@@ -6,7 +6,7 @@ body{
     margin: 0;
     border-top: none;
     border-bottom: none;
-    background-color: #352823;
+    background-color: #372115;
     text-align: center;
 }
 .content{
@@ -16,7 +16,7 @@ body{
     padding-bottom: 100px;
 }
 .hero{
-    opacity: 85%;
+    opacity: 80%;
     width: 100%;
 }
 
@@ -32,23 +32,29 @@ nav{
 }
 .btn{
     justify-content: space-evenly;
-    margin-left: 50px;
+    margin-left: 40px;
     margin-top: 20px;
-    padding: 40px;
+    padding: 5px;
     border: none;
     background-color: #b0907b;
     border: 2px solid #625750;
+    border-radius: 30px;
     color: #fff2df;
 }
 .btn:hover {
-    background-color: #625750;
-    border: 2px solid white;
-
+    background-color: hsl(23, 7%, 23%);
+    border: 3px solid #78ada5;
+    
 }
 a{
     color: white;
     text-decoration:dotted;
-    font-size: 20px;
+    font-size: 23px;
+    pointer-events: visible;
+}
+a:hover{
+    color: #78ada5;
+    text-decoration:dotted;
     pointer-events: visible;
 }
 
@@ -56,7 +62,7 @@ h2, h3{
     display: flex;
     justify-content: center;
     align-items: center;
-    color: rgb(41, 34, 27);
+    color: hsl(23, 7%, 23%);
 }
 
 form {
@@ -89,7 +95,7 @@ button {
 }
 button:hover {
     background-color: #625750;
-    border: 1px solid white;
+    border: 2px solid #78ada5;
 }
 #spaceType, #resDate,#resTime, #fullName, #email, #phone, #drinkType{
     font-size: 18px;

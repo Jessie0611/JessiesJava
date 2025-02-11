@@ -59,27 +59,3 @@ function showMenu() {
         });
     }
 }
-
-function generateOrderNumber() {
-    // Get the current timestamp
-    const timestamp = Date.now();
-    // Generate a random number between 1000 and 9999
-    const randomNum = Math.floor(Math.random() * 9000) + 1000;
-    // Combine the timestamp and random number to create a unique order number
-    const orderNumber = `ORD${timestamp}${randomNum}`;
-    // Store the order number in localStorage
-    localStorage.setItem('orderNumber', orderNumber);
-    // Redirect to the confirmation page
-    window.location.href = "confirmation.html";
-}
-// Attach the function to the "Generate" button
-document.getElementById('generateOrderButton').addEventListener('click', function(event) {
-    event.preventDefault();  // Prevent default link behavior
-    generateOrderNumber();   // Generate the order number and redirect
-});
-const orderNumber = localStorage.getItem('orderNumber');
-
-if (orderNumber) {
-    document.getElementById('confirmationOrderNumber').textContent = `Your order number: ${orderNumber}`;
-} else {
-    document.getElementById('confirmationOrderNumber').textContent = 'No order number found!';
