@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jessie's Java</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="content">
+    <div class="hero">
+        <img src="Images/jj-menuhero.png" alt="Hero Image Unavailable" width="100%"></div>
+
+        <nav>
+            <button class="btn"><a href="index.html">&nbsp;&nbsp;&nbsp;&nbsp;Home &nbsp;&nbsp;&nbsp;&nbsp;</a></button>
+               <button class="btn"><a href="reservation.html">Reservation</a></button>
+               <button class="btn"><a href="menu.html">&nbsp;&nbsp;&nbsp;&nbsp; Menu &nbsp;&nbsp;&nbsp;&nbsp;</a></button>
+                 <button class="btn"> <a href="aboutus.html"> &nbsp;&nbsp;About Us&nbsp;&nbsp;</a></button>
+           </nav>
+      
+               <h2>Welcome to the Coffee Shop!</h2>
+               <h3>Choose your drink type:</h3>
+               
+               <select id="drinkType" onchange="showMenu()">
+                   <option value="">-- Select Drink Type --</option>
+                   <option value="hotLattes">Hot Lattes</option>
+                   <option value="icedLattes">Iced Lattes</option>
+                   <option value="hotEspresso">Hot Espresso Drinks</option>
+                   <option value="icedEspresso">Iced Espresso Drinks</option>
+               </select>
+           <br>
+           <hr>
+           <br>
+               <div id="menu" class="menu-section"></div>
+           <br>
+           <hr>
+           </body>
+           </html>
+           
+
+</div>
+    <script src="script.js"></script>
+</body>
+</html>

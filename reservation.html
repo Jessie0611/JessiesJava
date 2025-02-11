@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jessie's Java</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="content">
+    <div class="hero">
+        <img src="Images/JJ-reserveHero.png" alt="Hero Image Unavailable" width="100%">
+    </div>
+    <nav>
+        <button class="btn"><a href="index.html">&nbsp;&nbsp;&nbsp;&nbsp;Home &nbsp;&nbsp;&nbsp;&nbsp;</a></button>
+        <button class="btn"><a href="reservation.html">Reservation</a></button>
+        <button class="btn"><a href="menu.html">&nbsp;&nbsp;&nbsp;&nbsp; Menu &nbsp;&nbsp;&nbsp;&nbsp;</a></button>
+        <button class="btn"> <a href="aboutus.html"> &nbsp;&nbsp;About Us&nbsp;&nbsp;</a></button>
+    </nav>
+<p> <h2>Reserve Your Space at Jessie's Java!</h2>
+<h3>Step into a space meticulously designed with programmers in mind, where the aroma of freshly ground coffee fuels your coding creativity.</h3>
+<h3>Reserve your preferred spot below!</h3></p>
+    <form action="/submitReservation" method="post">
+    <!-- Space Type Selection-->
+     <div class="section">
+        <label for="spaceType">Select Your Space</label>
+        <select id="spaceType" name="spaceType" required>
+            <option value="">-- Select Your Space --</option>
+            <option value="compBooth">🖥️ Computer Booth</option>
+            <option value="byol">💻 Bring Your Own Laptop</option>
+            <option value="quietZone">🤫 Quiet Zone </option>
+            <option value="collabRoom">🚀 Collaboration Room </option>
+        </select>
+    </div>
+            <br>
+         <!-- Date and Time Selection-->
+         <div class="section">
+            <label for="resDate">Reservation Date</label>
+            <input type="date" id="resDate" name="resDate" required>
+<br>
+            <label for="resTime">Reservation Time</label>
+            <input type="time" id="resTime" name="resTime" required>
+        </div>
+
+          <!-- Personal Information-->
+          <div class="section">
+            <label for="fullName">Full Name &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;</label>
+            <input type="text" id="fullName" name="fullName" placeholder="Full Name" required>
+<br>
+            <label for="email">Email Address&nbsp;</label>
+            <input type="email" id="email" name="email" placeholder="E-mail Address" required>
+<br>
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" placeholder="Phone Number (Optional)">
+        </div>
+
+        <!-- Special Requests or Notes-->
+        <div class="section">
+            <label for="specialRequests">Special Requests or Notes (Optional)</label><br>
+            <textarea id="specialRequests" name="specialRequests" rows="5" placeholder="Let us know if you have any specific needs or requests for your reservation"></textarea>
+        </div>
+
+        <!-- Submit Button-->
+        <button type="submit">Reserve My Space</button>
+          </form>
+
+
+
+</div>
+    <script src="script.js"></script>
+</body>
+</html>
