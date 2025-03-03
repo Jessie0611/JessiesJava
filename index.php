@@ -63,6 +63,9 @@ SQL DATABASE TABLE FOR SPACE:
 CREATE TABLE SPAVE (
     spaceID primary key,
     spaceType
-)
+);
+
+SQL CREATE DATABASE FOR AVAILABLE:
+
  */
 ?>
