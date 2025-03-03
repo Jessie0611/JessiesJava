@@ -49,5 +49,14 @@ CREATE TABLE reservations (
     phone VARCHAR(50),
     specialRequests TEXT
 );
+ 
+SQL DATABASE TABLE FOR USERS:
+CREATE TABLE USERS (
+    userID primary key,
+    fullName VARCHAR(255),
+    email VARCHAR(255),
+    phone VARCHAR(50),
+    specialRequests TEXT
+);
  */
 ?>
