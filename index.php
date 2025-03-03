@@ -58,5 +58,11 @@ CREATE TABLE USERS (
     phone VARCHAR(50),
     specialRequests TEXT
 );
+
+SQL DATABASE TABLE FOR SPACE:
+CREATE TABLE SPAVE (
+    spaceID primary key,
+    spaceType
+)
  */
 ?>
