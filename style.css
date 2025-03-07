@@ -121,3 +121,114 @@ button:hover {
 .menu-item span {
     font-weight: bold;
 }
+
+/* Responsive Design */
+@media (max-width: 767px) {
+    /* Mobile devices */
+    .content {
+        width: 100%;
+        padding: 15px;
+    }
+    
+    .aboutUs {
+        width: 100%;
+        padding-left: 0;
+        font-size: 20px;
+    }
+
+    .btn {
+        margin-left: 0;
+        margin-top: 10px;
+        width: 80%;
+        font-size: 16px;
+    }
+
+    form {
+        width: 100%;
+        padding: 10px;
+    }
+
+    input, select, textarea, button {
+        width: 100%;
+        font-size: 16px;
+        margin: 10px 0;
+    }
+
+    h2, h3 {
+        font-size: 22px;
+    }
+
+    #spaceType, #resDate, #resTime, #fullName, #email, #phone, #drinkType, #specialRequests {
+        font-size: 16px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    /* Tablets (e.g., iPads) */
+    .content {
+        width: 90%;
+    }
+
+    .aboutUs {
+        width: 100%;
+        padding-left: 0;
+        font-size: 22px;
+    }
+
+    .btn {
+        margin-left: 0;
+        margin-top: 20px;
+        width: 70%;
+        font-size: 18px;
+    }
+
+    form {
+        width: 100%;
+        padding: 10px;
+    }
+
+    input, select, textarea, button {
+        width: 100%;
+        font-size: 18px;
+        margin: 10px 0;
+    }
+
+    h2, h3 {
+        font-size: 24px;
+    }
+}
+
+@media (min-width: 1025px) {
+    /* Desktops and larger screens */
+    .content {
+        width: 85%;
+    }
+
+    .aboutUs {
+        width: 75%;
+        padding-left: 190px;
+        font-size: 25px;
+    }
+
+    .btn {
+        margin-left: 40px;
+        margin-top: 20px;
+        width: auto;
+        font-size: 20px;
+    }
+
+    form {
+        width: 80%;
+        padding: 20px;
+    }
+
+    input, select, textarea, button {
+        width: 80%;
+        font-size: 18px;
+        margin: 10px 0;
+    }
+
+    h2, h3 {
+        font-size: 28px;
+    }
+}
