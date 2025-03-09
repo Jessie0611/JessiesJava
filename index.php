@@ -1,11 +1,17 @@
 <?php
 // Database connection parameters
-$host = 'localhost';  //DB host
-$username = 'root';   // DB username
-$password = '';       // DB password
-$dbname = 'your_database_name';  //DB name
+$host="127.0.0.1";
+$port=3306;
+$socket="";
+$user="root";
+$password="";
+$dbname="jessiesjava";
 
-//Connect to database
+$con = new mysqli($host, $user, $password, $dbname, $port, $socket)
+	or die ('Could not connect to the database server' . mysqli_connect_error());
+
+//$con->close();
+
 $conn = new mysqli($host, $username, $password, $dbname);
 
 //Check if the connection is successful
@@ -57,12 +63,6 @@ CREATE TABLE USERS (
     email VARCHAR(255),
     phone VARCHAR(50),
     specialRequests TEXT
-);
-
-SQL DATABASE TABLE FOR SPACE:
-CREATE TABLE SPAVE (
-    spaceID primary key,
-    spaceType
 );
 
 SQL CREATE DATABASE FOR AVAILABLE:
