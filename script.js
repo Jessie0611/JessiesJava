@@ -59,3 +59,109 @@ function showMenu() {
         });
     }
 }
+
+//CALANDER
+document.addEventListener('DOMContentLoaded', function() {
+    const monthYearDisplay = document.getElementById('month-year');
+    const prevMonthBtn = document.getElementById('prev-month');
+    const nextMonthBtn = document.getElementById('next-month');
+    const calendarBody = document.querySelector('#calendar tbody');
+    const eventsList = document.getElementById('events-list');
+  
+    let currentDate = new Date();
+    
+    const events = [
+      { date: '2025-03-17', title: 'St. Patricks Day: $1.00 Irish Cream Lattes all day' },
+      { date: '2025-03-29', title: 'Peer Code Review: Clean Code Practices [10:00a.m - 6:00p.m]' },
+      { date: '2025-04-11', title: 'Code Breaker Trivia: Test Your Developer Knowledge! [4:00p.m - 8:00p.m.]' },
+    ];
+  
+    function renderCalendar() {
+      const year = currentDate.getFullYear();
+      const month = currentDate.getMonth();
+      monthYearDisplay.textContent = `${currentDate.toLocaleString('default', { month: 'long' })} ${year}`;
+      
+      // Clear previous calendar
+      calendarBody.innerHTML = '';
+  
+      // Get the first day of the month
+      const firstDay = new Date(year, month, 1);
+      const lastDay = new Date(year, month + 1, 0);
+      const startDay = firstDay.getDay();
+      const totalDays = lastDay.getDate();
+      
+      let day = 1;
+  
+      // Create the calendar grid
+      for (let i = 0; i < 6; i++) { // 6 rows to cover all weeks
+        const row = document.createElement('tr');
+        for (let j = 0; j < 7; j++) {
+          const cell = document.createElement('td');
+          if (i === 0 && j < startDay) {
+            cell.textContent = '';
+          } else if (day <= totalDays) {
+            const cellDate = new Date(year, month, day);
+            const dateString = cellDate.toISOString().split('T')[0];
+            cell.textContent = day;
+            cell.dataset.date = dateString;
+  
+            // Highlight days with events
+            const eventForDay = events.filter(event => event.date === dateString);
+            if (eventForDay.length > 0) {
+              cell.style.backgroundColor = '#b0907b';
+              cell.title = eventForDay.map(event => event.title).join(', ');
+            }
+  
+            // Add click event to show events for that date
+            cell.addEventListener('click', () => showEventsForDate(dateString));
+            
+            day++;
+          }
+          row.appendChild(cell);
+        }
+        calendarBody.appendChild(row);
+      }
+    }
+  
+    function showEventsForDate(date) {
+      const eventForDate = events.filter(event => event.date === date);
+      eventsList.innerHTML = '';
+      if (eventForDate.length > 0) {
+        eventForDate.forEach(event => {
+          const li = document.createElement('li');
+          li.textContent = `${event.title} - ${event.date}`;
+          eventsList.appendChild(li);
+        });
+      } else {
+        eventsList.innerHTML = '<li>No events for this day.</li>';
+      }
+    }
+  
+    function renderUpcomingEvents() {
+      const today = new Date();
+      const upcomingEvents = events.filter(event => new Date(event.date) > today);
+  
+      eventsList.innerHTML = '';
+      upcomingEvents.forEach(event => {
+        const li = document.createElement('li');
+        li.textContent = `${event.title} - ${event.date}`;
+        eventsList.appendChild(li);
+      });
+    }
+  
+    // Event listeners for buttons
+    prevMonthBtn.addEventListener('click', () => {
+      currentDate.setMonth(currentDate.getMonth() - 1);
+      renderCalendar();
+    });
+  
+    nextMonthBtn.addEventListener('click', () => {
+      currentDate.setMonth(currentDate.getMonth() + 1);
+      renderCalendar();
+    });
+  
+    // Initial render
+    renderCalendar();
+    renderUpcomingEvents();
+  });
+  

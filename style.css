@@ -1,3 +1,4 @@
+/*BODY, HERO, NAV*/
 body{
     display: flex;
     justify-content: center;
@@ -18,13 +19,6 @@ body{
 .hero{
     opacity: 80%;
     width: 100%;
-}
-
-.aboutUs{
-    width: 75%;
-    padding-left: 190px;
-    font-size: 25px;
-    text-align: center;
 }
 nav{
     display: flex;
@@ -93,6 +87,7 @@ button {
     border: 1px solid #625750;
     cursor: pointer;
 }
+
 button:hover {
     background-color: #625750;
     border: 2px solid #78ada5;
@@ -122,113 +117,157 @@ button:hover {
     font-weight: bold;
 }
 
-/* Responsive Design */
-@media (max-width: 767px) {
-    /* Mobile devices */
-    .content {
-        width: 100%;
-        padding: 15px;
-    }
-    
-    .aboutUs {
-        width: 100%;
-        padding-left: 0;
-        font-size: 20px;
-    }
-
-    .btn {
-        margin-left: 0;
-        margin-top: 10px;
-        width: 80%;
-        font-size: 16px;
-    }
-
-    form {
-        width: 100%;
-        padding: 10px;
-    }
-
-    input, select, textarea, button {
-        width: 100%;
-        font-size: 16px;
-        margin: 10px 0;
-    }
-
-    h2, h3 {
-        font-size: 22px;
-    }
-
-    #spaceType, #resDate, #resTime, #fullName, #email, #phone, #drinkType, #specialRequests {
-        font-size: 16px;
-    }
+.btn:hover {
+    background-color: hsl(23, 7%, 23%);
+    border: 3px solid #78ada5;
+}
+a {
+    color: white;
+    text-decoration: dotted;
+    font-size: 23px;
+    pointer-events: visible;
+}
+a:hover {
+    color: #78ada5;
+    text-decoration: dotted;
+    pointer-events: visible;
+}
+h2, h3 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: hsl(23, 7%, 23%);
 }
 
-@media (min-width: 768px) and (max-width: 1024px) {
-    /* Tablets (e.g., iPads) */
-    .content {
-        width: 90%;
-    }
-
-    .aboutUs {
-        width: 100%;
-        padding-left: 0;
-        font-size: 22px;
-    }
-
-    .btn {
-        margin-left: 0;
-        margin-top: 20px;
-        width: 70%;
-        font-size: 18px;
-    }
-
-    form {
-        width: 100%;
-        padding: 10px;
-    }
-
-    input, select, textarea, button {
-        width: 100%;
-        font-size: 18px;
-        margin: 10px 0;
-    }
-
-    h2, h3 {
-        font-size: 24px;
-    }
+/*ABOUT US*/
+.aboutUs {
+    width: 60%;
+    text-align: center;
 }
 
-@media (min-width: 1025px) {
-    /* Desktops and larger screens */
-    .content {
-        width: 85%;
-    }
+/*RES FORM*/
+form {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
 
-    .aboutUs {
-        width: 75%;
-        padding-left: 190px;
-        font-size: 25px;
-    }
+label {
+    font-size: 16px;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
 
-    .btn {
-        margin-left: 40px;
-        margin-top: 20px;
-        width: auto;
-        font-size: 20px;
-    }
+input, select, textarea {
+    padding: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
 
-    form {
-        width: 80%;
-        padding: 20px;
-    }
+button {
+    font-size: 12px;
+    padding: 10px;
+    background-color: #b0907b;
+    color: white;
+    border: none;
+    border: 1px solid #625750;
+    cursor: pointer;
+}
 
-    input, select, textarea, button {
-        width: 80%;
-        font-size: 18px;
-        margin: 10px 0;
-    }
+button:hover {
+    background-color: #625750;
+    border: 2px solid #78ada5;
+}
 
-    h2, h3 {
-        font-size: 28px;
-    }
+#spaceType, #resDate, #resTime, #fullName, #email, #phone, #drinkType {
+    font-size: 14px;
+    background-color: #d9d3cb;
+}
+
+#specialRequests {
+    font-size: 18px;
+    width: 90%;
+    background-color: #d9d3cb;
+}
+
+.menu-section {
+    margin: 20px;
+    padding: 10px;
+    border: 3px solid #625750;
+    border-radius: 8px;
+    background-color: #fff;
+}
+
+.menu-item {
+    margin: 5px 0;
+    font-size: 18px;
+}
+
+.menu-item span {
+    font-weight: bold;
+}
+
+/* CALANDER */
+.calendar-container {
+    margin-top: 4%;
+    width: 600px;
+    height: 600px;
+    padding: 10px;
+    background-color: #b7b19e;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin: 0 auto;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+button {
+    background-color: hsl(23, 7%, 23%);
+    color: white;
+    border: none;
+    padding: 15px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #b0907b;
+}
+
+#calendar {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#calendar th,
+#calendar td {
+    padding: 2px;
+    border: 2px solid #ddd;
+    text-align: center;
+}
+
+#calendar td {
+    cursor: pointer;
+}
+
+#calendar td:hover {
+    background-color: #9a867a;
+}
+
+/* Upcoming Events Section */
+.upcoming-events {
+    margin-top: 20px;
+}
+
+#events-list {
+    list-style: none;
+    padding: 0;
 }

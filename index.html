@@ -16,9 +16,38 @@
             <button class="btn"><a href="menu.html">&nbsp;&nbsp;&nbsp; Menu &nbsp;&nbsp;&nbsp;</a></button>
             <button class="btn"> <a href="aboutus.html"> &nbsp;About Us&nbsp;</a></button>
         </nav>
-      
-      
 
+          <div class="calendar-container">
+            <br>
+            <br>
+            <div class="calendar-header">
+              <button id="prev-month">&lt;</button>
+              <h2 id="month-year"></h2>
+              <button id="next-month">&gt;</button>
+              <br>
+            </div>
+        
+            <table id="calendar">
+              <thead>
+                <tr>
+                  <th>Sun</th>
+                  <th>Mon</th>
+                  <th>Tue</th>
+                  <th>Wed</th>
+                  <th>Thu</th>
+                  <th>Fri</th>
+                  <th>Sat</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+        
+            <div class="upcoming-events">
+              <h3>Upcoming Events</h3>
+              <ul id="events-list"></ul>
+            </div>
+          </div>
+        
 </div>
     <script src="script.js"></script>
 </body>

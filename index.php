@@ -62,7 +62,6 @@ CREATE TABLE USERS (
     fullName VARCHAR(255),
     email VARCHAR(255),
     phone VARCHAR(50),
-    specialRequests TEXT
 );
 
 SQL CREATE DATABASE FOR AVAILABLE:
