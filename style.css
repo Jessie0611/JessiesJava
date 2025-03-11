@@ -43,7 +43,7 @@ nav{
 a{
     color: white;
     text-decoration:dotted;
-    font-size: 23px;
+    font-size: 18px;
     pointer-events: visible;
 }
 a:hover{
@@ -77,10 +77,9 @@ input, select, textarea {
     border-radius: 4px;
 }
 button {
-    font-size: 16px;
+    font-size: 12px;
     width: 15%;
     padding: 10px;
-    
     background-color: #b0907b;
     color: white;
     border: none;
@@ -141,8 +140,59 @@ h2, h3 {
 
 /*ABOUT US*/
 .aboutUs {
-    width: 60%;
+    width: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
+    margin: 0 auto; /* Center horizontally */
+}
+/* Contact Section */
+.contact {
+    text-align: center;
+    margin: 50px auto;
+    width: 80%;
+    max-width: 600px;
+}
+
+.contact h2 {
+    margin-bottom: 20px;
+}
+
+.contact form {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.contact label {
+    font-size: 16px;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.contact input, .contact textarea {
+    padding: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: #d9d3cb;
+}
+
+.contact button {
+    font-size: 14px;
+    padding: 10px;
+    background-color: #b0907b;
+    color: white;
+    border: none;
+    border: 1px solid #625750;
+    cursor: pointer;
+}
+
+.contact button:hover {
+        background-color: #625750;
+        border: 2px solid #78ada5;
 }
 
 /*RES FORM*/
@@ -166,16 +216,6 @@ input, select, textarea {
     border-radius: 4px;
 }
 
-button {
-    font-size: 12px;
-    padding: 10px;
-    background-color: #b0907b;
-    color: white;
-    border: none;
-    border: 1px solid #625750;
-    cursor: pointer;
-}
-
 button:hover {
     background-color: #625750;
     border: 2px solid #78ada5;
@@ -183,12 +223,6 @@ button:hover {
 
 #spaceType, #resDate, #resTime, #fullName, #email, #phone, #drinkType {
     font-size: 14px;
-    background-color: #d9d3cb;
-}
-
-#specialRequests {
-    font-size: 18px;
-    width: 90%;
     background-color: #d9d3cb;
 }
 
@@ -212,8 +246,8 @@ button:hover {
 /* CALANDER */
 .calendar-container {
     margin-top: 4%;
-    width: 600px;
-    height: 600px;
+    width: 400px;
+    height: 520px;
     padding: 10px;
     background-color: #b7b19e;
     display: flex;
@@ -233,9 +267,9 @@ button {
     background-color: hsl(23, 7%, 23%);
     color: white;
     border: none;
-    padding: 15px;
+    padding: 10px;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 15px;
 }
 
 button:hover {
@@ -271,3 +305,76 @@ button:hover {
     list-style: none;
     padding: 0;
 }
+
+
+/*FOOTER*/
+/* Social media links */
+.footer .socialLinks {
+    margin-top: 80px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 30px;
+}
+
+.footer .socialIcon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover; /* Ensure the images scale well */
+    transition: transform 0.3s ease; /* Smooth hover effect */
+}
+
+.footer .socialIcon:hover {
+    transform: scale(1.1); /* Slight zoom effect on hover */
+}
+#chatbotContainer {
+    position: fixed;
+    bottom: 80px; /* Push above button */
+    right: 20px;
+    width: 400px; /* Adjusted width */
+    height: 550px; /* Adjusted height */
+    z-index: 9999;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    display: none; /* Hidden by default */
+    flex-direction: column;
+      }
+  #chatbotHeader {
+    background: #b0907b;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+  }
+
+  #chatbotiFrame {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+  }
+  #close-chatbot {
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    color: white;
+  }
+  #chatbotButton {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #b0907b;
+    color: white;
+    padding: 12px 15px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 14px;
+    box-shadow: 0px 2px 5px #372115;
+    z-index: 10000;
+    border: none;
+  }

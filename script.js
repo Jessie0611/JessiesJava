@@ -1,3 +1,5 @@
+
+
 function showMenu() {
     const menu = {
         hotLattes: [
@@ -165,3 +167,14 @@ document.addEventListener('DOMContentLoaded', function() {
     renderUpcomingEvents();
   });
   
+  function toggleChatbot() {
+    var chatbot = document.getElementById("chatbotContainer");
+    var button = document.getElementById("chatbotButton");
+    if (chatbot.style.display === "none" || chatbot.style.display === "") {
+      chatbot.style.display = "block";
+      button.style.display = "none"; // Hide button when chatbot is open
+    } else {
+      chatbot.style.display = "none";
+      button.style.display = "block"; // Show button when chatbot is closed
+    }
+  }
