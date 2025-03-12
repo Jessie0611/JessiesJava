@@ -73,9 +73,15 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentDate = new Date();
     
     const events = [
-      { date: '2025-03-17', title: 'St. Patricks Day: $1.00 Irish Cream Lattes all day' },
-      { date: '2025-03-29', title: 'Peer Code Review: Clean Code Practices [10:00a.m - 6:00p.m]' },
-      { date: '2025-04-11', title: 'Code Breaker Trivia: Test Your Developer Knowledge! [4:00p.m - 8:00p.m.]' },
+      { date: '2025-03-08', title: '11a-3p 3/8: International Womens Day Coffee Break, 1 free coffee any flavor'},
+      { date: '2025-03-17', title: 'ALL DAY 3/17: St. Patricks Day: $1.00 Irish Cream Lattes '},
+      { date: '2025-03-20', title: '[11a - 6p] Spring Equinox Art: Create digital art inspired by the equinox using programs like Photoshop, GIMP, or using a tablet to paint or draw. ' },
+      { date: '2025-03-29', title: '[11a - 6p] Peer Code Review: Clean Code Practices' },
+      { date: '2025-04-01', title: 'ALL DAY 4/1: April Fools Mystery Coffee $1.00' },
+      { date: '2025-04-11', title: '[4p - 8p] CodeBreaker Trivia: Test Your Dev Knowledge!' },
+      { date: '2025-04-20', title: 'ALL DAY 4/20: CLOSED FOR EASTER SUNDAY' },
+      { date: '2025-05-05', title: 'ALL DAY 5/5: Cinco de Mayo: Café de Olla TODAY ONLY $5'}
+
     ];
   
     function renderCalendar() {
@@ -142,14 +148,15 @@ document.addEventListener('DOMContentLoaded', function() {
     function renderUpcomingEvents() {
       const today = new Date();
       const upcomingEvents = events.filter(event => new Date(event.date) > today);
-  
+    
       eventsList.innerHTML = '';
       upcomingEvents.forEach(event => {
         const li = document.createElement('li');
-        li.textContent = `${event.title} - ${event.date}`;
+        li.textContent = event.title; // Only display the event title without the date
         eventsList.appendChild(li);
       });
     }
+    
   
     // Event listeners for buttons
     prevMonthBtn.addEventListener('click', () => {

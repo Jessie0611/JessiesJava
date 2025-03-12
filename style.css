@@ -75,7 +75,7 @@ button:hover {
     border: 2px solid #78ada5;
 }
 #spaceType, #resDate,#resTime, #fullName, #email, #phone, #drinkType{
-    font-size: 16px;
+    font-size: 14px;
     background-color:#d9d3cb;
 }
 .menu-section {
@@ -100,7 +100,7 @@ button:hover {
 a {
     color: white;
     text-decoration: dotted;
-    font-size: 23px;
+    font-size: 18px;
     pointer-events: visible;
 }
 a:hover {
