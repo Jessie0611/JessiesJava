@@ -1,70 +1,77 @@
 <?php
-// Database connection parameters
-$host="127.0.0.1";
-$port=3306;
-$socket="";
-$user="root";
-$password="";
-$dbname="jessiesjava";
+$host = "127.0.0.1";
+$port = 3306;
+$user = "root";
+$password = "";
+$dbname = "jessiesjava";
 
-$con = new mysqli($host, $user, $password, $dbname, $port, $socket)
-	or die ('Could not connect to the database server' . mysqli_connect_error());
+// Create a single MySQLi connection
+$conn = new mysqli($host, $user, $password, $dbname, $port);
 
-//$con->close();
-
-$conn = new mysqli($host, $username, $password, $dbname);
-
-//Check if the connection is successful
+// Check if the connection is successful
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-//Check if form is submitted
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Retrieve form data
-    $space = $_POST['spaceType'];
-    $resDate = $_POST['resDate'];
-    $resTime = $_POST['resTime'];
     $fullName = $_POST['fullName'];
     $email = $_POST['email'];
     $phone = $_POST['phone'];
-    $specialRequests = $_POST['specialRequests'];
+    $resDate = $_POST['resDate'];
+    $resTime = $_POST['resTime'];
+    $resType = $_POST['resType'];  // Reservation type (Booth, Room, etc.)
 
-    // Prepare an SQL statement to insert the reservation into the database
-    $stmt = $conn->prepare("INSERT INTO reservations (spaceType, resDate, resTime, fullName, email, phone, specialRequests) VALUES (?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("sssssss", $space, $resDate, $resTime, $fullName, $email, $phone, $specialRequests);
+    // Insert the user into the 'users' table first
+    $stmt = $conn->prepare("INSERT INTO users (fName, lName, eMail, phoneNum, resDate, resTime) VALUES (?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("ssssss", $fullName, $fullName, $email, $phone, $resDate, $resTime);
 
-    // Execute the query
+    // Check if the query was successful
     if ($stmt->execute()) {
+        $userID = $stmt->insert_id;  // Get the inserted userID
+    } else {
+        echo "<p>Error adding user.</p>";
+        exit();
+    }
+
+    // Now insert the reservation into the 'reservations' table
+    $stmt = $conn->prepare("INSERT INTO reservations (userID, resTypeID, resDate, resTime) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param("iiss", $userID, $resType, $resDate, $resTime);
+
+    // Execute the query and check for success
+    if ($stmt->execute()) {
+        $resID = $stmt->insert_id;  // Get the inserted resID
         echo "<p>Your reservation has been successfully submitted!</p>";
     } else {
-        echo "<p>There was an error submitting your reservation. Please try again.</p>";
+        echo "<p>Error creating reservation.</p>";
+        exit();
+    }
+
+    // Optionally, handle payment here (if necessary)
+    // Example: Get the price for the reservation type
+    $amount = getPriceForReservationType($resType, $conn);  // Assume this function retrieves the price from the resType table
+
+    // Insert the payment record
+    $stmt = $conn->prepare("INSERT INTO payments (userID, resID, amount, paymentDate) VALUES (?, ?, ?, ?)");
+    $paymentDate = date('Y-m-d');  // Get the current date
+    $stmt->bind_param("iiis", $userID, $resID, $amount, $paymentDate);
+
+    if ($stmt->execute()) {
+        echo "<p>Payment has been processed.</p>";
+    } else {
+        echo "<p>Error processing payment.</p>";
     }
 
     $stmt->close();
-    $conn->close();
+
+$conn->close();
 }
-/*  SQL DATABASE TABLE FOR RESERVATIONS:
-CREATE TABLE reservations (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    spaceType VARCHAR(100),
-    resDate DATE,
-    resTime TIME,
-    fullName VARCHAR(255),
-    email VARCHAR(255),
-    phone VARCHAR(50),
-    specialRequests TEXT
-);
- 
-SQL DATABASE TABLE FOR USERS:
-CREATE TABLE USERS (
-    userID primary key,
-    fullName VARCHAR(255),
-    email VARCHAR(255),
-    phone VARCHAR(50),
-);
-
-SQL CREATE DATABASE FOR AVAILABLE:
-
- */
+// Function to get the price based on the reservation type
+function getPriceForReservationType($resTypeID, $conn) {
+    $stmt = $conn->prepare("SELECT resPrice FROM resType WHERE resTypeID = ?");
+    $stmt->bind_param("i", $resTypeID);
+    $stmt->execute();
+    $stmt->bind_result($resPrice);
+    $stmt->fetch();
+    return $resPrice;
+}
 ?>

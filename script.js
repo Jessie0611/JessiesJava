@@ -110,7 +110,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Highlight days with events
             const eventForDay = events.filter(event => event.date === dateString);
             if (eventForDay.length > 0) {
-              cell.style.backgroundColor = '#b0907b';
+              cell.style.backgroundColor = '#78ada5';
               cell.title = eventForDay.map(event => event.title).join(', ');
             }
   

@@ -43,7 +43,7 @@ nav{
 a{
     color: white;
     text-decoration:dotted;
-    font-size: 18px;
+    font-size: 14px;
     pointer-events: visible;
 }
 a:hover{
@@ -59,23 +59,6 @@ h2, h3{
     color: hsl(23, 7%, 23%);
 }
 
-form {
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-label {
-    font-size: 20px;
-    margin-bottom: 15px;
-    font-weight: bold;
-}
-input, select, textarea {
-    padding: 8px;
-    margin-bottom: 15px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-}
 button {
     font-size: 12px;
     width: 15%;
@@ -92,19 +75,13 @@ button:hover {
     border: 2px solid #78ada5;
 }
 #spaceType, #resDate,#resTime, #fullName, #email, #phone, #drinkType{
-    font-size: 18px;
+    font-size: 16px;
     background-color:#d9d3cb;
-}
-#specialRequests{
-    font-size: 18px;
-    width: 90%;
-    background-color:#d9d3cb;
-
 }
 .menu-section {
     margin: 20px;
     padding: 10px;
-    border: 3px solid #625750;
+    border: 3px solid #78ada5;
     border-radius: 8px;
     background-color: #fff;
 }
@@ -215,13 +192,24 @@ input, select, textarea {
     border: 1px solid #ddd;
     border-radius: 4px;
 }
+.submit{
+    font-size: 14px;
+    width: 55%;
+    padding: 10px;
+    background-color: #b0907b;
+    color: white;
+    border: none;
+    border: 1px solid #625750;
+    cursor: pointer;
 
-button:hover {
+}
+
+.submit:hover {
     background-color: #625750;
     border: 2px solid #78ada5;
 }
 
-#spaceType, #resDate, #resTime, #fullName, #email, #phone, #drinkType {
+#spaceType, #resDate, #resTime, #fName, #lName, #email, #phone, #drinkType {
     font-size: 14px;
     background-color: #d9d3cb;
 }
@@ -245,10 +233,9 @@ button:hover {
 
 /* CALANDER */
 .calendar-container {
-    margin-top: 4%;
     width: 400px;
     height: 520px;
-    padding: 10px;
+    padding: 20px;
     background-color: #b7b19e;
     display: flex;
     flex-direction: column;
@@ -256,15 +243,17 @@ button:hover {
     margin: 0 auto;
 }
 
-.calendar-header {
+.calendar-header{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
     margin-bottom: 10px;
+    padding: 10px;
 }
 
 button {
     background-color: hsl(23, 7%, 23%);
+    align-items: center;
     color: white;
     border: none;
     padding: 10px;
@@ -283,7 +272,7 @@ button:hover {
 
 #calendar th,
 #calendar td {
-    padding: 2px;
+    padding: 4px;
     border: 2px solid #ddd;
     text-align: center;
 }
@@ -333,7 +322,7 @@ button:hover {
     bottom: 80px; /* Push above button */
     right: 20px;
     width: 400px; /* Adjusted width */
-    height: 550px; /* Adjusted height */
+    height: 570px; /* Adjusted height */
     z-index: 9999;
     background: white;
     border-radius: 10px;
@@ -368,13 +357,17 @@ button:hover {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    background: #b0907b;
+    background-color: hsl(23, 7%, 23%);
     color: white;
-    padding: 12px 15px;
+    padding: 10px 13px;
     border-radius: 50px;
     cursor: pointer;
     font-size: 14px;
-    box-shadow: 0px 2px 5px #372115;
+    box-shadow: 0px 2px 5px #78ada5;
     z-index: 10000;
     border: none;
+  }
+  #chatbotButton:hover{
+    background-color: #b0907b;
+    box-shadow: 0px 2px 5px #625750;
   }
