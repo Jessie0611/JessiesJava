@@ -254,7 +254,8 @@ input, select, textarea {
 button {
     background-color: hsl(23, 7%, 23%);
     align-items: center;
-    color: white;
+    color:#4EC9B0;
+    border: 2px solid #CE9178;
     border: none;
     padding: 10px;
     cursor: pointer;
@@ -273,7 +274,7 @@ button:hover {
 #calendar th,
 #calendar td {
     padding: 4px;
-    border: 2px solid #ddd;
+    border: 2px solid white;
     text-align: center;
 }
 
@@ -282,7 +283,7 @@ button:hover {
 }
 
 #calendar td:hover {
-    background-color: #9a867a;
+    background-color: #B5CEA8;
 }
 
 /* Upcoming Events Section */
@@ -321,7 +322,7 @@ button:hover {
     position: fixed;
     bottom: 80px; /* Push above button */
     right: 20px;
-    width: 400px; /* Adjusted width */
+    width: 420px; /* Adjusted width */
     height: 570px; /* Adjusted height */
     z-index: 9999;
     background: white;

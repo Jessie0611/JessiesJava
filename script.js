@@ -12,9 +12,6 @@ function showMenu() {
             { name: "Pistachio Latte", price: " $4.50" },
             { name: "Pumpkin Spice Latte", price: " $4.50" },
             { name: "Vanilla Latte", price: " $4.50" }
-
-
-
         ],
         icedLattes: [
             { name: "Iced Caramel Latte", price: "$5.00" },
@@ -25,7 +22,6 @@ function showMenu() {
             { name: "Iced Pistachio Latte", price: " $5.00" },
             { name: "Iced Pumpkin Spice Latte", price: " $5.00" },
             { name: "Iced Vanilla Latte", price: "$5.00"}
-
         ],
         hotEspresso: [
             { name: "Americano", price: "$3.00" },
@@ -40,7 +36,6 @@ function showMenu() {
             { name: "Iced Cortado", price: "$3.80" },
             { name: "Iced Espresso", price: "$2.80" },
             { name: "Iced Nitro Cold Brew", price: "$4.00" },
-
         ]
     };
     const selectedType = document.getElementById("drinkType").value;
