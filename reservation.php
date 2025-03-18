@@ -33,34 +33,36 @@ Our collaboration rooms are designed to provide just that, with two computer boo
  <br><br><br> Additional equipment can be rented on the same day, based on availability.
 </p>
 
-<form action="database.php" method="post">
     <!-- Space Type Selection-->
-
          <div class="section">
+            <form action="database.php" method="post"...>
         <label for="spaceType">Select Your Space</label>
         <select id="spaceType" name="spaceType" required>
             <option value="">--- Select Your Space ---</option>
-            <option value="compBooth">$60.00 Computer Booth</option>
-            <option value="byol">$100.00 BYOL</option>
+            <option value="compBooth">$60.00 BYOL Table</option>
+            <option value="byol">$100.00 Computer Booth</option>
             <option value="collabRoom">$200.00 Collaboration Room </option>
-        </select>
-    </div>
-            <br>
+        </select> </form>
+    </div> 
          <!-- Date and Time Selection-->
          <div class="section">
+            <form action="database.php" method="post">
+
             <label for="resDate">Reservation Date</label>
             <input type="date" id="resDate" name="resDate" required>
-<br>
+
             <label for="resTime">Reservation Time</label>
             <input type="time" id="resTime" name="resTime" required>
+            </form>
         </div>
 
           <!-- Personal Information-->
           <div class="section">
+            <form action="database.php" method="post">
+
             <label for="fName">First Name </label>
             <input type="text" id="fName" name="fName" placeholder="First Name" required>
 <br>
-<div class="section">
     <label for="lName">Last Name </label>
     <input type="text" id="lName" name="lName" placeholder="Last Name" required>
     <br>
@@ -68,10 +70,11 @@ Our collaboration rooms are designed to provide just that, with two computer boo
             <input type="email" id="email" name="email" placeholder="E-mail Address" required>
 <br>
             <label for="phone">Phone Number</label>
-            <input type="tel" id="phone" name="phone" placeholder="Phone Number (Optional)">
+            <input type="tel" id="phone" name="phone" placeholder="Phone Number">
+            </form>
         </div>
         <!-- Submit Button-->
-        <a href="resPayment.html"><button class="submit">Reserve My Space</button></a>
+        <button class="submit"><a href="resPayment.html">Reserve</a></button>
           </form>
 
 

@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', function() {
       let day = 1;
   
       // Create the calendar grid
-      for (let i = 0; i < 6; i++) { // 6 rows to cover all weeks
+      for (let i = 0; i < 6; i++) { 
         const row = document.createElement('tr');
         for (let j = 0; j < 7; j++) {
           const cell = document.createElement('td');
@@ -147,7 +147,7 @@ document.addEventListener('DOMContentLoaded', function() {
       eventsList.innerHTML = '';
       upcomingEvents.forEach(event => {
         const li = document.createElement('li');
-        li.textContent = event.title; // Only display the event title without the date
+        li.textContent = event.title; 
         eventsList.appendChild(li);
       });
     }
