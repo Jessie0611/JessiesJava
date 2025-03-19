@@ -1,5 +1,6 @@
 /*BODY, HERO, NAV*/
 body{
+    font-family: Arial, Helvetica, sans-serif;
     display: flex;
     justify-content: center;
     width: 100%;
@@ -372,3 +373,39 @@ button:hover {
     background-color: #b0907b;
     box-shadow: 0px 2px 5px #625750;
   }
+
+
+
+
+ .accordion {
+    width: 100%;
+    max-width: 700px;
+    margin: 20px auto;
+}
+
+.accordion-item {
+    border-bottom: 1px solid #78ada5;
+}
+
+.accordion-header {
+    background: #625750;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    border: none;
+    text-align: left;
+    width: 100%;
+    outline: none;
+    transition: 0.3s;
+}
+
+.accordion-header:hover {
+    background: #ddd;
+}
+
+.accordion-content {
+    display: none;
+    padding: 15px;
+    background: #fff;
+    overflow: hidden;
+}

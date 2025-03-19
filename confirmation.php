@@ -1,0 +1,79 @@
+<?php
+if (isset($_GET['name'], $_GET['resDate'], $_GET['resTime'], $_GET['resType'])) {
+    $name = htmlspecialchars($_GET['name']);
+    $resDate = htmlspecialchars($_GET['resDate']);
+    $resTime = htmlspecialchars($_GET['resTime']);
+    $resType = htmlspecialchars($_GET['resType']);
+
+    // You could also translate the reservation type ID into a readable string here
+    $resTypeNames = [
+        1 => 'Computer Booth',
+        2 => 'BYOL Table',
+        3 => 'Collaboration Room'
+    ];
+    $resTypeName = $resTypeNames[$resType] ?? 'Unknown Space';
+
+    echo "<h1>Reservation Confirmed!</h1>";
+    echo "<p>Thank you, $name! Your reservation for a $resTypeName has been successfully made.</p>";
+    echo "<p>Reservation Details:</p>";
+    echo "<ul><li>Date: $resDate</li><li>Time: $resTime</li><li>Space: $resTypeName</li></ul>";
+} else {
+    echo "<p>Error: No reservation information found.</p>";
+}
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jessie's Java</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="content">
+    <div class="hero">
+        <img src="Images/JJ-resPaymentHero.png" alt="Hero Image Unavailable" width="100%">
+    </div>
+    <nav>
+        <button class="btn"><a href="index.html">&nbsp;&nbsp;&nbsp;&nbsp;Home &nbsp;&nbsp;&nbsp;&nbsp;</a></button>
+        <button class="btn"><a href="reservation.html">Reservation</a></button>
+        <button class="btn"><a href="menu.html">&nbsp;&nbsp;&nbsp;&nbsp; Menu &nbsp;&nbsp;&nbsp;&nbsp;</a></button>
+        <button class="btn"> <a href="aboutus.html"> &nbsp;&nbsp;About Us&nbsp;&nbsp;</a></button>
+    </nav>
+    <br>
+<hr>
+<br>
+    <h2>You have successfully reserved your space!</h2>
+    <h2>Enjoy your Jessie's Java Coding Experience!</h2>
+    <br><hr><br>
+
+
+    <button id="chatbotButton" onclick="toggleChatbot()">💬 Chat with Brewgle</button>
+    <div id="chatbotContainer">
+        <div id="chatbotHeader" onclick="toggleChatbot()">💬 Close Brewgle  &nbsp;&nbsp;&nbsp;&nbsp; ✖<span id="close-chatbot" onclick="toggleChatbot()">
+        </span></div>
+         <iframe
+           id="chatbotiFrame"
+           title="Brewgle"
+           src="https://jessiesjava.ai.copilot.live"
+           style="border:none;"
+           loading="lazy"
+           allow="microphone;camera;speaker;clipboard-read;clipboard-write;geolocation;"
+           width="400px"
+           height="540px"
+        ></iframe>
+    </div>
+<br>
+         <footer class="footer">
+             <div class="socialLinks">
+               <a href="https://www.facebook.com" target="_blank" class="socialLink">
+                 <img src="Images/facebook.jpg" class="socialIcon"></a>
+             <a href="https://www.instagram.com" target="_blank" class="socialLink">
+               <img src="Images/insta.jpg" class="socialIcon">
+           </div>
+           <hr>
+         </footer>
+    <script src="script.js"></script>
+</body>
+</html>

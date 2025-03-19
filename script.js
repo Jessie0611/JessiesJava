@@ -38,6 +38,7 @@ function showMenu() {
             { name: "Iced Nitro Cold Brew", price: "$4.00" },
         ]
     };
+
     const selectedType = document.getElementById("drinkType").value;
     const menuContainer = document.getElementById("menu");
 
@@ -70,11 +71,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const events = [
       { date: '2025-03-08', title: '11a-3p 3/8: International Womens Day Coffee Break, 1 free coffee any flavor'},
       { date: '2025-03-17', title: 'ALL DAY 3/17: St. Patricks Day: $1.00 Irish Cream Lattes '},
-      { date: '2025-03-20', title: '[11a - 6p] Spring Equinox Art: Create digital art inspired by the equinox using programs like Photoshop, GIMP, or using a tablet to paint or draw. ' },
-      { date: '2025-03-29', title: '[11a - 6p] Peer Code Review: Clean Code Practices' },
-      { date: '2025-04-01', title: 'ALL DAY 4/1: April Fools Mystery Coffee $1.00' },
-      { date: '2025-04-11', title: '[4p - 8p] CodeBreaker Trivia: Test Your Dev Knowledge!' },
-      { date: '2025-04-20', title: 'ALL DAY 4/20: CLOSED FOR EASTER SUNDAY' },
+      { date: '2025-03-20', title: '[11a - 6p] Spring Equinox: Create digital art inspired by the equinox using programs like Photoshop, GIMP, or using a tablet to paint or draw.'},
+      { date: '2025-03-29', title: '[11a - 6p] Peer Code Review: Clean Code Practices'},
+      { date: '2025-04-01', title: 'ALL DAY 4/1: April Fools Mystery Coffee $1.00'},
+      { date: '2025-04-11', title: '[4p - 8p] CodeBreaker Trivia: Test Your Dev Knowledge!'},
+      { date: '2025-04-20', title: 'ALL DAY 4/20: CLOSED FOR EASTER SUNDAY'},
       { date: '2025-05-05', title: 'ALL DAY 5/5: Cinco de Mayo: Café de Olla TODAY ONLY $5'}
 
     ];
@@ -180,3 +181,34 @@ document.addEventListener('DOMContentLoaded', function() {
       button.style.display = "block"; // Show button when chatbot is closed
     }
   }
+
+  document.querySelectorAll('.accordion-header').forEach(button => {
+    button.addEventListener('click', () => {
+        const isActive = button.classList.contains('active');
+        
+        // Close all accordions
+        document.querySelectorAll('.accordion-header').forEach(item => {
+            item.classList.remove('active');
+        });
+        document.querySelectorAll('.accordion-content').forEach(content => {
+            content.style.display = 'none';
+        });
+
+        // Open the clicked one if it was not already active
+        if (!isActive) {
+            button.classList.add('active');
+            button.nextElementSibling.style.display = 'block';
+        }
+    });
+});
+
+document.getElementById("agreeCheckbox").addEventListener("change", function() {
+  let button = document.getElementById("continueButton");
+  if (this.checked) {
+      button.disabled = false;
+      button.classList.add("enabled");
+  } else {
+      button.disabled = true;
+      button.classList.remove("enabled");
+  }
+});
