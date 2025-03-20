@@ -52,7 +52,7 @@ include("database.php");
               <ul id="events-list"></ul>
             </div>
           </div>
-     <button id="chatbotButton" onclick="toggleChatbot()">💬 Chat with Brewgle</button>
+     <button id="chatbotButton" onclick="toggleChatbot()">💬 Brewgle</button>
      <div id="chatbotContainer">
          <div id="chatbotHeader" onclick="toggleChatbot()">💬 Close Brewgle  &nbsp;&nbsp;&nbsp;&nbsp; ✖<span id="close-chatbot" onclick="toggleChatbot()">
          </span></div>

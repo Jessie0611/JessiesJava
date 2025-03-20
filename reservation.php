@@ -57,7 +57,7 @@ Our collaboration rooms are designed to provide just that, with two computer boo
     </div>
 
 <!-- Space Type Selection-->
-<form action="database.php" method="get">
+<form action="database.php" method="POST">
     <label for="resType">Select Your Space</label>
     <select id="resTypeID" name="resType" required>
         <option value="">--- Select Your Space ---</option>
@@ -141,7 +141,7 @@ Amendments & Updates: We reserve the right to modify this Agreement at any time.
 
 
        </form>
-   <button id="chatbotButton" onclick="toggleChatbot()">💬 Chat with Brewgle</button>
+   <button id="chatbotButton" onclick="toggleChatbot()">💬 Brewgle</button>
           <div id="chatbotContainer">
               <div id="chatbotHeader" onclick="toggleChatbot()">💬 Close Brewgle  &nbsp;&nbsp;&nbsp;&nbsp; ✖<span id="close-chatbot" onclick="toggleChatbot()">
               </span></div>
