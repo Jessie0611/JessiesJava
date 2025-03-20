@@ -37,10 +37,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 $stmt = $conn->prepare("INSERT INTO reservations (fName, lName, email, phone, resDate, resTime, spaceType) VALUES (?, ?, ?, ?, ?, ?, ?)");
 $stmt->bind_param("sssssss", $fName, $lName, $email, $phone, $resDate, $resTime, $spaceType);
 
+
+// Redirect to the confirmation page
+
 if ($stmt->execute()) {
-    // Redirect to the confirmation page with necessary query parameters (including name, reservation date, time, and space type)
-    header("Location: confirmation.php?name=" . urlencode($fName) . "&resDate=" . urlencode($resDate) . "&resTime=" . urlencode($resTime) . "&spaceType=" . urlencode($spaceType));
-    exit(); // Don't forget to call exit() after header redirect to stop further code execution.
+    header("Location: confirmation.php?fName=" . urlencode($fName) . "&lName=" . urlencode($lName) . "&email=" . urlencode($email) . "&phone=" . urlencode($phone) . "&resDate=" . urlencode($resDate) . "&resTime=" . urlencode($resTime) . "&resType=" . urlencode($resType));
+    exit(); //stop further code execution.
 } else {
     echo "<p>Error creating reservation: " . $stmt->error . "</p>";
 }

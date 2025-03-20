@@ -409,3 +409,104 @@ button:hover {
     background: #fff;
     overflow: hidden;
 }
+/* Responsive Design */
+@media (max-width: 768px) {
+    /* Adjust content width */
+    .content {
+        width: 95%;
+    }
+
+    /* Adjust button width */
+    .btn {
+        width: 80%; /* Make buttons more narrow */
+        margin-left: 0;
+    }
+
+    /* Adjust navigation to stack */
+    nav {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* Adjust text size for headings */
+    h2, h3 {
+        font-size: 18px;
+    }
+
+    /* Adjust form input fields to full width */
+    input, select, textarea, .submit {
+        width: 100%;
+    }
+
+    /* Calendar container adjustments */
+    .calendar-container {
+        width: 100%;
+        height: auto;
+        padding: 10px;
+    }
+
+    /* Adjust the chatbot size */
+    #chatbotContainer {
+        width: 90%;
+        height: 400px;
+    }
+
+    /* Adjust footer social media layout */
+    .footer .socialLinks {
+        flex-direction: column;
+    }
+
+    .footer .socialIcon {
+        width: 35px;
+        height: 35px;
+    }
+
+    /* Adjust accordion items for mobile */
+    .accordion-item {
+        padding: 5px;
+    }
+
+    .accordion-header {
+        font-size: 14px;
+    }
+}
+
+/* Responsive for smaller screens (max-width: 480px) */
+@media (max-width: 480px) {
+    /* Adjust content width even more for smaller screens */
+    .content {
+        width: 100%;
+    }
+
+    /* Adjust text sizes further for smaller screens */
+    h2, h3 {
+        font-size: 16px;
+    }
+
+    .menu-item {
+        font-size: 16px;
+    }
+
+    /* Adjust button size */
+    .btn {
+        width: 90%; /* Make buttons almost full width */
+        margin-left: 0;
+    }
+
+    /* Adjust footer for smaller screens */
+    .footer .socialLinks {
+        flex-direction: row;
+        gap: 10px;
+    }
+
+    /* Adjust chatbot button size */
+    #chatbotButton {
+        padding: 8px 10px;
+        font-size: 12px;
+    }
+
+    /* Adjust form input width */
+    input, select, textarea, .submit {
+        width: 100%;
+    }
+}

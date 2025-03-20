@@ -1,5 +1,15 @@
 <?php
 include("database.php");
+
+session_start();
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $_SESSION['name'] = $_POST['fName'] . ' ' . $_POST['lName'];
+    $_SESSION['resDate'] = $_POST['resDate'];
+    $_SESSION['resTime'] = $_POST['resTime'];
+    $_SESSION['resType'] = $_POST['resType'];
+    header("Location: confirmation.php");
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -37,7 +47,7 @@ Our collaboration rooms are designed to provide just that, with two computer boo
     </div>
 
 <!-- Space Type Selection-->
-<form action="database.php" method="post">
+<form action="database.php" method="get">
     <label for="resType">Select Your Space</label>
     <select id="resTypeID" name="resType" required>
         <option value="">--- Select Your Space ---</option>

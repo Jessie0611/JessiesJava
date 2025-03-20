@@ -1,14 +1,17 @@
 <?php
-if (isset($_GET['name'], $_GET['resDate'], $_GET['resTime'], $_GET['resType'])) {
-    $name = htmlspecialchars($_GET['name']);
-    $resDate = htmlspecialchars($_GET['resDate']);
-    $resTime = htmlspecialchars($_GET['resTime']);
-    $resType = htmlspecialchars($_GET['resType']);
+include("database.php");
+
+session_start();
+if (isset($_SESSION['name'], $_SESSION['resDate'], $_SESSION['resTime'], $_SESSION['resType'])) {
+    $name = htmlspecialchars($_SESSION['name']);
+    $resDate = htmlspecialchars($_SESSION['resDate']);
+    $resTime = htmlspecialchars($_SESSION['resTime']);
+    $resType = htmlspecialchars($_SESSION['resType']);
 
     $resTypeNames = [
-        1 => 'Table',
-        2 => 'Booth',
-        3 => 'Room'
+        1 => 'BYOL Table',
+        2 => 'Computer Booth',
+        3 => 'Collaboration Room'
     ];
     $resTypeName = $resTypeNames[$resType] ?? 'Unknown Space';
 
@@ -19,6 +22,7 @@ if (isset($_GET['name'], $_GET['resDate'], $_GET['resTime'], $_GET['resType'])) 
 } else {
     echo "<p>Error: No reservation information found.</p>";
 }
+
 ?>
 
 <!DOCTYPE html>
