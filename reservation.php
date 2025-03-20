@@ -17,10 +17,11 @@ include("database.php");
     </div>
     <hr>
     <nav>
-        <button class="btn"><a href="index.html">&nbsp;&nbsp;&nbsp;&nbsp;Home &nbsp;&nbsp;&nbsp;&nbsp;</a></button>
-        <button class="btn"><a href="reservation.html">Reservation</a></button>
-        <button class="btn"><a href="menu.html">&nbsp;&nbsp;&nbsp;&nbsp; Menu &nbsp;&nbsp;&nbsp;&nbsp;</a></button>
-        <button class="btn"> <a href="aboutus.html"> &nbsp;&nbsp;About Us&nbsp;&nbsp;</a></button>
+    <button class="btn"><a href="index.php">&nbsp;&nbsp;&nbsp;Home &nbsp;&nbsp;&nbsp;</a></button>
+            <button class="btn"><a href="reservation.php">Reservation</a></button>
+            <button class="btn"><a href="menu.php">&nbsp;&nbsp;&nbsp; Menu &nbsp;&nbsp;&nbsp;</a></button>
+            <button class="btn"> <a href="aboutus.php"> &nbsp;About Us&nbsp;</a></button>
+
     </nav>
 <p> <h3>Reserve Your Space at Jessie's Java!</h3>
 <h3>Service Options:</h3></p>
