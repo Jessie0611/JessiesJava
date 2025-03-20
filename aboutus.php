@@ -36,7 +36,6 @@ At Jessie's Java, we've brewed up the perfect blend of productivity and comfort 
 <br> Your next breakthrough awaits—sip, code, repeat! 💻☕
 </p>
     </div>
-    <section class="contact">
         <h2>Business Hours:</h2>
     Monday   6:00 a.m.-9:00 p.m. <br>
     Tuesday 6:00 a.m. - 9:00 p.m.<br>
@@ -49,7 +48,7 @@ At Jessie's Java, we've brewed up the perfect blend of productivity and comfort 
         <h2>Contact Us</h2>
         <form action="#" method="POST">
           <label for="name">Name:</label>
-          <input type="text" id="name" name="name" required placeholder="Your Name">
+          <input type="name" id="name" name="name" required placeholder="Your Name">
           <label for="email">Email:</label>
           <input type="email" id="email" name="email" required placeholder="Your Email">
           <label for="message">Message:</label>
@@ -57,7 +56,6 @@ At Jessie's Java, we've brewed up the perfect blend of productivity and comfort 
           
           <button type="submit">Send Message</button>
         </form>
-      </section>
       
       <button id="chatbotButton" onclick="toggleChatbot()">💬 Chat with Brewgle</button>
       <div id="chatbotContainer">

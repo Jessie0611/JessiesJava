@@ -1,16 +1,26 @@
 <?php
+session_start();
 include("database.php");
 
-session_start();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $_SESSION['name'] = $_POST['fName'] . ' ' . $_POST['lName'];
-    $_SESSION['resDate'] = $_POST['resDate'];
-    $_SESSION['resTime'] = $_POST['resTime'];
-    $_SESSION['resType'] = $_POST['resType'];
-    header("Location: confirmation.php");
-    exit();
+    if (isset($_POST['fName'], $_POST['lName'], $_POST['resDate'], $_POST['resTime'], $_POST['resType'])) {
+        $_SESSION['name'] = trim($_POST['fName']) . ' ' . trim($_POST['lName']);
+        $_SESSION['resDate'] = trim($_POST['resDate']);
+        $_SESSION['resTime'] = trim($_POST['resTime']);
+        $_SESSION['resType'] = trim($_POST['resType']);
+        
+        // Debugging: Check session values before redirecting
+        echo "<pre>";
+        print_r($_SESSION);
+        echo "</pre>";
+        exit(); // Stop execution to check output
+    } else {
+        echo "<p>Error: Missing required fields.</p>";
+        exit();
+    }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -126,7 +136,7 @@ Amendments & Updates: We reserve the right to modify this Agreement at any time.
             <br>
         </div>
     </div>
-<br><br>
+<br><br> <br> <br>
     <button type="submit" class="submit"><a href="confirmation.php"> Reserve </a></button>
 
 

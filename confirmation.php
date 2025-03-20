@@ -1,28 +1,22 @@
 <?php
+session_start();
 include("database.php");
 
-session_start();
-if (isset($_SESSION['name'], $_SESSION['resDate'], $_SESSION['resTime'], $_SESSION['resType'])) {
-    $name = htmlspecialchars($_SESSION['name']);
-    $resDate = htmlspecialchars($_SESSION['resDate']);
-    $resTime = htmlspecialchars($_SESSION['resTime']);
-    $resType = htmlspecialchars($_SESSION['resType']);
+// Debugging: Print session before checking
+echo "<pre>";
+print_r($_SESSION);
+echo "</pre>";
 
-    $resTypeNames = [
-        1 => 'BYOL Table',
-        2 => 'Computer Booth',
-        3 => 'Collaboration Room'
-    ];
-    $resTypeName = $resTypeNames[$resType] ?? 'Unknown Space';
-
-    echo "<h1>Reservation Confirmed!</h1>";
-    echo "<p>Thank you, $name! Your reservation for a $resTypeName has been successfully made.</p>";
-    echo "<p>Reservation Details:</p>";
-    echo "<ul><li>Date: $resDate</li><li>Time: $resTime</li><li>Space: $resTypeName</li></ul>";
-} else {
+if (!isset($_SESSION['name'], $_SESSION['resDate'], $_SESSION['resTime'], $_SESSION['resType'])) {
     echo "<p>Error: No reservation information found.</p>";
+    exit();
 }
 
+// If session data exists, display it
+$name = htmlspecialchars($_SESSION['name']);
+$resDate = htmlspecialchars($_SESSION['resDate']);
+$resTime = htmlspecialchars($_SESSION['resTime']);
+$resType = htmlspecialchars($_SESSION['resType']);
 ?>
 
 <!DOCTYPE html>
@@ -49,7 +43,15 @@ if (isset($_SESSION['name'], $_SESSION['resDate'], $_SESSION['resTime'], $_SESSI
 <br>
     <h2>You have successfully reserved your space!</h2>
     <h2>Enjoy your Jessie's Java Coding Experience!</h2>
-    <br><hr><br>
+    <br>
+    <div class="container">
+        <h2>Reservation Confirmed</h2>
+        <p><strong>Name:</strong> <?php echo $name; ?></p>
+        <p><strong>Date:</strong> <?php echo $resDate; ?></p>
+        <p><strong>Time:</strong> <?php echo $resTime; ?></p>
+        <p><strong>Space Type:</strong> <?php echo $resType; ?></p>
+    </div>
+    <hr><br>
 
 
     <button id="chatbotButton" onclick="toggleChatbot()">💬 Chat with Brewgle</button>

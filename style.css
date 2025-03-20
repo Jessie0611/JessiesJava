@@ -210,7 +210,7 @@ input, select, textarea {
     border: 2px solid #78ada5;
 }
 
-#spaceType, #resDate, #resTime, #fName, #lName, #email, #phone, #drinkType {
+#spaceType, #resDate, #resTime, #fName, #lName, #email, #phone, #drinkType, #message, #name {
     font-size: 14px;
     background-color: #d9d3cb;
 }
