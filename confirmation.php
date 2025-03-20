@@ -5,11 +5,10 @@ if (isset($_GET['name'], $_GET['resDate'], $_GET['resTime'], $_GET['resType'])) 
     $resTime = htmlspecialchars($_GET['resTime']);
     $resType = htmlspecialchars($_GET['resType']);
 
-    // You could also translate the reservation type ID into a readable string here
     $resTypeNames = [
-        1 => 'Computer Booth',
-        2 => 'BYOL Table',
-        3 => 'Collaboration Room'
+        1 => 'Table',
+        2 => 'Booth',
+        3 => 'Room'
     ];
     $resTypeName = $resTypeNames[$resType] ?? 'Unknown Space';
 
@@ -36,10 +35,10 @@ if (isset($_GET['name'], $_GET['resDate'], $_GET['resTime'], $_GET['resType'])) 
         <img src="Images/JJ-resPaymentHero.png" alt="Hero Image Unavailable" width="100%">
     </div>
     <nav>
-            <button class="btn"><a href="index.php">&nbsp;&nbsp;&nbsp;Home &nbsp;&nbsp;&nbsp;</a></button>
-            <button class="btn"><a href="reservation.php">Reservation</a></button>
-            <button class="btn"><a href="menu.php">&nbsp;&nbsp;&nbsp; Menu &nbsp;&nbsp;&nbsp;</a></button>
-            <button class="btn"> <a href="aboutus.php"> &nbsp;About Us&nbsp;</a></button>
+        <button class="btn"><a href="index.php">&nbsp;&nbsp;&nbsp;Home &nbsp;&nbsp;&nbsp;</a></button>
+        <button class="btn"><a href="reservation.php">Reservation</a></button>
+        <button class="btn"><a href="menu.php">&nbsp;&nbsp;&nbsp; Menu &nbsp;&nbsp;&nbsp;</a></button>
+        <button class="btn"> <a href="aboutus.php"> &nbsp;About Us&nbsp;</a></button>
     </nav>
     <br>
 <hr>

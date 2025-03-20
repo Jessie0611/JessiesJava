@@ -117,7 +117,7 @@ Amendments & Updates: We reserve the right to modify this Agreement at any time.
         </div>
     </div>
 <br><br>
-    <button type="submit" class="submit"> Reserve </button>
+    <button type="submit" class="submit"><a href="confirmation.php"> Reserve </a></button>
 
 
        </form>
