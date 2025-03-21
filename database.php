@@ -4,7 +4,6 @@ $port = 3306;
 $user = "root";
 $password = "";
 $dbname = "jessiesjava";
-$conn = "";
 
 // Create a single MySQLi connection
 $conn = new mysqli($host, $user, $password, $dbname, $port);
@@ -13,6 +12,7 @@ $conn = new mysqli($host, $user, $password, $dbname, $port);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
+
 // Handle form submission
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (
@@ -25,31 +25,50 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $phone = trim($_POST['phone']);
         $resDate = trim($_POST['resDate']);
         $resTime = trim($_POST['resTime']);
-        $resType = (int)$_POST['resType'];
+        $resType = (int)$_POST['resType']; // Fix variable usage
 
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            echo "<p>Error: Invalid email format.</p>";
-            $conn->close();
-            exit();
-        }
+        // Validate email format
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        echo "<p>Error: Invalid email format.</p>";
+        $conn->close();
+        exit();
+    }
 
-// Insert into reservations table
-$stmt = $conn->prepare("INSERT INTO reservations (fName, lName, email, phone, resDate, resTime, spaceType) VALUES (?, ?, ?, ?, ?, ?, ?)");
-$stmt->bind_param("sssssss", $fName, $lName, $email, $phone, $resDate, $resTime, $spaceType);
+        $stmt = $conn->prepare("SELECT id FROM users WHERE email = ?");
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $stmt->store_result();
 
+    if ($stmt->num_rows == 0) { // If email does not exist, insert new user
+        $stmt->close();
+        $stmt = $conn->prepare("INSERT INTO users (fName, lName, email, phone) VALUES (?, ?, ?, ?)");
+        $stmt->bind_param("ssss", $fName, $lName, $email, $phone);
+        $stmt->execute();
+        $stmt->close();
+    }
 
-// Redirect to the confirmation page
+        // Insert into users table
+        $stmt = $conn->prepare("INSERT INTO users (fName, lName, email, phone) VALUES (?, ?, ?, ?)");
+        $stmt->bind_param("ssss", $fName, $lName, $email, $phone);
+        $stmt->execute();
+        $stmt->close(); // Close the statement to avoid conflicts
 
-if ($stmt->execute()) {
-    header("Location: confirmation.php?fName=" . urlencode($fName) . "&lName=" . urlencode($lName) . "&email=" . urlencode($email) . "&phone=" . urlencode($phone) . "&resDate=" . urlencode($resDate) . "&resTime=" . urlencode($resTime) . "&resType=" . urlencode($resType));
-    exit(); //stop further code execution.
-} else {
-    echo "<p>Error creating reservation: " . $stmt->error . "</p>";
-}
-$stmt->close();
-} else {
-echo "<p>Error: All required fields must be filled.</p>";
-}
-$conn->close();
+        // Insert into reservations table
+        $stmt = $conn->prepare("INSERT INTO reservations (resTypeID, resDate, resTime) VALUES (?, ?, ?)");
+        $stmt->bind_param("iss", $resType, $resDate, $resTime); // Fix data types: "iss"
+        $success = $stmt->execute(); // Store execution result
+        $stmt->close();
+
+        // Redirect if successful
+    if ($success) {
+        header("Location: /JessiesJava/confirmation.php?fName=" . urlencode($fName) . "&lName=" . urlencode($lName) . "&email=" . urlencode($email) . "&phone=" . urlencode($phone) . "&resDate=" . urlencode($resDate) . "&resTime=" . urlencode($resTime) . "&resType=" . urlencode($resType));
+        exit();
+    } else {
+        echo "<p>Error creating reservation: " . $conn->error . "</p>";
+    }
+    } else {
+        echo "<p>Error: All required fields must be filled.</p>";
+    }
+    $conn->close();
 }
 ?>

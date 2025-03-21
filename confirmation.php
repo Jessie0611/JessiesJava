@@ -1,23 +1,40 @@
 <?php
 session_start();
+
 include("database.php");
-
-// Debugging: Print session before checking
 echo "<pre>";
-print_r($_SESSION);
+print_r($_POST);  // Check what values are being sent
 echo "</pre>";
+exit();
 
-if (!isset($_SESSION['name'], $_SESSION['resDate'], $_SESSION['resTime'], $_SESSION['resType'])) {
-    echo "<p>Error: No reservation information found.</p>";
-    exit();
-}
-
-// If session data exists, display it
-$name = htmlspecialchars($_SESSION['name']);
-$resDate = htmlspecialchars($_SESSION['resDate']);
-$resTime = htmlspecialchars($_SESSION['resTime']);
-$resType = htmlspecialchars($_SESSION['resType']);
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservation Confirmation</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="confirmation-container">
+        <h1>Reservation Confirmed</h1>
+        <p>Thank you, <strong><?php echo htmlspecialchars($reservation['fName'] . " " . $reservation['lName']); ?></strong>!</p>
+        <p>Your reservation details:</p>
+        <ul>
+            <li><strong>Email:</strong> <?php echo htmlspecialchars($reservation['eMail']); ?></li>
+            <li><strong>Phone:</strong> <?php echo htmlspecialchars($reservation['phoneNum']); ?></li>
+            <li><strong>Reservation Type:</strong> <?php echo htmlspecialchars($reservation['typeName']); ?></li>
+            <li><strong>Date:</strong> <?php echo htmlspecialchars($reservation['resDate']); ?></li>
+            <li><strong>Time:</strong> <?php echo htmlspecialchars($reservation['resTime']); ?></li>
+            <li><strong>Total Amount:</strong> $<?php echo number_format($reservation['totalAmount'], 2); ?></li>
+            <li><strong>Status:</strong> <?php echo htmlspecialchars($reservation['status']); ?></li>
+        </ul>
+        <a href="index.php">Return to Home</a>
+    </div>
+</body>
+</html>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -30,7 +47,7 @@ $resType = htmlspecialchars($_SESSION['resType']);
 <body>
     <div class="content">
     <div class="hero">
-        <img src="Images/JJ-resPaymentHero.png" alt="Hero Image Unavailable" width="100%">
+        <img src="Images/JJ-resPaymentHero.png" alt="Hero Image" width="97%">
     </div>
     <nav>
         <button class="btn"><a href="index.php">&nbsp;&nbsp;&nbsp;Home &nbsp;&nbsp;&nbsp;</a></button>
@@ -44,14 +61,17 @@ $resType = htmlspecialchars($_SESSION['resType']);
     <h2>You have successfully reserved your space!</h2>
     <h2>Enjoy your Jessie's Java Coding Experience!</h2>
     <br>
-    <div class="container">
-        <h2>Reservation Confirmed</h2>
-        <p><strong>Name:</strong> <?php echo $name; ?></p>
-        <p><strong>Date:</strong> <?php echo $resDate; ?></p>
-        <p><strong>Time:</strong> <?php echo $resTime; ?></p>
-        <p><strong>Space Type:</strong> <?php echo $resType; ?></p>
-    </div>
-    <hr><br>
+    <h2>Thank you, <?php echo htmlspecialchars($reservation['fName']); ?>!</h2>
+    <p>Your reservation has been confirmed.</p>
+    <ul>
+        <li><strong>Name:</strong> <?php echo htmlspecialchars($reservation['fName'] . " " . $reservation['lName']); ?></li>
+        <li><strong>Email:</strong> <?php echo htmlspecialchars($reservation['eMail']); ?></li>
+        <li><strong>Phone:</strong> <?php echo htmlspecialchars($reservation['phoneNum']); ?></li>
+        <li><strong>Type:</strong> <?php echo htmlspecialchars($reservation['typeName']); ?></li>
+        <li><strong>Date:</strong> <?php echo htmlspecialchars($reservation['resDate']); ?></li>
+        <li><strong>Time:</strong> <?php echo htmlspecialchars($reservation['resTime']); ?></li>
+        <li><strong>Total Amount:</strong> $<?php echo number_format($reservation['totalAmount'], 2); ?></li>
+        <li><strong>Status:</strong> <?php echo htmlspecialchars($reservation['status']); ?></li>
 
 
     <button id="chatbotButton" onclick="toggleChatbot()">💬 Brewgle</button>

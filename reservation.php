@@ -3,24 +3,85 @@ session_start();
 include("database.php");
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['fName'], $_POST['lName'], $_POST['resDate'], $_POST['resTime'], $_POST['resType'])) {
-        $_SESSION['name'] = trim($_POST['fName']) . ' ' . trim($_POST['lName']);
-        $_SESSION['resDate'] = trim($_POST['resDate']);
-        $_SESSION['resTime'] = trim($_POST['resTime']);
-        $_SESSION['resType'] = trim($_POST['resType']);
-        
-        // Debugging: Check session values before redirecting
-        echo "<pre>";
-        print_r($_SESSION);
-        echo "</pre>";
-        exit(); // Stop execution to check output
+    if (isset($_POST['fName'], $_POST['lName'], $_POST['email'], $_POST['phone'], $_POST['resDate'], $_POST['resTime'], $_POST['resType'])) {
+        $fName = trim($_POST['fName']);
+        $lName = trim($_POST['lName']);
+        $email = trim($_POST['email']);
+        $phone = trim($_POST['phone']);
+        $resDate = trim($_POST['resDate']);
+        $resTime = trim($_POST['resTime']);
+        $resType = (int)$_POST['resType'];
+
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            echo "<p>Error: Invalid email format.</p>";
+            exit();
+        }
+
+        // Store session data
+        $_SESSION['name'] = $fName . ' ' . $lName;
+        $_SESSION['email'] = $email;
+        $_SESSION['phone'] = $phone;
+        $_SESSION['resDate'] = $resDate;
+        $_SESSION['resTime'] = $resTime;
+        $_SESSION['resType'] = $resType;
+
+        // Insert data into database
+        $conn->begin_transaction();
+        try {
+            // Check if user exists
+            $stmt = $conn->prepare("SELECT userID FROM users WHERE eMail = ?");
+            $stmt->bind_param("s", $email);
+            $stmt->execute();
+            $stmt->store_result();
+
+            if ($stmt->num_rows == 0) {
+                $stmt->close();
+                $stmt = $conn->prepare("INSERT INTO users (fName, lName, eMail, phoneNum) VALUES (?, ?, ?, ?)");
+                $stmt->bind_param("ssss", $fName, $lName, $email, $phone);
+                $stmt->execute();
+                $userID = $stmt->insert_id;
+                $stmt->close();
+            } else {
+                $stmt->bind_result($userID);
+                $stmt->fetch();
+                $stmt->close();
+            }
+
+            // Get reservation price
+            $stmt = $conn->prepare("SELECT resPrice FROM restype WHERE resTypeID = ?");
+            $stmt->bind_param("i", $resType);
+            $stmt->execute();
+            $stmt->bind_result($totalAmount);
+            $stmt->fetch();
+            $stmt->close();
+
+            if (!$totalAmount) {
+                throw new Exception("Invalid reservation type.");
+            }
+
+            // Insert reservation
+            $status = "Pending";
+            $stmt = $conn->prepare("INSERT INTO reservations (userID, resTypeID, resDate, resTime, totalAmount, status) VALUES (?, ?, ?, ?, ?, ?)");
+            $stmt->bind_param("iissds", $userID, $resType, $resDate, $resTime, $totalAmount, $status);
+            $stmt->execute();
+            $resID = $stmt->insert_id;
+            $stmt->close();
+
+            $conn->commit();
+
+            // Redirect to confirmation page
+            header("Location: confirmation.php?resID=" . urlencode($resID));
+            exit();
+        } catch (Exception $e) {
+            $conn->rollback();
+            echo "<p>Error: " . htmlspecialchars($e->getMessage()) . "</p>";
+        }
     } else {
         echo "<p>Error: Missing required fields.</p>";
         exit();
     }
 }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -33,7 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
     <div class="content">
     <div class="hero">
-        <img src="Images/JJ-reserveHero.png" alt="Hero Image Unavailable" width="100%">
+        <img src="Images/JJ-reserveHero.png" alt="Hero Image Unavailable" width="97%">
     </div>
     <hr>
     <nav>
@@ -56,10 +117,9 @@ Our collaboration rooms are designed to provide just that, with two computer boo
 </p> 
     </div>
 
-<!-- Space Type Selection-->
-<form action="database.php" method="POST">
-    <label for="resType">Select Your Space</label>
-    <select id="resTypeID" name="resType" required>
+    <form action="reservation.php" method="POST">
+    <label for="resTypeID">Select Your Space</label>
+    <select id="resTypeID" name="resTypeID" required>
         <option value="">--- Select Your Space ---</option>
         <option value="1">($60.00) BYOL Table</option>
         <option value="2">($100.00) Computer Booth</option>
@@ -137,7 +197,13 @@ Amendments & Updates: We reserve the right to modify this Agreement at any time.
         </div>
     </div>
 <br><br> <br> <br>
-    <button type="submit" class="submit"><a href="confirmation.php"> Reserve </a></button>
+
+
+
+        <button type="submit" class="submit">Reserve</button>
+
+</div>
+
 
 
        </form>
