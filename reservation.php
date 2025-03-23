@@ -94,7 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
     <div class="content">
     <div class="hero">
-        <img src="Images/JJ-reserveHero.png" alt="Hero Image Unavailable" width="97%">
+        <img src="Images/JJ-reserveHero.png" alt="Hero Image" class="hero img">
     </div>
     <hr>
     <nav>

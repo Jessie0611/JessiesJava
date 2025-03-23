@@ -47,7 +47,7 @@ exit();
 <body>
     <div class="content">
     <div class="hero">
-        <img src="Images/JJ-resPaymentHero.png" alt="Hero Image" width="97%">
+        <img src="Images/JJ-resPaymentHero.png" alt="Hero Image" class="hero img">
     </div>
     <nav>
         <button class="btn"><a href="index.php">&nbsp;&nbsp;&nbsp;Home &nbsp;&nbsp;&nbsp;</a></button>

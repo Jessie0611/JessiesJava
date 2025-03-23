@@ -11,27 +11,27 @@ body{
     background-color: #372115;
     text-align: center;
 }
-.content {
+.content{
     width: 85%;
+    height: 100%;
     background-color: #b7b19e;
     padding-bottom: 100px;
-    margin-top: 20px;
+}
+.hero {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 900px; /* Force hero section to grow */
+    overflow: hidden;
 }
 
-.hero {
-    width: 100%;
-    max-height: 300px;
-    overflow: hidden;
-    display: block;
-}
- 
 .hero img {
     width: 100%;
-    max-height: 300px;
+    height: 100%; /* Stretch the image */
     object-fit: cover;
     display: block;
 }
-    
+
 nav{
     display: flex;
     justify-content: center;
@@ -385,10 +385,7 @@ button:hover {
     box-shadow: 0px 2px 5px #625750;
   }
 
-
-
-
- .accordion {
+.accordion {
     width: 100%;
     max-width: 700px;
     margin: 20px auto;
