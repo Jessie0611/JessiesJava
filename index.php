@@ -13,7 +13,7 @@ include("database.php");
 <body>
 <div class="content">
     <div class="hero">
-        <img src="Images/jj-hero.png" alt="Hero Image" width="97%"></div>
+        <img src="Images/jj-hero.png" alt="Hero Image"></div>
         <hr>
         <nav>
             <button class="btn"><a href="index.php">&nbsp;&nbsp;&nbsp;Home &nbsp;&nbsp;&nbsp;</a></button>
@@ -21,8 +21,7 @@ include("database.php");
             <button class="btn"><a href="menu.php">&nbsp;&nbsp;&nbsp; Menu &nbsp;&nbsp;&nbsp;</a></button>
             <button class="btn"> <a href="aboutus.php"> &nbsp;About Us&nbsp;</a></button>
         </nav>
-
-          <div class="calendar-container">
+        <div class="calendar-container">
             <br>
             <br>
             <div class="calendar-header">

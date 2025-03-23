@@ -5,10 +5,9 @@ $user = "root";
 $password = "";
 $dbname = "jessiesjava";
 
-// Create a single MySQLi connection
+// Create a MySQLi connection
 $conn = new mysqli($host, $user, $password, $dbname, $port);
 
-// Check if the connection is successful
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
@@ -25,50 +24,70 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $phone = trim($_POST['phone']);
         $resDate = trim($_POST['resDate']);
         $resTime = trim($_POST['resTime']);
-        $resType = (int)$_POST['resType']; // Fix variable usage
+        $resType = (int)$_POST['resType']; 
 
-        // Validate email format
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        echo "<p>Error: Invalid email format.</p>";
-        $conn->close();
-        exit();
-    }
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            echo "<p>Error: Invalid email format.</p>";
+            $conn->close();
+            exit();
+        }
 
-        $stmt = $conn->prepare("SELECT id FROM users WHERE email = ?");
-        $stmt->bind_param("s", $email);
-        $stmt->execute();
-        $stmt->store_result();
+        $conn->begin_transaction();
 
-    if ($stmt->num_rows == 0) { // If email does not exist, insert new user
-        $stmt->close();
-        $stmt = $conn->prepare("INSERT INTO users (fName, lName, email, phone) VALUES (?, ?, ?, ?)");
-        $stmt->bind_param("ssss", $fName, $lName, $email, $phone);
-        $stmt->execute();
-        $stmt->close();
-    }
+        try {
+            // Check if user already exists
+            $stmt = $conn->prepare("SELECT userID FROM users WHERE eMail = ?");
+            $stmt->bind_param("s", $email);
+            $stmt->execute();
+            $stmt->store_result();
 
-        // Insert into users table
-        $stmt = $conn->prepare("INSERT INTO users (fName, lName, email, phone) VALUES (?, ?, ?, ?)");
-        $stmt->bind_param("ssss", $fName, $lName, $email, $phone);
-        $stmt->execute();
-        $stmt->close(); // Close the statement to avoid conflicts
+            if ($stmt->num_rows == 0) {
+                // Insert new user
+                $stmt->close();
+                $stmt = $conn->prepare("INSERT INTO users (fName, lName, eMail, phoneNum) VALUES (?, ?, ?, ?)");
+                $stmt->bind_param("ssss", $fName, $lName, $email, $phone);
+                $stmt->execute();
+                $userID = $stmt->insert_id; // Get the newly inserted userID
+                $stmt->close();
+            } else {
+                $stmt->bind_result($userID);
+                $stmt->fetch();
+                $stmt->close();
+            }
 
-        // Insert into reservations table
-        $stmt = $conn->prepare("INSERT INTO reservations (resTypeID, resDate, resTime) VALUES (?, ?, ?)");
-        $stmt->bind_param("iss", $resType, $resDate, $resTime); // Fix data types: "iss"
-        $success = $stmt->execute(); // Store execution result
-        $stmt->close();
+            // Get reservation price
+            $stmt = $conn->prepare("SELECT resPrice FROM restype WHERE resTypeID = ?");
+            $stmt->bind_param("i", $resType);
+            $stmt->execute();
+            $stmt->bind_result($totalAmount);
+            $stmt->fetch();
+            $stmt->close();
 
-        // Redirect if successful
-    if ($success) {
-        header("Location: /JessiesJava/confirmation.php?fName=" . urlencode($fName) . "&lName=" . urlencode($lName) . "&email=" . urlencode($email) . "&phone=" . urlencode($phone) . "&resDate=" . urlencode($resDate) . "&resTime=" . urlencode($resTime) . "&resType=" . urlencode($resType));
-        exit();
-    } else {
-        echo "<p>Error creating reservation: " . $conn->error . "</p>";
-    }
+            if (!$totalAmount) {
+                throw new Exception("Invalid reservation type.");
+            }
+
+            // Insert reservation
+            $status = "Pending";
+            $stmt = $conn->prepare("INSERT INTO reservations (userID, resTypeID, resDate, resTime, totalAmount, status) VALUES (?, ?, ?, ?, ?, ?)");
+            $stmt->bind_param("iissds", $userID, $resType, $resDate, $resTime, $totalAmount, $status);
+            $stmt->execute();
+            $resID = $stmt->insert_id;
+            $stmt->close();
+
+            $conn->commit();
+
+            // Redirect to confirmation page
+            header("Location: /JessiesJava/confirmation.php?resID=" . urlencode($resID));
+            exit();
+        } catch (Exception $e) {
+            $conn->rollback();
+            echo "<p>Error: " . htmlspecialchars($e->getMessage()) . "</p>";
+        }
     } else {
         echo "<p>Error: All required fields must be filled.</p>";
     }
+
     $conn->close();
 }
 ?>
