@@ -1,84 +1,43 @@
-<?php
+<?php 
 session_start();
 include("database.php");
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['fName'], $_POST['lName'], $_POST['email'], $_POST['phone'], $_POST['resDate'], $_POST['resTime'], $_POST['resType'])) {
-        $fName = trim($_POST['fName']);
-        $lName = trim($_POST['lName']);
-        $email = trim($_POST['email']);
-        $phone = trim($_POST['phone']);
-        $resDate = trim($_POST['resDate']);
-        $resTime = trim($_POST['resTime']);
-        $resType = (int)$_POST['resType'];
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Sanitize input
+    $fName = filter_input(INPUT_POST, 'fName', FILTER_SANITIZE_SPECIAL_CHARS);
+    $lName = filter_input(INPUT_POST, 'lName', FILTER_SANITIZE_SPECIAL_CHARS);
+    $eMail = filter_input(INPUT_POST, 'eMail', FILTER_SANITIZE_EMAIL);
+    $phone = filter_input(INPUT_POST, 'phone', FILTER_SANITIZE_SPECIAL_CHARS);
+    $resTypeID = filter_input(INPUT_POST, 'resTypeID', FILTER_SANITIZE_NUMBER_INT);
+    $resDate = filter_input(INPUT_POST, 'resDate', FILTER_SANITIZE_SPECIAL_CHARS);
+    $resTime = filter_input(INPUT_POST, 'resTime', FILTER_SANITIZE_SPECIAL_CHARS);
 
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            echo "<p>Error: Invalid email format.</p>";
-            exit();
-        }
+    if (empty($fName) || empty($lName) || empty($eMail) || empty($phone) || empty($resDate) || empty($resTime)) {
+        die("Error: All fields are required.");
+    }
 
-        // Store session data
-        $_SESSION['name'] = $fName . ' ' . $lName;
-        $_SESSION['email'] = $email;
-        $_SESSION['phone'] = $phone;
-        $_SESSION['resDate'] = $resDate;
-        $_SESSION['resTime'] = $resTime;
-        $_SESSION['resType'] = $resType;
+    // Insert user into `users` table
+    $sql1 = "INSERT INTO users (fName, lName, eMail, phone) VALUES (?, ?, ?, ?)";
+    $stmt1 = $conn->prepare($sql1);
+    $stmt1->bind_param("ssss", $fName, $lName, $eMail, $phone);
 
-        // Insert data into database
-        $conn->begin_transaction();
-        try {
-            // Check if user exists
-            $stmt = $conn->prepare("SELECT userID FROM users WHERE eMail = ?");
-            $stmt->bind_param("s", $email);
-            $stmt->execute();
-            $stmt->store_result();
+    if ($stmt1->execute()) {
+        $userID = $stmt1->insert_id; // Get the auto-generated userID
 
-            if ($stmt->num_rows == 0) {
-                $stmt->close();
-                $stmt = $conn->prepare("INSERT INTO users (fName, lName, eMail, phoneNum) VALUES (?, ?, ?, ?)");
-                $stmt->bind_param("ssss", $fName, $lName, $email, $phone);
-                $stmt->execute();
-                $userID = $stmt->insert_id;
-                $stmt->close();
-            } else {
-                $stmt->bind_result($userID);
-                $stmt->fetch();
-                $stmt->close();
-            }
+        // Insert reservation into `reservations` table
+        $sql2 = "INSERT INTO reservations (userID, resTypeID, resDate, resTime, status) VALUES (?, ?, ?, ?, 'pending')";
+        $stmt2 = $conn->prepare($sql2);
+        $stmt2->bind_param("isss", $userID, $resTypeID, $resDate, $resTime);
 
-            // Get reservation price
-            $stmt = $conn->prepare("SELECT resPrice FROM restype WHERE resTypeID = ?");
-            $stmt->bind_param("i", $resType);
-            $stmt->execute();
-            $stmt->bind_result($totalAmount);
-            $stmt->fetch();
-            $stmt->close();
-
-            if (!$totalAmount) {
-                throw new Exception("Invalid reservation type.");
-            }
-
-            // Insert reservation
-            $status = "Pending";
-            $stmt = $conn->prepare("INSERT INTO reservations (userID, resTypeID, resDate, resTime, totalAmount, status) VALUES (?, ?, ?, ?, ?, ?)");
-            $stmt->bind_param("iissds", $userID, $resType, $resDate, $resTime, $totalAmount, $status);
-            $stmt->execute();
-            $resID = $stmt->insert_id;
-            $stmt->close();
-
-            $conn->commit();
-
+        if ($stmt2->execute()) {
             // Redirect to confirmation page
-            header("Location: confirmation.php?resID=" . urlencode($resID));
+            header("Location: confirmation.php?userID=$userID");
             exit();
-        } catch (Exception $e) {
-            $conn->rollback();
-            echo "<p>Error: " . htmlspecialchars($e->getMessage()) . "</p>";
+        } else {
+            die("Error: Reservation could not be saved.");
         }
     } else {
-        echo "<p>Error: Missing required fields.</p>";
-        exit();
+        die("Error: User could not be created.");
     }
 }
 ?>
@@ -116,8 +75,7 @@ Our collaboration rooms are designed to provide just that, with two computer boo
  it's the perfect space for creative work. <br><br>
 </p> 
     </div>
-
-    <form action="reservation.php" method="POST">
+    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
     <label for="resTypeID">Select Your Space</label>
     <select id="resTypeID" name="resTypeID" required>
         <option value="">--- Select Your Space ---</option>
@@ -138,8 +96,8 @@ Our collaboration rooms are designed to provide just that, with two computer boo
     <label for="lName">Last Name</label>
     <input type="text" id="lName" name="lName" placeholder="Last Name" required>
 
-    <label for="email">Email Address</label>
-    <input type="email" id="email" name="email" placeholder="E-mail Address" required>
+    <label for="eMail">Email Address</label>
+    <input type="email" class="form-control is-invalid" id="eMail" name="eMail" placeholder="E-mail Address" required>
 
     <label for="phone">Phone Number</label>
     <input type="tel" id="phone" name="phone" placeholder="Phone Number">
@@ -150,24 +108,24 @@ Our collaboration rooms are designed to provide just that, with two computer boo
 
     </p>
 
-    <label>        <input type="checkbox" id="agreeCheckbox">
+    <label>        <input type="checkbox" id="agreeCheckbox" required>
         I have read the disclosure agreement
     </label>
 </div>
 
 <div class="accordion">
     <div class="accordion-item">
-        <button class="accordion-header">Disclosure Agreement</button>
+        <div class="accordion-header">Disclosure Agreement</div>
         <div class="accordion-content">
              <small>
                 Reservations & Walk-Ins <br>
 Customers may reserve a BYOL table, computer booth, or collaboration room in advance via our website, phone, or in person. Walk-ins are welcome, but availability is not guaranteed. 
 Prepaid Reservations: Customers who pay for their reservation upfront will have their table or room held for the full reservation period.
-Non-Prepaid Reservations (Made In-House): Customers who make a reservation without prepayment will have their table or room held for 15 minutes (BYOL tables and computer booths). If the customer fails to arrive within the hold time, the reservation will be forfeited, and the space will be made available to walk-in customers.
+Non-Prepaid Reservations (Made In-House): Customers who make a reservation without prepayment will have their table or room held for 20 minutes (BYOL tables and computer booths). If the customer fails to arrive within the hold time, the reservation will be forfeited, and the space will be made available to walk-in customers.
 Collaboration Rooms: Due to limited availability, collaboration rooms must be prepaid at the time of booking.
    <br> <br>
                 Rental of Additional Tech Equipment <br>
-Customers may rent extra tech accessories (e.g., monitors, keyboards, mice, chargers) based on availability.
+Customers may rent extra tech accessories (e.g., monitors, keyboards, mice, chargers, gaming controllers) based on availability.
 Rental fees must be paid upfront, and certain high-value items may require a security deposit.
 Customers are responsible for returning rented equipment in the same condition. Any damage or loss will result in additional fees.
 <br> <br>
@@ -190,6 +148,7 @@ We may monitor public computer booths to ensure compliance with shop policies.
 Customers must log out of any personal accounts before leaving to protect their data.
 Wi-Fi access is provided as a courtesy, and we are not responsible for security risks or interruptions.
 <br> <br>
+<br>Discounts: Students can get a 10% discount off in-store snacks and drinks with their student ID card. Please tell the staff when you are ordering. <br>
 Amendments & Updates: We reserve the right to modify this Agreement at any time. Continued use of our services after updates indicates acceptance of the revised terms.
 <br>
             </small>
@@ -197,15 +156,8 @@ Amendments & Updates: We reserve the right to modify this Agreement at any time.
         </div>
     </div>
 <br><br> <br> <br>
-
-
-
         <button type="submit" class="submit">Reserve</button>
-
 </div>
-
-
-
        </form>
    <button id="chatbotButton" onclick="toggleChatbot()">💬 Brewgle</button>
           <div id="chatbotContainer">

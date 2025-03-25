@@ -210,7 +210,7 @@ input, select, textarea {
     border: 2px solid #78ada5;
 }
 
-#spaceType, #resDate, #resTime, #fName, #lName, #email, #phone, #drinkType, #message, #name {
+#spaceType, #resDate, #resTime, #fName, #lName, #eMail, #phone, #drinkType, #message, #name {
     font-size: 14px;
     background-color: #d9d3cb;
 }
@@ -388,7 +388,9 @@ button:hover {
 }
 
 .accordion-header {
-    background: #625750;
+    background: hsl(23, 7%, 23%);
+    color: white;
+    border-radius: 30px;
     padding: 10px;
     cursor: pointer;
     font-size: 16px;
