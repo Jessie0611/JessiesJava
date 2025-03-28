@@ -28,9 +28,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $mail->Body = "Name: $name\nEmail: $email\n\nMessage:\n$message";
 
         $mail->send();
-        echo "Message sent successfully!";
+        echo "<script type='text/javascript'>
+                alert('Message sent successfully!');
+                window.location.href = 'aboutus.php';
+              </script>";
     } catch (Exception $e) {
-        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        echo "<script type='text/javascript'>
+                alert('Message could not be sent. Mailer Error: {$mail->ErrorInfo}');
+                window.location.href = 'reservation.php'; // Redirect to reservation page or stay on the same page
+              </script>";
     }
 }
 ?>

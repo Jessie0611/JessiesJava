@@ -37,10 +37,10 @@ At Jessie's Java, we've brewed up the perfect blend of productivity and comfort 
     <section class="business-hours">
     <h2>Business Hours</h2>
     <ul>
-      <li><span class="day">Monday</span><span class="hours">6:00 a.m. - 10:00 p.m.</span></li>
-      <li><span class="day">Tuesday</span><span class="hours">6:00 a.m. - 10:00 p.m.</span></li>
-      <li><span class="day">Wednesday</span><span class="hours">6:00 a.m. - 10:00 p.m.</span></li>
-      <li><span class="day">Thursday</span><span class="hours">6:00 a.m. - 10:00 p.m.</span></li>
+      <li><span class="day">Monday</span><span class="hours">6:00 a.m. - 11:00 p.m.</span></li>
+      <li><span class="day">Tuesday</span><span class="hours">6:00 a.m. - 11:00 p.m.</span></li>
+      <li><span class="day">Wednesday</span><span class="hours">6:00 a.m. - 11:00 p.m.</span></li>
+      <li><span class="day">Thursday</span><span class="hours">6:00 a.m. - 11:00 p.m.</span></li>
       <li><span class="day">Friday</span><span class="hours">6:00 a.m. - 11:00 p.m.</span></li>
       <li><span class="day">Saturday</span><span class="hours">6:00 a.m. - 11:00 p.m.</span></li>
       <li><span class="day">Sunday</span><span class="hours">9:00 a.m. - 9:00 p.m.</span></li>
@@ -80,16 +80,7 @@ At Jessie's Java, we've brewed up the perfect blend of productivity and comfort 
           ></iframe>
       </div>
  <br>
-           <footer class="footer">
-               <div class="socialLinks">
-                 <a href="https://www.facebook.com" target="_blank" class="socialLink">
-                   <img src="Images/facebook.jpg" class="socialIcon"></a>
-               <a href="https://www.instagram.com" target="_blank" class="socialLink">
-                 <img src="Images/insta.jpg" class="socialIcon">
-             </div>
-           </footer>
-           <hr> 
-</div>
+ <?php include('footer.php'); ?>
     <script src="script.js"></script>
 </body>
 </html>

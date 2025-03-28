@@ -1,18 +1,17 @@
 <?php 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
-
 require 'PHPMailer/src/PHPMailer.php';
 require 'PHPMailer/src/Exception.php';
 require 'PHPMailer/src/SMTP.php';
 include("database.php");
+
 if (!isset($_GET['userID']) || empty($_GET['userID'])) {
     echo "Invalid request.";
     exit();
 }
 
 $userID = intval($_GET['userID']);
-
 // Fetch user details
 $userQuery = "SELECT * FROM users WHERE userID = ?";
 $stmtUser = $conn->prepare($userQuery);
@@ -52,7 +51,6 @@ $reservation = $resResult->fetch_assoc();
 // Format Date and Time
 $resDate = date("m/d/Y", strtotime($reservation['resDate']));
 $resTime = date("g:i A", strtotime($reservation['resTime']));
-
 // Send confirmation email
 $mail = new PHPMailer(true);
 try {
@@ -84,10 +82,8 @@ try {
     <p><b>Jessie's Java</b></p>
     <p>123 Java Avenue, Suite 200<br>Atlanta, GA 30303</p>
     ";
-
     $mail->isHTML(true);
     $mail->Body = $emailBody;
-
     $mail->send();
 } catch (Exception $e) {
     echo "Email could not be sent. Mailer Error: {$mail->ErrorInfo}";
@@ -137,7 +133,8 @@ try {
             <p>Enjoy your Jessie's Java Coding Experience!</p>
          
         </div>
-        <button onclick="window.print()" class="no-print">Print / Save as PDF</button>
+        <button onclick="window.print()" class="no-print">Print / Save as PDF</button> <br>
+        <small>You will also receive a confirmation e-mail, please check your spam folder.</small>
 
         <button id="chatbotButton" class="no-print" onclick="toggleChatbot()">💬 Brewgle</button>
         <div id="chatbotContainer" class="no-print">
