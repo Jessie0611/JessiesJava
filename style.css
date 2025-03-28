@@ -18,7 +18,7 @@ body{
     padding-bottom: 100px;
 }
 .hero{
-    opacity: 80%;
+    opacity: 95%;
     width: 100%;
 }
 nav{
@@ -70,7 +70,6 @@ button {
     border: 1px solid #625750;
     cursor: pointer;
 }
-
 button:hover {
     background-color: #625750;
     border: 2px solid #78ada5;
@@ -115,7 +114,6 @@ h2, h3 {
     align-items: center;
     color: hsl(23, 7%, 23%);
 }
-
 /*ABOUT US*/
 .aboutUs {
     width: 70%;
@@ -132,23 +130,19 @@ h2, h3 {
     width: 80%;
     max-width: 600px;
 }
-
 .contact h2 {
     margin-bottom: 20px;
 }
-
 .contact form {
     display: flex;
     flex-direction: column;
     gap: 5px;
 }
-
 .contact label {
     font-size: 16px;
     margin-bottom: 10px;
     font-weight: bold;
 }
-
 .contact input, .contact textarea {
     padding: 5px;
     margin-bottom: 15px;
@@ -157,7 +151,6 @@ h2, h3 {
     font-size: 14px;
     background-color: #d9d3cb;
 }
-
 .contact button {
     font-size: 14px;
     padding: 10px;
@@ -167,12 +160,47 @@ h2, h3 {
     border: 1px solid #625750;
     cursor: pointer;
 }
-
 .contact button:hover {
         background-color: #625750;
         border: 2px solid #78ada5;
 }
-
+.business-hours {
+   max-width: 300px;
+   margin: 10px auto;
+   background-color: #f8f8f8;
+   border: 1px solid #ddd;
+   border-radius: 8px;
+   padding: 10px;
+   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+.business-hours h2 {
+   text-align: center;
+   color: #333;
+   margin-bottom: 10px;
+   border-bottom: 2px solid #333;
+   padding-bottom: 10px;
+}
+.business-hours ul {
+   list-style: none;
+   padding: 0;
+   margin: 0;
+}
+.business-hours li {
+   display: flex;
+   justify-content: space-between;
+   padding: 4px 0;
+   border-bottom: 1px solid #eee;
+}
+.business-hours li:last-child {
+  border-bottom: none;
+}
+.business-hours .day {
+   font-weight: bold;
+   color: #555;
+}
+.business-hours .hours {
+   color: #777;
+}
 /*RES FORM*/
 form {
     align-items: center;
@@ -180,13 +208,11 @@ form {
     flex-direction: column;
     justify-content: center;
 }
-
 label {
     font-size: 16px;
     margin-bottom: 10px;
     font-weight: bold;
 }
-
 input, select, textarea {
     padding: 5px;
     margin-bottom: 15px;
@@ -204,17 +230,14 @@ input, select, textarea {
     cursor: pointer;
 
 }
-
 .submit:hover {
     background-color: #625750;
     border: 2px solid #78ada5;
 }
-
 #spaceType, #resDate, #resTime, #fName, #lName, #eMail, #phone, #drinkType, #message, #name {
     font-size: 14px;
     background-color: #d9d3cb;
 }
-
 .menu-section {
     margin: 20px;
     padding: 10px;
@@ -222,16 +245,13 @@ input, select, textarea {
     border-radius: 8px;
     background-color: #fff;
 }
-
 .menu-item {
     margin: 5px 0;
     font-size: 18px;
 }
-
 .menu-item span {
     font-weight: bold;
 }
-
 /* CALANDER */
 .calendar-container {
     width: 400px;
@@ -243,7 +263,6 @@ input, select, textarea {
     justify-content: flex-start;
     margin: 0 auto;
 }
-
 .calendar-header{
     display: flex;
     justify-content: space-evenly;
@@ -251,7 +270,6 @@ input, select, textarea {
     margin-bottom: 10px;
     padding: 10px;
 }
-
 button {
     background-color: hsl(23, 7%, 23%);
     align-items: center;
@@ -262,44 +280,35 @@ button {
     cursor: pointer;
     border-radius: 15px;
 }
-
 button:hover {
     background-color: #b0907b;
+    color: white;
 }
-
 #calendar {
     width: 100%;
     border-collapse: collapse;
 }
-
 #calendar th,
 #calendar td {
     padding: 4px;
     border: 2px solid white;
     text-align: center;
 }
-
 #calendar td {
     cursor: pointer;
 }
-
 #calendar td:hover {
     background-color: #B5CEA8;
 }
-
 /* Upcoming Events Section */
 .upcoming-events {
     margin-top: 20px;
 }
-
 #events-list {
     list-style: none;
     padding: 0;
 }
-
-
-/*FOOTER*/
-/* Social media links */
+/*FOOTER Social media links */
 .footer .socialLinks {
     margin-top: 80px;
     display: flex;
@@ -307,7 +316,6 @@ button:hover {
     gap: 20px;
     padding: 30px;
 }
-
 .footer .socialIcon {
     width: 40px;
     height: 40px;
@@ -315,7 +323,6 @@ button:hover {
     object-fit: cover; /* Ensure the images scale well */
     transition: transform 0.3s ease; /* Smooth hover effect */
 }
-
 .footer .socialIcon:hover {
     transform: scale(1.1); /* Slight zoom effect on hover */
 }
@@ -332,30 +339,29 @@ button:hover {
     overflow: hidden;
     display: none; /* Hidden by default */
     flex-direction: column;
-      }
-  #chatbotHeader {
+}
+#chatbotHeader {
     background: #b0907b;
     color: white;
     padding: 10px;
     text-align: center;
     cursor: pointer;
-  }
-
-  #chatbotiFrame {
+}
+#chatbotiFrame {
     width: 100%;
     height: 100%;
     border: none;
     display: block;
-  }
-  #close-chatbot {
+}
+#close-chatbot {
     position: absolute;
     right: 10px;
     top: 5px;
     cursor: pointer;
     font-size: 14px;
     color: white;
-  }
-  #chatbotButton {
+}
+#chatbotButton {
     position: fixed;
     bottom: 20px;
     right: 20px;
@@ -368,25 +374,19 @@ button:hover {
     box-shadow: 0px 2px 5px #78ada5;
     z-index: 10000;
     border: none;
-  }
-  #chatbotButton:hover{
+}
+#chatbotButton:hover{
     background-color: #b0907b;
     box-shadow: 0px 2px 5px #625750;
-  }
-
-
-
-
- .accordion {
+}
+.accordion {
     width: 100%;
     max-width: 700px;
     margin: 20px auto;
 }
-
 .accordion-item {
     border-bottom: 1px solid #78ada5;
 }
-
 .accordion-header {
     background: hsl(23, 7%, 23%);
     color: white;
@@ -400,16 +400,38 @@ button:hover {
     outline: none;
     transition: 0.3s;
 }
-
 .accordion-header:hover {
     background: #ddd;
 }
-
 .accordion-content {
     display: none;
     padding: 15px;
     background: #fff;
     overflow: hidden;
+}
+@media print {
+    /* Hide elements on the page */
+    body * {
+        visibility: hidden;
+    }
+    /* Make only the confirmation container visible */
+    .confirmation-container, 
+    .confirmation-container * {
+        visibility: visible;
+    }
+    /* Position the confirmation container at the top left of the printed page */
+    .confirmation-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+}
+.address-container {
+    line-height: 1.5;
+}
+.address-container strong {
+    display: block;
+    margin-bottom: 0.5em;
 }
 /* Responsive Design */
 @media (max-width: 768px) {

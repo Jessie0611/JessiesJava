@@ -16,31 +16,47 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die("Error: All fields are required.");
     }
 
-    // Insert user into `users` table
-    $sql1 = "INSERT INTO users (fName, lName, eMail, phone) VALUES (?, ?, ?, ?)";
-    $stmt1 = $conn->prepare($sql1);
-    $stmt1->bind_param("ssss", $fName, $lName, $eMail, $phone);
+    // Check if user exists based on email OR phone
+    $checkUserQuery = "SELECT userID FROM users WHERE eMail = ? OR phone = ?";
+    $stmt = $conn->prepare($checkUserQuery);
+    $stmt->bind_param("ss", $eMail, $phone);
+    $stmt->execute();
+    $stmt->store_result();
 
-    if ($stmt1->execute()) {
-        $userID = $stmt1->insert_id; // Get the auto-generated userID
-
-        // Insert reservation into `reservations` table
-        $sql2 = "INSERT INTO reservations (userID, resTypeID, resDate, resTime, status) VALUES (?, ?, ?, ?, 'pending')";
-        $stmt2 = $conn->prepare($sql2);
-        $stmt2->bind_param("isss", $userID, $resTypeID, $resDate, $resTime);
-
-        if ($stmt2->execute()) {
-            // Redirect to confirmation page
-            header("Location: confirmation.php?userID=$userID");
-            exit();
-        } else {
-            die("Error: Reservation could not be saved.");
-        }
+    if ($stmt->num_rows > 0) {
+        // User exists, fetch userID
+        $stmt->bind_result($userID);
+        $stmt->fetch();
     } else {
-        die("Error: User could not be created.");
+        // User does not exist, insert new user
+        $insertUserQuery = "INSERT INTO users (fName, lName, eMail, phone) VALUES (?, ?, ?, ?)";
+        $stmt = $conn->prepare($insertUserQuery);
+        $stmt->bind_param("ssss", $fName, $lName, $eMail, $phone);
+        $stmt->execute();
+        $userID = $stmt->insert_id; // Get new userID
     }
+    
+    $stmt->close();
+
+    // Insert reservation into `reservations` table
+    $insertReservationQuery = "INSERT INTO reservations (userID, resTypeID, resDate, resTime, status) 
+                               VALUES (?, ?, ?, ?, 'pending')";
+    $stmt2 = $conn->prepare($insertReservationQuery);
+    $stmt2->bind_param("iiss", $userID, $resTypeID, $resDate, $resTime);
+
+    if ($stmt2->execute()) {
+        // Redirect to confirmation page
+        header("Location: confirmation.php?userID=$userID");
+        exit();
+    } else {
+        die("Error: Reservation could not be saved.");
+    }
+
+    $stmt2->close();
+    $conn->close();
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
