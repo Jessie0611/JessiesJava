@@ -1,4 +1,10 @@
 <?php 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require 'PHPMailer/src/PHPMailer.php';
+require 'PHPMailer/src/Exception.php';
+require 'PHPMailer/src/SMTP.php';
 include("database.php");
 if (!isset($_GET['userID']) || empty($_GET['userID'])) {
     echo "Invalid request.";
@@ -43,6 +49,49 @@ $stmtRes->bind_param("i", $userID);
 $stmtRes->execute();
 $resResult = $stmtRes->get_result();
 $reservation = $resResult->fetch_assoc();
+// Format Date and Time
+$resDate = date("m/d/Y", strtotime($reservation['resDate']));
+$resTime = date("g:i A", strtotime($reservation['resTime']));
+
+// Send confirmation email
+$mail = new PHPMailer(true);
+try {
+    $mail->isSMTP();
+    $mail->Host = 'smtp.gmail.com'; // Use your SMTP server
+    $mail->SMTPAuth = true;
+    $mail->Username = 'jessies.java.1@gmail.com';
+    $mail->Password = 'szch tstb dxtn fozh';
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+    $mail->Port = 587;
+
+    // Email details
+    $mail->setFrom('jessies.java.1@gmail.com', 'Jessie\'s Java');
+    $mail->addAddress($user['eMail']); // Customer's email
+    $mail->Subject = 'Jessie\'s Java - Reservation Confirmation';
+    
+    $emailBody = "
+    <h2>Reservation Confirmation</h2>
+    <p>Thank you, <b>{$user['fName']} {$user['lName']}</b>, for your reservation at Jessie's Java!</p>
+    <h3>Your Reservation Details:</h3>
+    <p><b>Reservation Type:</b> " . strtoupper($reservation['typeName']) . "</p>
+    <p><b>Price:</b> $" . $reservation['resPrice'] . "</p>
+    <p><b>Date:</b> $resDate</p>
+    <p><b>Time:</b> $resTime</p>
+    <br>
+    <p>For any changes or cancellations, contact us at (404) 555-0198.</p>
+    <br>
+    <p>We look forward to seeing you!</p>
+    <p><b>Jessie's Java</b></p>
+    <p>123 Java Avenue, Suite 200<br>Atlanta, GA 30303</p>
+    ";
+
+    $mail->isHTML(true);
+    $mail->Body = $emailBody;
+
+    $mail->send();
+} catch (Exception $e) {
+    echo "Email could not be sent. Mailer Error: {$mail->ErrorInfo}";
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">

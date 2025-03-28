@@ -54,8 +54,8 @@ At Jessie's Java, we've brewed up the perfect blend of productivity and comfort 
   </address>
   </section>
         <h2>Contact Us</h2>
-        <form action="#" method="POST">
-          <label for="name">Name:</label>
+        <form action="contact.php" method="POST">
+        <label for="name">Name:</label>
           <input type="name" id="name" name="name" required placeholder="Your Name">
           <label for="email">Email:</label>
           <input type="email" id="email" name="email" required placeholder="Your Email">
