@@ -26,26 +26,28 @@ nav{
     justify-content: center;
 }
 .btn{
-    justify-content: space-evenly;
-    margin-left: 40px;
     margin-top: 20px;
-    padding: 5px;
+    margin-left: 20px;
     border: none;
     background-color: #b0907b;
-    border: 2px solid #625750;
+    border: 3px solid #625750;
     border-radius: 30px;
     color: #fff2df;
+    width: 120px;
+    font-size: large;
+    
 }
 .btn:hover {
     background-color: hsl(23, 7%, 23%);
-    border: 3px solid #78ada5;
-    
+    border: 5px solid #78ada5;
+    color: #78ada5;
 }
 a{
     color: white;
     text-decoration:dotted;
     font-size: 14px;
     pointer-events: visible;
+    font-size: medium;
 }
 a:hover{
     color: #78ada5;
@@ -218,25 +220,39 @@ input, select, textarea {
     margin-bottom: 15px;
     border: 1px solid #ddd;
     border-radius: 4px;
+    box-shadow: 1px 1px 6px 1px  hsl(23, 7%, 23%);
+    background-color: #ffffff;
 }
 .submit{
-    font-size: 14px;
-    width: 55%;
+    font-size: large;
+    width: 25%;
     padding: 10px;
     background-color: #b0907b;
     color: white;
     border: none;
-    border: 1px solid #625750;
+    border: 3px solid #625750;
     cursor: pointer;
-
 }
 .submit:hover {
     background-color: #625750;
-    border: 2px solid #78ada5;
+    border: 3px solid #78ada5;
+    color: #58ada5;
 }
-#spaceType, #resDate, #resTime, #fName, #lName, #eMail, #phone, #drinkType, #message, #name {
+#spaceType{
     font-size: 14px;
-    background-color: #d9d3cb;
+    background-color: #ffffff;
+    height: 31px;
+    width: 340px;
+    border-radius: 8px;
+    box-shadow: 1px 1px 6px 1px  hsl(23, 7%, 23%);
+}
+#resDate, #resTime, #fName, #lName, #email, #eMail, #phone, #drinkType, #message, #name, #resTypeID{
+    font-size: 14px;
+    background-color: #ffffff;
+    height: 30px;
+    width: 320px;
+    border-radius: 8px;
+    box-shadow: 1px 1px 6px 1px  hsl(23, 7%, 23%);
 }
 .menu-section {
     margin: 20px;
@@ -303,10 +319,12 @@ button:hover {
 /* Upcoming Events Section */
 .upcoming-events {
     margin-top: 20px;
+    padding: 3px;
 }
 #events-list {
     list-style: none;
-    padding: 0;
+    padding: 2px;
+    max-width: 600px;
 }
 /*FOOTER Social media links */
 .footer .socialLinks {
@@ -390,24 +408,52 @@ button:hover {
 .accordion-header {
     background: hsl(23, 7%, 23%);
     color: white;
-    border-radius: 30px;
-    padding: 10px;
+    border-radius: 8px;
+    padding: 8px;
     cursor: pointer;
     font-size: 16px;
     border: none;
     text-align: left;
-    width: 100%;
+    width: 98%;
     outline: none;
     transition: 0.3s;
 }
 .accordion-header:hover {
-    background: #ddd;
+    background: hsl(23, 7%, 23%);
 }
 .accordion-content {
     display: none;
     padding: 15px;
     background: #fff;
     overflow: hidden;
+    box-shadow: 1px 1px 8px 1px  hsl(23, 7%, 23%);
+
+}
+.confirm-align{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.confirmation-container{
+    align-self: center;
+    max-width: 500px;
+    text-align: left;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 3px 3px 10px 4px  #372115;
+}
+.serviceOpt{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.resAlign{
+    align-self: center;
+    max-width: 600px;
+    text-align: left;
+    padding: 20px;
 }
 @media print {
     /* Hide elements on the page */
@@ -418,6 +464,7 @@ button:hover {
     .confirmation-container, 
     .confirmation-container * {
         visibility: visible;
+        box-shadow: 0px 0px 0px 0px;
     }
     /* Position the confirmation container at the top left of the printed page */
     .confirmation-container {

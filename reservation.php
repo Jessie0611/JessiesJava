@@ -137,51 +137,40 @@ if ($resTime < $openTime || $resTime > $closeTime) {
     <div class="hero">
         <img src="Images/JJ-reserveHero.png" alt="Hero Image" class="hero img">
     </div>
-    <hr>
-    <nav>
-    <button class="btn"><a href="index.php">&nbsp;&nbsp;&nbsp;Home &nbsp;&nbsp;&nbsp;</a></button>
-            <button class="btn"><a href="reservation.php">Reservation</a></button>
-            <button class="btn"><a href="menu.php">&nbsp;&nbsp;&nbsp; Menu &nbsp;&nbsp;&nbsp;</a></button>
-            <button class="btn"> <a href="aboutus.php"> &nbsp;About Us&nbsp;</a></button>
+    <?php include('nav.php'); ?>
 
-    </nav>
 <p> <h3>Reserve Your Space at Jessie's Java!</h3>
 <h3>Service Options:</h3></p>
 <div class="serviceOpt">
+    <div class="resAlign">
   <p> <b>💻BYOL [$60.00]</b> A bring-your-own-laptop  table equpied with the optional otional extra monitor, headphones, keyboard and mouse. 
  <br><br>
 <b>🖥️ Computer Booth [$100.00]</b> Booths come fully equipped with a programming computer, extra monitor, headphones, keyboard, and mouse. <br> 
 <br><br>
-<b>👨‍👨‍👦‍👦Collaboration Room [$200.00] </b> Looking for a more relaxed setting for your collaboration projects, away from the office grind? <br>
+<b>👨‍👨‍👦‍👦Collaboration Room [$200.00] </b> Looking for a more relaxed setting for your collaboration projects, away from the office grind? 
 Our collaboration rooms are designed to provide just that, with two computer booths and space for up to eight BYOL areas,
  it's the perfect space for creative work. <br><br>
  <br>
- <small>Reservations must be made at least one hour before closing. View our business hours on the About Us page.</small>
+ <small>Reservations must be made at least one hour before closing.</small>
     <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
     <label for="resTypeID">Select Your Space</label>
     <select id="resTypeID" name="resTypeID" required>
-        <option value="">--- Select Your Space ---</option>
+        <option value="">- - - Select Your Space - --</option>
         <option value="1">($60.00) BYOL Table</option>
         <option value="2">($100.00) Computer Booth</option>
         <option value="3">($200.00) Collaboration Room</option>
     </select> 
 
-    <label for="resDate">Reservation Date</label>
     <input type="date" id="resDate" name="resDate" required>
 
-    <label for="resTime">Reservation Time</label>
     <input type="time" id="resTime" name="resTime" required>
 
-    <label for="fName">First Name</label>
     <input type="text" id="fName" name="fName" placeholder="First Name" required>
 
-    <label for="lName">Last Name</label>
     <input type="text" id="lName" name="lName" placeholder="Last Name" required>
 
-    <label for="eMail">Email Address</label>
     <input type="email" class="form-control is-invalid" id="eMail" name="eMail" placeholder="E-mail Address" required>
 
-    <label for="phone">Phone Number</label>
     <input type="tel" id="phone" name="phone" placeholder="Phone Number">
 <div class="container">
     <p>Please read the disclosure agreement and check the box to continue. <br> 
@@ -240,6 +229,7 @@ Amendments & Updates: We reserve the right to modify this Agreement at any time.
 <br><br> <br> <br>
         <button type="submit" class="submit">Reserve</button>
 </div>
+</div></div>
        </form>
    <button id="chatbotButton" onclick="toggleChatbot()">💬 Brewgle</button>
           <div id="chatbotContainer">

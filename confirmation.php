@@ -102,13 +102,9 @@ try {
         <div class="hero">
             <img src="Images/JJ-resPaymentHero.png" alt="Hero Image Unavailable" width="100%">
         </div>
-        <nav class="no-print">
-            <button class="btn"><a href="index.php">Home</a></button>
-            <button class="btn"><a href="reservation.php">Reservation</a></button>
-            <button class="btn"><a href="menu.php">Menu</a></button>
-            <button class="btn"><a href="aboutus.php">About Us</a></button>
-        </nav>
-        <hr>
+        <?php include('nav.php'); ?>
+
+        <div class="confirm-align">
         <div class="confirmation-container">
             <h2>You have successfully reserved your space!<br><br>
             Thank you, <?= htmlspecialchars($user['fName'] . " " . $user['lName']); ?>!
@@ -131,10 +127,11 @@ try {
     (404) 555-0198
   </address>
             <p>Enjoy your Jessie's Java Coding Experience!</p>
-         
+       </div>  
         </div>
+        <br>
         <button onclick="window.print()" class="no-print">Print / Save as PDF</button> <br>
-        <small>You will also receive a confirmation e-mail, please check your spam folder.</small>
+        <small>You will also receive a confirmation e-mail, please check your spam or junk folder.</small>
 
         <button id="chatbotButton" class="no-print" onclick="toggleChatbot()">💬 Brewgle</button>
         <div id="chatbotContainer" class="no-print">
