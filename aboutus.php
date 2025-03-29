@@ -37,10 +37,10 @@ At Jessie's Java, we've brewed up the perfect blend of productivity and comfort 
     <section class="business-hours">
     <h2>Business Hours</h2>
     <ul>
-      <li><span class="day">Monday</span><span class="hours">6:00 a.m. - 11:00 p.m.</span></li>
-      <li><span class="day">Tuesday</span><span class="hours">6:00 a.m. - 11:00 p.m.</span></li>
-      <li><span class="day">Wednesday</span><span class="hours">6:00 a.m. - 11:00 p.m.</span></li>
-      <li><span class="day">Thursday</span><span class="hours">6:00 a.m. - 11:00 p.m.</span></li>
+      <li><span class="day">Monday</span><span class="hours">6:00 a.m. - 10:00 p.m.</span></li>
+      <li><span class="day">Tuesday</span><span class="hours">6:00 a.m. - 10:00 p.m.</span></li>
+      <li><span class="day">Wednesday</span><span class="hours">6:00 a.m. - 10:00 p.m.</span></li>
+      <li><span class="day">Thursday</span><span class="hours">6:00 a.m. - 10:00 p.m.</span></li>
       <li><span class="day">Friday</span><span class="hours">6:00 a.m. - 11:00 p.m.</span></li>
       <li><span class="day">Saturday</span><span class="hours">6:00 a.m. - 11:00 p.m.</span></li>
       <li><span class="day">Sunday</span><span class="hours">9:00 a.m. - 9:00 p.m.</span></li>
