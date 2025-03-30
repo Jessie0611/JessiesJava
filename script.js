@@ -232,19 +232,19 @@ document.addEventListener('DOMContentLoaded', function() {
       switch (dayOfWeek) {
           case 0: // Sunday
               minTime = "09:00";
-              maxTime = "21:00";
+              maxTime = "20:00";
               break;
           case 1: // Monday
           case 2: // Tuesday
           case 3: // Wednesday
           case 4: // Thursday
               minTime = "06:00";
-              maxTime = "22:00";
+              maxTime = "21:00";
               break;
           case 5: // Friday
           case 6: // Saturday
               minTime = "06:00";
-              maxTime = "23:00";
+              maxTime = "22:00";
               break;
       }
 
