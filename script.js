@@ -115,7 +115,7 @@ document.addEventListener('DOMContentLoaded', function() {
               cell.style.backgroundColor = '#78ada5';
               cell.title = eventForDay.map(event => event.title).join(', ');
             }
-  
+
             // Add click event to show events for that date
             cell.addEventListener('click', () => showEventsForDate(dateString));
             
@@ -212,7 +212,6 @@ document.getElementById("agreeCheckbox").addEventListener("change", function() {
       button.classList.remove("enabled");
   }
 });
-
 document.addEventListener('DOMContentLoaded', function() {
   const resDateInput = document.getElementById('resDate');
   const resTimeInput = document.getElementById('resTime');
@@ -233,19 +232,19 @@ document.addEventListener('DOMContentLoaded', function() {
       switch (dayOfWeek) {
           case 0: // Sunday
               minTime = "09:00";
-              maxTime = "08:00";
+              maxTime = "21:00";
               break;
           case 1: // Monday
           case 2: // Tuesday
           case 3: // Wednesday
           case 4: // Thursday
               minTime = "06:00";
-              maxTime = "09:00";
+              maxTime = "22:00";
               break;
           case 5: // Friday
           case 6: // Saturday
               minTime = "06:00";
-              maxTime = "10:00";
+              maxTime = "23:00";
               break;
       }
 
@@ -255,10 +254,9 @@ document.addEventListener('DOMContentLoaded', function() {
       // If the selected time is out of range, reset it
       if (resTimeInput.value && (resTimeInput.value < minTime || resTimeInput.value > maxTime)) {
           resTimeInput.value = "";
-          alert(`Please select a time between ${minTime}a.m. and ${maxTime} p.m. for the chosen day.`);
+          alert(`Please select a time between ${minTime} and ${maxTime}.`);
       }
   }
-
   // Update time limits when the date is selected
   resDateInput.addEventListener('change', updateTimeLimits);
 
@@ -268,11 +266,9 @@ document.addEventListener('DOMContentLoaded', function() {
       const maxTime = resTimeInput.getAttribute('max');
 
       if (resTimeInput.value < minTime || resTimeInput.value > maxTime) {
-          alert(`Please select a time between ${minTime} a.m. and ${maxTime} p.m.`);
+          alert(`Please select a time between ${minTime} and ${maxTime}.`);
           resTimeInput.value = "";
       }
   });
-
-  // Trigger change event on page load to apply restrictions
   resDateInput.dispatchEvent(new Event('change'));
 });

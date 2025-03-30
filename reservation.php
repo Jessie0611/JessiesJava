@@ -50,19 +50,19 @@ $dayOfWeek = date('w', strtotime($resDate));
 switch ($dayOfWeek) {
     case 0: // Sunday
         $openTime = "09:00"; 
-        $closeTime = "21:00";
+        $closeTime = "20:00";
         break;
     case 1: // Monday
     case 2: // Tuesday
     case 3: // Wednesday
     case 4: // Thursday
         $openTime = "06:00";
-        $closeTime = "22:00";
+        $closeTime = "21:00";
         break;
     case 5: // Friday
     case 6: // Saturday
         $openTime = "06:00";
-        $closeTime = "23:00";
+        $closeTime = "22:00";
         break;
     default:
         echo "<script type='text/javascript'>

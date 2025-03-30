@@ -14,6 +14,7 @@
         <?php include('nav.php'); ?>
 
     <div class="aboutUs">
+      <div class="aboutAlign">
         <p>
 At Jessie's Java, we've brewed up the perfect blend of productivity and comfort for the coding community!
 <br> Step into a space meticulously designed with programmers in mind, where the aroma of freshly ground coffee fuels your coding creativity. <br>
@@ -26,7 +27,7 @@ At Jessie's Java, we've brewed up the perfect blend of productivity and comfort 
 <br><br>Join us at Jessie's Java, where every line of code is written with a side of exceptional coffee. Elevate your programming experience in an environment that's as dynamic as your code.
 <br> Your next breakthrough awaits—sip, code, repeat! 💻☕
 </p>
-    </div>
+   
     <section class="business-hours">
     <h2>Business Hours</h2>
     <ul>
@@ -54,9 +55,9 @@ At Jessie's Java, we've brewed up the perfect blend of productivity and comfort 
           <input type="email" id="email" name="email" required placeholder="Your Email">
           <label for="message">Message:</label>
           <textarea id="message" name="message" required placeholder="Your Message"></textarea>
-          <button type="submit">Send Message</button>
+          <button type="submit" class="submit">Send Message</button>
         </form>
-      
+      </div> </div>
       <button id="chatbotButton" onclick="toggleChatbot()">💬 Brewgle</button>
       <div id="chatbotContainer">
           <div id="chatbotHeader" onclick="toggleChatbot()">💬 Close Brewgle  &nbsp;&nbsp;&nbsp;&nbsp; ✖<span id="close-chatbot" onclick="toggleChatbot()">

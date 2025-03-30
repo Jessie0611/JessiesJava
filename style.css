@@ -238,15 +238,16 @@ input, select, textarea {
     border: 3px solid #78ada5;
     color: #58ada5;
 }
-#spaceType{
+#resTypeID{
+    box-sizing: border-box;
     font-size: 14px;
     background-color: #ffffff;
-    height: 31px;
-    width: 340px;
+    height: 32px;
+    width: 330px;
     border-radius: 8px;
     box-shadow: 1px 1px 6px 1px  hsl(23, 7%, 23%);
 }
-#resDate, #resTime, #fName, #lName, #email, #eMail, #phone, #drinkType, #message, #name, #resTypeID{
+#resDate, #resTime, #fName, #lName, #email, #eMail, #phone, #drinkType, #message, #name{
     font-size: 14px;
     background-color: #ffffff;
     height: 30px;
@@ -451,7 +452,18 @@ button:hover {
 }
 .resAlign{
     align-self: center;
-    max-width: 600px;
+    max-width: 620px;
+    text-align: left;
+    padding: 20px;
+}
+.aboutUs{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.aboutAlign{
+    align-self: center;
+    max-width: 750px;
     text-align: left;
     padding: 20px;
 }
