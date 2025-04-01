@@ -69,14 +69,17 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentDate = new Date();
     
     const events = [
-      { date: '2025-03-08', title: '11a-3p 3/8: International Womens Day Coffee Break, 1 free coffee any flavor'},
-      { date: '2025-03-17', title: 'ALL DAY 3/17: St. Patricks Day: $1.00 Irish Cream Lattes '},
-      { date: '2025-03-20', title: '[11a - 6p] Spring Equinox: Create digital art inspired by the equinox using programs like Photoshop, GIMP, or using a tablet to paint or draw.'},
-      { date: '2025-03-29', title: '[11a - 6p] Peer Code Review: Clean Code Practices'},
-      { date: '2025-04-01', title: 'ALL DAY 4/1: April Fools Mystery Coffee $1.00'},
-      { date: '2025-04-11', title: '[4p - 8p] CodeBreaker Trivia: Test Your Dev Knowledge!'},
-      { date: '2025-04-20', title: 'ALL DAY 4/20: CLOSED FOR EASTER SUNDAY'},
-      { date: '2025-05-05', title: 'ALL DAY 5/5: Cinco de Mayo: Café de Olla TODAY ONLY $5'}
+      { date: '2025-03-08', title: 'International Womens Day Coffee Break, 1 free coffee any flavor: 11a-3p'},
+      { date: '2025-03-17', title: 'St. Patricks Day: $1.00 Irish Cream Lattes'},
+      { date: '2025-03-20', title: 'Spring Equinox: Create digital art inspired by the equinox'},
+      { date: '2025-03-29', title: 'Peer Code Review: Clean Code Practices: 11a - 6p'},
+      { date: '2025-04-01', title: 'April Fools Mystery Coffee $1.00'},
+      { date: '2025-04-11', title: 'CodeBreaker Trivia: Test Your Dev Knowledge!: 4p - 8p'},
+      { date: '2025-04-20', title: 'CLOSED FOR EASTER SUNDAY'},
+      { date: '2025-05-05', title: 'Cinco de Mayo: Café de Olla TODAY ONLY $5'},
+      { date: '2025-05-04', title: 'May the 4th be with you! Star Wars Latte art!'},
+      { date: '2025-06-19', title: 'Juneteenth Art: Commemorate the emancipation of enslaved people in the US.'},
+      { date: '2025-06-20', title: 'Summer Solistice: Create digital art inspired by the solistice.'}
 
     ];
   
@@ -84,10 +87,8 @@ document.addEventListener('DOMContentLoaded', function() {
       const year = currentDate.getFullYear();
       const month = currentDate.getMonth();
       monthYearDisplay.textContent = `${currentDate.toLocaleString('default', { month: 'long' })} ${year}`;
-      
       // Clear previous calendar
       calendarBody.innerHTML = '';
-  
       // Get the first day of the month
       const firstDay = new Date(year, month, 1);
       const lastDay = new Date(year, month + 1, 0);
@@ -115,7 +116,6 @@ document.addEventListener('DOMContentLoaded', function() {
               cell.style.backgroundColor = '#78ada5';
               cell.title = eventForDay.map(event => event.title).join(', ');
             }
-
             // Add click event to show events for that date
             cell.addEventListener('click', () => showEventsForDate(dateString));
             
@@ -185,7 +185,6 @@ document.addEventListener('DOMContentLoaded', function() {
   document.querySelectorAll('.accordion-header').forEach(button => {
     button.addEventListener('click', () => {
         const isActive = button.classList.contains('active');
-        
         // Close all accordions
         document.querySelectorAll('.accordion-header').forEach(item => {
             item.classList.remove('active');
@@ -193,7 +192,6 @@ document.addEventListener('DOMContentLoaded', function() {
         document.querySelectorAll('.accordion-content').forEach(content => {
             content.style.display = 'none';
         });
-
         // Open the clicked one if it was not already active
         if (!isActive) {
             button.classList.add('active');
@@ -215,11 +213,9 @@ document.getElementById("agreeCheckbox").addEventListener("change", function() {
 document.addEventListener('DOMContentLoaded', function() {
   const resDateInput = document.getElementById('resDate');
   const resTimeInput = document.getElementById('resTime');
-
   // Disable past dates
   const today = new Date().toISOString().split('T')[0];
   resDateInput.setAttribute('min', today);
-
   // Function to update time limits based on selected date
   function updateTimeLimits() {
       if (!resDateInput.value) return; // Prevent errors if no date is selected
@@ -255,7 +251,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
       resTimeInput.setAttribute('min', minTime);
       resTimeInput.setAttribute('max', maxTime);
-
       // If the selected time is out of range, reset it
       if (resTimeInput.value && (resTimeInput.value < minTime || resTimeInput.value > maxTime)) {
           resTimeInput.value = "";
@@ -264,7 +259,6 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   // Update time limits when the date is selected
   resDateInput.addEventListener('change', updateTimeLimits);
-
   // Ensure time is within range when changed
   resTimeInput.addEventListener('change', function () {
       const minTime = resTimeInput.getAttribute('min');

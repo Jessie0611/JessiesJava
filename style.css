@@ -27,15 +27,14 @@ nav{
 }
 .btn{
     margin-top: 20px;
-    margin-left: 20px;
+    margin-left: 30px;
     border: none;
     background-color: #b0907b;
     border: 3px solid #625750;
     border-radius: 30px;
     color: #fff2df;
-    width: 120px;
+    width: 145px;
     font-size: large;
-    
 }
 .btn:hover {
     background-color: hsl(23, 7%, 23%);
@@ -61,7 +60,6 @@ h2, h3{
     align-items: center;
     color: hsl(23, 7%, 23%);
 }
-
 button {
     font-size: 12px;
     width: 15%;
@@ -319,8 +317,8 @@ button:hover {
 }
 /* Upcoming Events Section */
 .upcoming-events {
-    margin-top: 20px;
-    padding: 3px;
+    margin-top: 30px;
+    max-width: 600px;
 }
 #events-list {
     list-style: none;
