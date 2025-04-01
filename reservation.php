@@ -23,7 +23,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 function convertTo12Hour($time) {
     return date("g:i A", strtotime($time)); 
 }
-
 // Define current date and time for validation
 $currentDate = date("Y-m-d");
 $currentTime = date("H:i");
@@ -42,10 +41,8 @@ if ($resDate < $currentDate) {
           </script>";
     exit;
 }
-
 // Get day of the week for the selected reservation date
 $dayOfWeek = date('w', strtotime($resDate));
-
 // Validate time based on business hours
 switch ($dayOfWeek) {
     case 0: // Sunday
@@ -71,7 +68,6 @@ switch ($dayOfWeek) {
               </script>";
         exit;
 }
-
 // Check if the reservation time is outside business hours
 if ($resTime < $openTime || $resTime > $closeTime) {
     echo "<script type='text/javascript'>
@@ -101,7 +97,6 @@ if ($resTime < $openTime || $resTime > $closeTime) {
     }
     
     $stmt->close();
-
     // Insert reservation into `reservations` table
     $insertReservationQuery = "INSERT INTO reservations (userID, resTypeID, resDate, resTime, status) 
                                VALUES (?, ?, ?, ?, 'pending')";

@@ -233,6 +233,7 @@ document.addEventListener('DOMContentLoaded', function() {
           case 0: // Sunday
               minTime = "09:00";
               maxTime = "20:00";
+              timeMessage = "9:00 a.m. - 8:00 p.m";
               break;
           case 1: // Monday
           case 2: // Tuesday
@@ -240,11 +241,15 @@ document.addEventListener('DOMContentLoaded', function() {
           case 4: // Thursday
               minTime = "06:00";
               maxTime = "21:00";
+              timeMessage = "6:00 a.m. - 9:00 p.m";
+
               break;
           case 5: // Friday
           case 6: // Saturday
               minTime = "06:00";
               maxTime = "22:00";
+              timeMessage = "6:00 a.m. - 10:00 p.m";
+
               break;
       }
 
@@ -254,7 +259,7 @@ document.addEventListener('DOMContentLoaded', function() {
       // If the selected time is out of range, reset it
       if (resTimeInput.value && (resTimeInput.value < minTime || resTimeInput.value > maxTime)) {
           resTimeInput.value = "";
-          alert(`Please select a time between ${minTime} and ${maxTime}.`);
+          alert(`Please select a time between ${timeMessage}}.`);
       }
   }
   // Update time limits when the date is selected
@@ -266,7 +271,7 @@ document.addEventListener('DOMContentLoaded', function() {
       const maxTime = resTimeInput.getAttribute('max');
 
       if (resTimeInput.value < minTime || resTimeInput.value > maxTime) {
-          alert(`Please select a time between ${minTime} and ${maxTime}.`);
+          alert(`Please select a time between ${timeMessage}.`);
           resTimeInput.value = "";
       }
   });
