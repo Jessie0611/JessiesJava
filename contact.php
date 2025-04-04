@@ -20,7 +20,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $mail->Password = 'szch tstb dxtn fozh'; // Use an App Password for security
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port = 587;
-
         // Email Content
         $mail->setFrom($email, $name);
         $mail->addAddress('jessies.java.1@gmail.com'); // Your receiving email

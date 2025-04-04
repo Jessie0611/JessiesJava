@@ -28,7 +28,7 @@ At Jessie's Java, we've brewed up the perfect blend of productivity and comfort 
 <br> Your next breakthrough awaits—sip, code, repeat! 💻☕
 </p>
    
-    <section class="business-hours">
+    <section class="businessHours">
     <h2>Business Hours</h2>
     <ul>
       <li><span class="day">Monday</span><span class="hours">6:00 a.m. - 10:00 p.m.</span></li>
@@ -39,7 +39,7 @@ At Jessie's Java, we've brewed up the perfect blend of productivity and comfort 
       <li><span class="day">Saturday</span><span class="hours">6:00 a.m. - 11:00 p.m.</span></li>
       <li><span class="day">Sunday</span><span class="hours">9:00 a.m. - 9:00 p.m.</span></li>
     </ul>
-            <address class="address-container">
+            <address class="addressContainer">
     <strong>Jessie's Java Address:</strong>
     123 Java Avenue, Suite 200<br>
     Atlanta, GA 30303<br><br>
@@ -49,11 +49,8 @@ At Jessie's Java, we've brewed up the perfect blend of productivity and comfort 
   </section>
         <h2>Contact Us</h2>
         <form action="contact.php" method="POST">
-        <label for="name">Name:</label>
           <input type="name" id="name" name="name" required placeholder="Your Name">
-          <label for="email">Email:</label>
           <input type="email" id="email" name="email" required placeholder="Your Email">
-          <label for="message">Message:</label>
           <textarea id="message" name="message" required placeholder="Your Message"></textarea>
           <button type="submit" class="submit">Send Message</button>
         </form>

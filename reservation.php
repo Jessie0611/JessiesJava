@@ -180,9 +180,9 @@ Our collaboration rooms are designed to provide just that, with two computer boo
 </div>
 
 <div class="accordion">
-    <div class="accordion-item">
-        <div class="accordion-header">Disclosure Agreement</div>
-        <div class="accordion-content">
+    <div class="accordionItem">
+        <div class="accordionHeader">Disclosure Agreement</div>
+        <div class="accordionContent">
              <small>
                 Reservations & Walk-Ins <br>
 Customers may reserve a BYOL table, computer booth, or collaboration room in advance via our website, phone, or in person. Walk-ins are welcome, but availability is not guaranteed. 

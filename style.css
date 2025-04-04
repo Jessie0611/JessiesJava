@@ -31,7 +31,7 @@ nav{
     border: none;
     background-color: #b0907b;
     border: 3px solid #625750;
-    border-radius: 30px;
+    border-radius: 13px;
     color: #fff2df;
     width: 145px;
     font-size: large;
@@ -164,7 +164,7 @@ h2, h3 {
         background-color: #625750;
         border: 2px solid #78ada5;
 }
-.business-hours {
+.businessHours {
    max-width: 300px;
    margin: 10px auto;
    background-color: #f8f8f8;
@@ -173,32 +173,32 @@ h2, h3 {
    padding: 10px;
    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
-.business-hours h2 {
+.businessHours h2 {
    text-align: center;
    color: #333;
    margin-bottom: 10px;
    border-bottom: 2px solid #333;
    padding-bottom: 10px;
 }
-.business-hours ul {
+.businessHours ul {
    list-style: none;
    padding: 0;
    margin: 0;
 }
-.business-hours li {
+.businessHours li {
    display: flex;
    justify-content: space-between;
    padding: 4px 0;
    border-bottom: 1px solid #eee;
 }
-.business-hours li:last-child {
+.businessHours li:last-child {
   border-bottom: none;
 }
-.business-hours .day {
+.businessHours .day {
    font-weight: bold;
    color: #555;
 }
-.business-hours .hours {
+.businessHours .hours {
    color: #777;
 }
 /*RES FORM*/
@@ -317,17 +317,27 @@ button:hover {
 }
 /* Upcoming Events Section */
 .upcoming-events {
-    margin-top: 30px;
-    max-width: 600px;
+    margin-top: 5px;
+    width: 100%;
+    min-height: 400px;
 }
 #events-list {
     list-style: none;
-    padding: 2px;
-    max-width: 600px;
+    padding: 5px;
+    max-width: 700px;
 }
+li {
+    display: flex;
+    justify-content: left;
+    max-width: 660px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    white-space: nowrap; 
+}
+
 /*FOOTER Social media links */
 .footer .socialLinks {
-    margin-top: 80px;
+    margin-top: 90px;
     display: flex;
     justify-content: center;
     gap: 20px;
@@ -401,10 +411,10 @@ button:hover {
     max-width: 700px;
     margin: 20px auto;
 }
-.accordion-item {
+.accordionItem {
     border-bottom: 1px solid #78ada5;
 }
-.accordion-header {
+.accordionHeader {
     background: hsl(23, 7%, 23%);
     color: white;
     border-radius: 8px;
@@ -417,10 +427,10 @@ button:hover {
     outline: none;
     transition: 0.3s;
 }
-.accordion-header:hover {
+.accordionHeader:hover {
     background: hsl(23, 7%, 23%);
 }
-.accordion-content {
+.accordionContent {
     display: none;
     padding: 15px;
     background: #fff;
@@ -483,10 +493,10 @@ button:hover {
         left: 0;
     }
 }
-.address-container {
+.addressContainer {
     line-height: 1.5;
 }
-.address-container strong {
+.addressContainer strong {
     display: block;
     margin-bottom: 0.5em;
 }
