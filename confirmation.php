@@ -130,7 +130,7 @@ try {
        </div>  
         </div>
         <br>
-        <button onclick="window.print()" class="no-print">Print / Save as PDF</button> <br>
+      <button onclick="window.print()" class="no-print"> <div class="printBtn"> Print / Save as PDF</div></button> <br>
         <small>You will also receive a confirmation e-mail, please check your spam or junk folder.</small>
 
         <button id="chatbotButton" class="no-print" onclick="toggleChatbot()">💬 Brewgle</button>

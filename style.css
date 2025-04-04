@@ -267,11 +267,14 @@ input, select, textarea {
 .menu-item span {
     font-weight: bold;
 }
+.printBtn{
+    font-size: medium;
+}
 /* CALANDER */
 .calendar-container {
     width: 400px;
-    height: 520px;
-    padding: 20px;
+    height: 530px;
+    padding: 0px;
     background-color: #b7b19e;
     display: flex;
     flex-direction: column;
@@ -305,8 +308,8 @@ button:hover {
 }
 #calendar th,
 #calendar td {
-    padding: 4px;
-    border: 2px solid white;
+    padding: 6px;
+    border: 1px solid white;
     text-align: center;
 }
 #calendar td {
@@ -324,7 +327,7 @@ button:hover {
 #events-list {
     list-style: none;
     padding: 5px;
-    max-width: 700px;
+    max-width: 600px;
 }
 li {
     display: flex;
@@ -500,6 +503,7 @@ li {
     display: block;
     margin-bottom: 0.5em;
 }
+
 /* Responsive Design */
 @media (max-width: 768px) {
     /* Adjust content width */
@@ -562,42 +566,98 @@ li {
     }
 }
 
-/* Responsive for smaller screens (max-width: 480px) */
-@media (max-width: 480px) {
-    /* Adjust content width even more for smaller screens */
+
+/* Responsive Design */
+@media (max-width: 1024px) {
     .content {
-        width: 100%;
+        width: 95%;
     }
 
-    /* Adjust text sizes further for smaller screens */
+    .calendar-container {
+        width: 90%;
+        height: auto;
+    }
+
+    #chatbotContainer {
+        width: 90%;
+        height: 500px;
+    }
+}
+
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .btn {
+        width: 80%;
+        margin: 10px auto;
+        font-size: medium;
+    }
+
     h2, h3 {
+        font-size: 1.5rem;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .contact,
+    .businessHours,
+    .calendar-container,
+    .accordion,
+    .confirmation-container,
+    .resAlign,
+    .aboutAlign {
+        width: 90%;
+        padding: 10px;
+    }
+
+    form input,
+    form select,
+    form textarea,
+    #resDate, #resTime, #fName, #lName, #email, #eMail, #phone, #drinkType, #message, #name {
+        width: 100%;
         font-size: 16px;
+    }
+
+    .submit, .printBtn, button {
+        width: 100%;
+        font-size: 16px;
+    }
+
+    .footer .socialLinks {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        font-size: 14px;
+    }
+
+    .btn {
+        font-size: small;
+    }
+
+    .accordionHeader {
+        font-size: 14px;
     }
 
     .menu-item {
         font-size: 16px;
     }
 
-    /* Adjust button size */
-    .btn {
-        width: 90%; /* Make buttons almost full width */
-        margin-left: 0;
+    .contact button,
+    .submit,
+    button {
+        padding: 8px;
+        font-size: 14px;
     }
 
-    /* Adjust footer for smaller screens */
-    .footer .socialLinks {
-        flex-direction: row;
-        gap: 10px;
-    }
-
-    /* Adjust chatbot button size */
     #chatbotButton {
         padding: 8px 10px;
         font-size: 12px;
-    }
-
-    /* Adjust form input width */
-    input, select, textarea, .submit {
-        width: 100%;
     }
 }
