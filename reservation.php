@@ -11,6 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $resTypeID = filter_input(INPUT_POST, 'resTypeID', FILTER_SANITIZE_NUMBER_INT);
     $resDate = filter_input(INPUT_POST, 'resDate', FILTER_SANITIZE_SPECIAL_CHARS);
     $resTime = filter_input(INPUT_POST, 'resTime', FILTER_SANITIZE_SPECIAL_CHARS);
+    $resID = $conn->insert_id;
 
     if (empty($fName) || empty($lName) || empty($eMail) || empty($phone) || empty($resDate) || empty($resTime)) {
         echo "<script type='text/javascript'>
@@ -134,10 +135,10 @@ if ($resTime < $openTime || $resTime > $closeTime) {
     </div>
     <?php include('nav.php'); ?>
 
-<p> <h3>Reserve Your Space at Jessie's Java!</h3>
-<h3>Service Options:</h3></p>
+<h3>Reserve Your Space at Jessie's Java!</h3>
+<p>Already made a reservation?  <a href="search.php"> Click here to view, edit, or cancel.</a></p>
 <div class="serviceOpt">
-    <div class="resAlign">
+    <div class="resAlign"><h3>Service Options:</h3>
   <p> <b>💻BYOL [$60.00]</b> A bring-your-own-laptop  table equpied with the optional otional extra monitor, headphones, keyboard and mouse. 
  <br><br>
 <b>🖥️ Computer Booth [$100.00]</b> Booths come fully equipped with a programming computer, extra monitor, headphones, keyboard, and mouse. <br> 
@@ -226,6 +227,8 @@ Amendments & Updates: We reserve the right to modify this Agreement at any time.
 </div>
 </div></div>
        </form>
+       <script src="script.js"></script>
+
    <button id="chatbotButton" onclick="toggleChatbot()">💬 Brewgle</button>
           <div id="chatbotContainer">
               <div id="chatbotHeader" onclick="toggleChatbot()">💬 Close Brewgle  &nbsp;&nbsp;&nbsp;&nbsp; ✖<span id="close-chatbot" onclick="toggleChatbot()">
@@ -242,7 +245,7 @@ Amendments & Updates: We reserve the right to modify this Agreement at any time.
               ></iframe>
           </div>
      <br>
+
      <?php include('footer.php'); ?>
-    <script src="script.js"></script>
 </body>
 </html>

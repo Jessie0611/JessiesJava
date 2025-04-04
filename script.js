@@ -1,5 +1,4 @@
-
-
+//MENU select
 function showMenu() {
   const menu = {
       hotLattes: [
@@ -56,13 +55,14 @@ function showMenu() {
   }
 }
 
+//CALANDER
 const monthYearDisplay = document.getElementById('month-year');
 const prevMonthBtn = document.getElementById('prev-month');
 const nextMonthBtn = document.getElementById('next-month');
 const calendarBody = document.querySelector('#calendar tbody');
 const eventsList = document.getElementById('events-list');
 let currentDate = new Date();
-
+//events
 const events = [
 { date: '2025-03-29', title: 'March 29 @ 11a - 7p: Peer Code Review: Clean Code Practices'},
 { date: '2025-04-01', title: 'April 1: April Fools Mystery Coffee $1.00'},
@@ -100,7 +100,7 @@ let day = 1;
 
 const eventForDay = events.filter(event => event.date === dateString);
   if (eventForDay.length > 0) {
-    cell.style.backgroundColor = '#78ada5';
+    cell.style.backgroundColor = '#78ada5'; // date hover color ----
     cell.title = eventForDay.map(event => event.title).join(', ');
   }
   cell.addEventListener('click', () => showEventsForDate(dateString));
@@ -150,7 +150,9 @@ renderCalendar();
 
 renderCalendar();
 renderUpcomingEvents();
-  
+
+
+//BREWGLE -- AI CHATBOT
 function toggleChatbot() {
   var chatbot = document.getElementById("chatbotContainer");
   var button = document.getElementById("chatbotButton");
@@ -163,35 +165,35 @@ function toggleChatbot() {
   }
 }
 
-document.querySelectorAll('.accordionHeader').forEach(button => {
-  button.addEventListener('click', () => {
-      const isActive = button.classList.contains('active');
-      // Close all accordions
-      document.querySelectorAll('.accordionHeader').forEach(item => {
-          item.classList.remove('active');
+//DISCLOSURE ACCORDION
+document.addEventListener('DOMContentLoaded', function () {
+  // Handle the accordion functionality
+  document.querySelectorAll('.accordionHeader').forEach(button => {
+      button.addEventListener('click', () => {
+          const isActive = button.classList.contains('active');
+
+          // Close all accordions
+          document.querySelectorAll('.accordionHeader').forEach(item => {
+              item.classList.remove('active');
+          });
+          document.querySelectorAll('.accordionContent').forEach(content => {
+              content.style.maxHeight = null; // Collapse the content
+              content.style.opacity = '0'; // Hide it smoothly
+          });
+
+          // If the clicked item wasn't already active, open it
+          if (!isActive) {
+              button.classList.add('active');
+              const content = button.nextElementSibling;
+              content.style.maxHeight = content.scrollHeight + 'px'; // Allow content to expand
+              content.style.opacity = '1'; // Make content visible
+          }
       });
-      document.querySelectorAll('.accordionContent').forEach(content => {
-          content.style.display = 'none';
-      });
-      // Open the clicked one if it was not already active
-      if (!isActive) {
-          button.classList.add('active');
-          button.nextElementSibling.style.display = 'block';
-      }
   });
 });
 
-document.getElementById("agreeCheckbox").addEventListener("change", function() {
-let button = document.getElementById("continueButton");
-if (this.checked) {
-    button.disabled = false;
-    button.classList.add("enabled");
-} else {
-    button.disabled = true;
-    button.classList.remove("enabled");
-}
-});
 
+//LIMIT RES TIME TO BUSINESS HOURS -1H FOR CLOSING
 document.addEventListener('DOMContentLoaded', function() {
 const resDateInput = document.getElementById('resDate');
 const resTimeInput = document.getElementById('resTime');

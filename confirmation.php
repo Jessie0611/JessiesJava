@@ -19,7 +19,7 @@ $stmtUser->bind_param("i", $userID);
 $stmtUser->execute();
 $userResult = $stmtUser->get_result();
 $user = $userResult->fetch_assoc();
-
+$resID = $conn->insert_id;
 if (!$user) {
     echo "User not found.";
     exit();
@@ -110,6 +110,7 @@ try {
             Thank you, <?= htmlspecialchars($user['fName'] . " " . $user['lName']); ?>!
             </h2>
             <h3>Your reservation details:</h3>
+            <p><b>Confirmation Number:</b> <?= htmlspecialchars((($reservation['resID']))); ?></p></p>
             <p><b>E-Mail Address: </b> <?= htmlspecialchars($user['eMail']); ?></p>
             <p><b>Phone Number: </b> <?= htmlspecialchars($user['phone']); ?></p>
             <p><b>Reservation Type: </b> <?= htmlspecialchars(strtoupper($reservation['typeName'])); ?></p>

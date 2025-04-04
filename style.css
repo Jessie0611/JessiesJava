@@ -33,7 +33,7 @@ nav{
     border: 3px solid #625750;
     border-radius: 13px;
     color: #fff2df;
-    width: 145px;
+    width: 135px;
     font-size: large;
 }
 .btn:hover {
@@ -74,25 +74,6 @@ button:hover {
     background-color: #625750;
     border: 2px solid #78ada5;
 }
-#spaceType, #resDate,#resTime, #fullName, #email, #phone, #drinkType{
-    font-size: 14px;
-    background-color:#d9d3cb;
-}
-.menu-section {
-    margin: 20px;
-    padding: 10px;
-    border: 3px solid #78ada5;
-    border-radius: 8px;
-    background-color: #fff;
-}
-.menu-item {
-    margin: 5px 0;
-    font-size: 18px;
-}
-.menu-item span {
-    font-weight: bold;
-}
-
 .btn:hover {
     background-color: hsl(23, 7%, 23%);
     border: 3px solid #78ada5;
@@ -100,11 +81,11 @@ button:hover {
 a {
     color: white;
     text-decoration: dotted;
-    font-size: 18px;
+    font-size: medium;
     pointer-events: visible;
 }
 a:hover {
-    color: #78ada5;
+    color: #81e9da;
     text-decoration: dotted;
     pointer-events: visible;
 }
@@ -113,6 +94,80 @@ h2, h3 {
     justify-content: center;
     align-items: center;
     color: hsl(23, 7%, 23%);
+}
+
+
+/*RES FORM*/
+form {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+label {
+    font-size: 16px;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+input, select, textarea {
+    padding: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 1px 1px 6px 1px  hsl(23, 7%, 23%);
+    background-color: #ffffff;
+}
+.submit{
+    font-size: large;
+    width: 25%;
+    padding: 10px;
+    background-color: #b0907b;
+    color: white;
+    border: none;
+    border: 3px solid #625750;
+    cursor: pointer;
+}
+.submit:hover {
+    background-color: #625750;
+    border: 3px solid #78ada5;
+    color: #58ada5;
+}
+#resTypeID{
+    box-sizing: border-box;
+    font-size: 14px;
+    background-color: #ffffff;
+    height: 32px;
+    width: 330px;
+    border-radius: 8px;
+    box-shadow: 1px 1px 6px 1px  hsl(23, 7%, 23%);
+}
+#resDate, #resTime, #fName, #lName, #email, #eMail, #phone, #drinkType, #message, #name{
+    font-size: 14px;
+    background-color: #ffffff;
+    height: 30px;
+    width: 320px;
+    border-radius: 8px;
+    box-shadow: 1px 1px 6px 1px  hsl(23, 7%, 23%);
+}
+
+/*MENU*/
+.menu-item span {
+    font-weight: bold;
+}
+.menu-section {
+    margin: 20px;
+    padding: 10px;
+    border: 3px solid #625750;
+    border-radius: 8px;
+    background-color: #fff;
+}
+.menu-item {
+    margin: 5px 0;
+    font-size: 16px;
+    padding: 5px;
+}
+.menu-item span {
+    font-weight: bold;
 }
 /*ABOUT US*/
 .aboutUs {
@@ -123,6 +178,7 @@ h2, h3 {
     text-align: center;
     margin: 0 auto; /* Center horizontally */
 }
+
 /* Contact Section */
 .contact {
     text-align: center;
@@ -201,72 +257,7 @@ h2, h3 {
 .businessHours .hours {
    color: #777;
 }
-/*RES FORM*/
-form {
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-label {
-    font-size: 16px;
-    margin-bottom: 10px;
-    font-weight: bold;
-}
-input, select, textarea {
-    padding: 5px;
-    margin-bottom: 15px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    box-shadow: 1px 1px 6px 1px  hsl(23, 7%, 23%);
-    background-color: #ffffff;
-}
-.submit{
-    font-size: large;
-    width: 25%;
-    padding: 10px;
-    background-color: #b0907b;
-    color: white;
-    border: none;
-    border: 3px solid #625750;
-    cursor: pointer;
-}
-.submit:hover {
-    background-color: #625750;
-    border: 3px solid #78ada5;
-    color: #58ada5;
-}
-#resTypeID{
-    box-sizing: border-box;
-    font-size: 14px;
-    background-color: #ffffff;
-    height: 32px;
-    width: 330px;
-    border-radius: 8px;
-    box-shadow: 1px 1px 6px 1px  hsl(23, 7%, 23%);
-}
-#resDate, #resTime, #fName, #lName, #email, #eMail, #phone, #drinkType, #message, #name{
-    font-size: 14px;
-    background-color: #ffffff;
-    height: 30px;
-    width: 320px;
-    border-radius: 8px;
-    box-shadow: 1px 1px 6px 1px  hsl(23, 7%, 23%);
-}
-.menu-section {
-    margin: 20px;
-    padding: 10px;
-    border: 3px solid #625750;
-    border-radius: 8px;
-    background-color: #fff;
-}
-.menu-item {
-    margin: 5px 0;
-    font-size: 18px;
-}
-.menu-item span {
-    font-weight: bold;
-}
+
 .printBtn{
     font-size: medium;
 }
@@ -409,13 +400,14 @@ li {
     background-color: #b0907b;
     box-shadow: 0px 2px 5px #625750;
 }
+
 .accordion {
     width: 100%;
-    max-width: 700px;
     margin: 20px auto;
 }
 .accordionItem {
     border-bottom: 1px solid #78ada5;
+
 }
 .accordionHeader {
     background: hsl(23, 7%, 23%);
@@ -429,9 +421,11 @@ li {
     width: 98%;
     outline: none;
     transition: 0.3s;
+    border: 2px solid #78ada5;
+
 }
 .accordionHeader:hover {
-    background: hsl(23, 7%, 23%);
+    background: #b0907b;
 }
 .accordionContent {
     display: none;
@@ -439,8 +433,47 @@ li {
     background: #fff;
     overflow: hidden;
     box-shadow: 1px 1px 8px 1px  hsl(23, 7%, 23%);
-
 }
+
+/*SEARCH*/
+.searchRes{
+    display: grid;
+    justify-content: center;
+}
+.search {
+    width: 80px;
+    background: hsl(23, 7%, 23%);
+    color: white;
+    border-radius: 12px;
+    padding: 12px;
+}
+.search:hover {
+    width: 80px;
+    background-color: #b0907b;
+}
+.edit {
+    border-radius: 30px;
+    padding: 4px;
+    width: 70px;
+    background-color: hsl(23, 7%, 23%);
+    color: white;
+    border: 1px solid white;
+}
+.edit:hover {
+    background-color: #be641a;
+}
+.cancel {
+    border-radius: 30px;
+    padding: 4px;
+    width: 70px;
+    background-color: hsl(23, 7%, 23%);
+    color: white;
+    border: 1px solid white;
+}
+.cancel:hover {
+    background-color: #921c27;
+}
+
 .confirm-align{
     width: 100%;
     display: flex;
@@ -478,6 +511,8 @@ li {
     text-align: left;
     padding: 20px;
 }
+
+
 @media print {
     /* Hide elements on the page */
     body * {
@@ -557,11 +592,11 @@ li {
     }
 
     /* Adjust accordion items for mobile */
-    .accordion-item {
+    .accordionItem {
         padding: 5px;
     }
 
-    .accordion-header {
+    .accordionHeader {
         font-size: 14px;
     }
 }
