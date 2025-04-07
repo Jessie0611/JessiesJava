@@ -473,6 +473,9 @@ li {
 .cancel:hover {
     background-color: #921c27;
 }
+h4{
+    color: #921c27;
+}
 
 .confirm-align{
     width: 100%;

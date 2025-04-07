@@ -25,6 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $reservations[] = $row;
     }
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -74,22 +75,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                <th>Actions</th>
             </tr>
 <?php foreach ($reservations as $res): ?>
-            <tr>
-                <td><?= $res['resID'] ?></td>
-                <td><?= $res['fName'] . ' ' . $res['lName'] ?></td>
-                <td><?= $res['typeName'] ?></td>
-                <td><?= $res['resDate'] ?></td>
-                <td><?= $res['resTime'] ?></td>
-                <td><?= $res['status'] ?></td>
-                <td>
-                            <form class="inline" action="edit.php" method="get">
-                                <input type="hidden" name="resID" value="<?= $res['resID'] ?>">
-                                <button type="submit" class="edit">Edit</button>
-                            </form>
-                            <form class="inline" action="cancel.php" method="post" onsubmit="return confirm('Are you sure you want to cancel this reservation?');">
-                                <input type="hidden" name="resID" value="<?= $res['resID'] ?>">
-                                <button type="submit" class="cancel">Cancel</button>
-                            </form>
+        <tr>
+            <td><?= $res['resID'] ?></td>
+            <td><?= $res['fName'] . ' ' . $res['lName'] ?></td>
+            <td><?= $res['typeName'] ?></td>
+            <td><?= $res['resDate'] ?></td>
+            <td><?= $res['resTime'] ?></td>
+            <td><?= $res['status'] ?></td>
+            <td>
+        <form class="inline" action="edit.php" method="get">
+        <input type="hidden" name="resID" value="<?= $res['resID'] ?>">
+        <button type="submit" class="edit">Edit</button>
+        </form>
+<?php if ($res['status'] === 'Canceled'): ?>
+        <em style="color: gray;">Already Canceled</em>
+        <?php else: ?>
+    <form class="inline" action="cancel.php" method="post" onsubmit="return confirm('Are you sure you want to cancel this reservation?');">
+       <input type="hidden" name="resID" value="<?= $res['resID'] ?>">
+       <button type="submit" class="cancel">Cancel</button>
+    </form>
+    <?php endif; ?>
+
                         </td>
                     </tr>
                 <?php endforeach; ?>
@@ -100,6 +106,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <script src="script.js"></script>
         <br>
         </div>
+        
 <button id="chatbotButton" onclick="toggleChatbot()">💬 Brewgle</button>
        <div id="chatbotContainer">
            <div id="chatbotHeader" onclick="toggleChatbot()">💬 Close Brewgle  &nbsp;&nbsp;&nbsp;&nbsp; ✖<span id="close-chatbot" onclick="toggleChatbot()">
@@ -115,7 +122,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               height="540px"
            ></iframe>
        </div>
-  <br>
+  <br> <br> <br>
   <?php include('footer.php'); ?>
     </div>
     

@@ -9,6 +9,15 @@ if (!isset($_GET['resID'])) {
 $resID = $_GET['resID'];
 $success = false;
 
+// Function to convert 24-hour time to 12-hour format
+function convertTo12Hour($time) {
+    return date("g:i A", strtotime($time));
+}
+
+// Business hours
+$openTime = "08:00:00";
+$closeTime = "18:00:00";
+
 // Get reservation info
 $stmt = $conn->prepare("
     SELECT r.*, u.fName, u.lName, rt.typeName 
@@ -21,22 +30,29 @@ $stmt->bind_param("i", $resID);
 $stmt->execute();
 $res = $stmt->get_result()->fetch_assoc();
 
-// Update reservation
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $newDate = $_POST['resDate'];
     $newTime = $_POST['resTime'];
+
+    // Check business hours
+    if ($newTime < $openTime || $newTime > $closeTime) {
+        echo "<script>
+        alert('Reservations are only allowed from " . convertTo12Hour($openTime) . " to " . convertTo12Hour($closeTime) . ".');
+        window.location.href = 'edit.php?resID=" . $resID . "';
+      </script>";
+    exit;
+    }
 
     $update = $conn->prepare("UPDATE reservations SET resDate = ?, resTime = ? WHERE resID = ?");
     $update->bind_param("ssi", $newDate, $newTime, $resID);
     if ($update->execute()) {
         $success = true;
-        // Refresh updated values
         $res['resDate'] = $newDate;
         $res['resTime'] = $newTime;
     }
 }
-
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -77,7 +93,8 @@ input{
     background-color: #ffffff;
 }
 </style>
-<form method="post">
+<form method="post" action="edit.php?resID=<?= $resID ?>
+">
     <label>Reservation Type: <strong><?= $res['typeName'] ?></strong></label><br>
     <label for="resDate">Date:</label><br>
     <input type="date" name="resDate" value="<?= $res['resDate'] ?>" required><br>
@@ -88,8 +105,10 @@ input{
     <button type="submit">Save Changes</button>
 </form>
 
-<br>
-<a href="search.php">Back to Search</a>
-
+<br><br>
+<a href="search.php"><button>Back to Search</button></a>
+<br> <br>
+  <?php include('footer.php'); ?>
+    </div>
 </body>
 </html>

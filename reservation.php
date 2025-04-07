@@ -136,7 +136,7 @@ if ($resTime < $openTime || $resTime > $closeTime) {
     <?php include('nav.php'); ?>
 
 <h3>Reserve Your Space at Jessie's Java!</h3>
-<p>Already made a reservation?  <a href="search.php"> Click here to view, edit, or cancel.</a></p>
+<p>Already made a reservation? <br> <a href="search.php"><button> Manage Reservation </button></a></p>
 <div class="serviceOpt">
     <div class="resAlign"><h3>Service Options:</h3>
   <p> <b>💻BYOL [$60.00]</b> A bring-your-own-laptop  table equpied with the optional otional extra monitor, headphones, keyboard and mouse. 
