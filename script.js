@@ -41,8 +41,8 @@ function showMenu() {
       teaOptions: [
         { name: "Bug-Free Brew", price: "$3.50", description: "Chamomile and lavender tea latte — for when you finally squash that last bug and deserve some serenity." },
         { name: "Hot Chai Latte", price: "$4.50", description: "Spiced like your debugging rants — cozy, bold, and full of complex flavor." },
-        { name: "Iced Chai Latte", price: "$5.00", description: "A perfectly spiced brew, ideal for when your code is compiling, but you need a little more chill." },
         { name: "Hot Matcha Latte", price: "$4.50", description: "Green-powered like your clean energy hosting — focused, balanced, and sharp." },
+        { name: "Iced Chai Latte", price: "$5.00", description: "A perfectly spiced brew, ideal for when your code is compiling, but you need a little more chill." },
         { name: "Iced Matcha Latte", price: "$5.00", description: "Chilled matcha and milk — a refreshing, energizing drink to power through your tasks." },
       ]
   };
