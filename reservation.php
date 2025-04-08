@@ -141,7 +141,7 @@ if ($resTime < $openTime || $resTime > $closeTime) {
     <div class="resAlign"><h3>Service Options:</h3>
   <p> <b>💻BYOL [$60.00]</b> A bring-your-own-laptop  table equpied with the optional otional extra monitor, headphones, keyboard and mouse. 
  <br><br>
-<b>🖥️ Computer Booth [$100.00]</b> Booths come fully equipped with a programming computer, extra monitor, headphones, keyboard, and mouse. <br> 
+<b>🖥️ Computer Booth [$100.00]</b> Booths come fully equipped with a programming computer, extra monitor, headphones, keyboard, and mouse.
 <br><br>
 <b>👨‍👨‍👦‍👦Collaboration Room [$200.00] </b> Looking for a more relaxed setting for your collaboration projects, away from the office grind? 
 Our collaboration rooms are designed to provide just that, with two computer booths and space for up to eight BYOL areas,

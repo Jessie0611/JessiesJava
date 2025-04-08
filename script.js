@@ -29,7 +29,7 @@ function showMenu() {
         { name: "Cortado", price: "$3.50", description: "Equal parts espresso and milk, no distractions — for developers who like their code clean and simple." },
         { name: "Debugger", price: "$3.50", description: "Espresso + mint + dark chocolate. Cuts through brain fog like stepping through breakpoints." },
         { name: "Git Push Pull", price: "$3.50", description: "Classic mocha with an extra dark twist — sync up your energy levels whether you’re merging branches or merging deadlines." },
-        { name: "JavaScript Jolt", price: "$2.50", description: "A bold espresso shot with a citrusy finish — perfect for asynchronous minds who love event loops and coffee loops." },
+        { name: "JavaScript Jolt", price: "$2.50", description:"A powerful espresso shot with a zesty citrus twist — energizing for those who thrive on callbacks and pushing async boundaries."},
         { name: "Stack Overflow", price: "$3.00", description: "Triple espresso layered with vanilla cream and cinnamon — like your brain at 3AM: overloaded, but delicious." }
       ],
       icedEspresso: [
@@ -127,73 +127,70 @@ if (monthYearDisplay && prevMonthBtn && nextMonthBtn && calendarBody) {
     }
   }
 
-  function showEventsForDate(date) {
-    const eventForDate = events.filter(event => event.date === date);
-    const eventsList = document.getElementById('events-list');
-    if (!eventsList) return;
+function showEventsForDate(date) {
+  const eventForDate = events.filter(event => event.date === date);
+  const eventsList = document.getElementById('events-list');
+  if (!eventsList) return;
 
-    eventsList.innerHTML = '';
-    if (eventForDate.length > 0) {
-      eventForDate.forEach(event => {
-        const li = document.createElement('li');
-        li.textContent = event.title;
-        eventsList.appendChild(li);
-      });
-    } else {
-      eventsList.innerHTML = '<li>No events for this day.</li>';
-    }
-  }
-
-  prevMonthBtn.addEventListener('click', () => {
-    currentDate.setMonth(currentDate.getMonth() - 1);
-    renderCalendar();
-  });
-
-  nextMonthBtn.addEventListener('click', () => {
-    currentDate.setMonth(currentDate.getMonth() + 1);
-    renderCalendar();
-  });
-
-  renderCalendar();
-}
-  function renderUpcomingEvents() {
-    const today = new Date();
-    const upcomingEvents = events.filter(event => new Date(event.date) > today);
-  
-    const eventsList = document.getElementById('events-list');
-    if (!eventsList) return;
-  
-    eventsList.innerHTML = '';
-    upcomingEvents.forEach(event => {
+  eventsList.innerHTML = '';
+  if (eventForDate.length > 0) {
+    eventForDate.forEach(event => {
       const li = document.createElement('li');
       li.textContent = event.title;
       eventsList.appendChild(li);
     });
+  } else {
+    eventsList.innerHTML = '<li>No events for this day.</li>';
   }
+}
+
+prevMonthBtn.addEventListener('click', () => {
+  currentDate.setMonth(currentDate.getMonth() - 1);
+  renderCalendar();
+});
+
+nextMonthBtn.addEventListener('click', () => {
+  currentDate.setMonth(currentDate.getMonth() + 1);
+  renderCalendar();
+});
+  renderCalendar();
+}
+function renderUpcomingEvents() {
+  const today = new Date();
+  const upcomingEvents = events.filter(event => new Date(event.date) > today);
   
-  document.addEventListener('DOMContentLoaded', renderUpcomingEvents);
-  document.addEventListener('DOMContentLoaded', function () {
+  const eventsList = document.getElementById('events-list');
+  if (!eventsList) return;
+  
+  eventsList.innerHTML = '';
+  upcomingEvents.forEach(event => {
+    const li = document.createElement('li');
+    li.textContent = event.title;
+    eventsList.appendChild(li);
+  });
+}
+  
+document.addEventListener('DOMContentLoaded', renderUpcomingEvents);
+document.addEventListener('DOMContentLoaded', function () {
     // All your DOM-related code here:
     
-    const prevMonthBtn = document.getElementById('prev-month');
-    const nextMonthBtn = document.getElementById('next-month');
+  const prevMonthBtn = document.getElementById('prev-month');
+  const nextMonthBtn = document.getElementById('next-month');
   
-    if (prevMonthBtn) {
-      prevMonthBtn.addEventListener('click', () => {
-        currentDate.setMonth(currentDate.getMonth() - 1);
-        renderCalendar();
-      });
-    }
+  if (prevMonthBtn) {
+    prevMonthBtn.addEventListener('click', () => {
+      currentDate.setMonth(currentDate.getMonth() - 1);
+      renderCalendar();
+    });
+  }
   
-    if (nextMonthBtn) {
-      nextMonthBtn.addEventListener('click', () => {
-        currentDate.setMonth(currentDate.getMonth() + 1);
-        renderCalendar();
-      });
-    }
-  
-  });
-  
+  if (nextMonthBtn) {
+    nextMonthBtn.addEventListener('click', () => {
+      currentDate.setMonth(currentDate.getMonth() + 1);
+      renderCalendar();
+    });
+  }
+});
 renderUpcomingEvents();
 
 
@@ -261,19 +258,19 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
-  resDateInput.addEventListener('change', updateTimeLimits);
-  resTimeInput.addEventListener('change', function () {
-    const minTime = resTimeInput.getAttribute('min');
-    const maxTime = resTimeInput.getAttribute('max');
-    let timeMessage = ""; // You can define this here too if needed
+resDateInput.addEventListener('change', updateTimeLimits);
+resTimeInput.addEventListener('change', function () {
+  const minTime = resTimeInput.getAttribute('min');
+  const maxTime = resTimeInput.getAttribute('max');
+  let timeMessage = ""; // You can define this here too if needed
 
-    if (resTimeInput.value < minTime || resTimeInput.value > maxTime) {
-      alert(`Please select a time between ${timeMessage}.`);
-      resTimeInput.value = "";
-    }
-  });
+  if (resTimeInput.value < minTime || resTimeInput.value > maxTime) {
+    alert(`Please select a time between ${timeMessage}.`);
+    resTimeInput.value = "";
+  }
+});
 
-  resDateInput.dispatchEvent(new Event('change'));
+resDateInput.dispatchEvent(new Event('change'));
 });
 
 //DISCLOSURE ACCORDION
