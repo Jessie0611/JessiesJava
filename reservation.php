@@ -180,52 +180,50 @@ Our collaboration rooms are designed to provide just that, with two computer boo
     </label>
 </div>
 
-<div class="accordion">
-    <div class="accordionItem">
-        <div class="accordionHeader">Disclosure Agreement</div>
-        <div class="accordionContent">
-             <small>
-                Reservations & Walk-Ins <br>
+    <div class="accordionHeader">Disclosure Agreement</div>
+    <div class="accordionContent">
+    <small>
+              <u> Reservations & Walk-Ins</u> <br>
 Customers may reserve a BYOL table, computer booth, or collaboration room in advance via our website, phone, or in person. Walk-ins are welcome, but availability is not guaranteed. 
 Prepaid Reservations: Customers who pay for their reservation upfront will have their table or room held for the full reservation period.
 Non-Prepaid Reservations (Made In-House): Customers who make a reservation without prepayment will have their table or room held for 20 minutes (BYOL tables and computer booths). If the customer fails to arrive within the hold time, the reservation will be forfeited, and the space will be made available to walk-in customers.
 Collaboration Rooms: Due to limited availability, collaboration rooms must be prepaid at the time of booking.
-   <br> <br>
-                Rental of Additional Tech Equipment <br>
+<br>
+               <U>Rental of Additional Tech Equipment</U> <br>
 Customers may rent extra tech accessories (e.g., monitors, keyboards, mice, chargers, gaming controllers) based on availability.
 Rental fees must be paid upfront, and certain high-value items may require a security deposit.
 Customers are responsible for returning rented equipment in the same condition. Any damage or loss will result in additional fees.
-<br> <br>
-                Cancellation & No-Show Policy <br>
+<br>
+            <U>   Cancellation & No-Show Policy</U> <br>
 Prepaid Reservations: Cancellations must be made at least 2 hours before the reservation time for BYOL tables & computer booths and at least 4 hours before the reservation time for collaboration rooms to receive a full refund.
 Cancellations made after the respective window will result in no refund. Failure to cancel or show up within the hold time will result in forfeiting the reservation, and no refund will be issued.
 Non-Prepaid Reservations (Made In-House): Please cancel at least 2 hours before the reservation time for BYOL tables & computer booths if you need to cancel.
-<br> <br>
-                Customer Responsibilities <br>
+<br>
+             <U>  Customer Responsibilities</U> <br>
 Customers must use all facilities and equipment responsibly.
 No unauthorized software downloads or modifications are allowed on provided computer booths. Customers must comply with all shop policies, including food and drink restrictions near electronic devices.
 Any disruptive behavior (e.g., excessive noise, inappropriate tech use) may result in removal from the premises.
-<br> <br>
-Liability & Damage <br>
+<br>
+    <U>Liability & Damage</U> <br>
 Jessie's Java is not responsible for any loss, theft, or damage to personal laptops or other belongings. Customers assume full responsibility for any damage to rented equipment and will be charged for repairs or replacement.
 We are not liable for data loss, connectivity issues, or personal technical malfunctions.
-<br><br>
-Privacy & Security <br>
+<br>
+    <u>Privacy & Security </u>
+<br>
 We may monitor public computer booths to ensure compliance with shop policies.
 Customers must log out of any personal accounts before leaving to protect their data.
 Wi-Fi access is provided as a courtesy, and we are not responsible for security risks or interruptions.
-<br> <br>
-<br>Discounts: Students can get a 10% discount off in-store snacks and drinks with their student ID card. Please tell the staff when you are ordering. <br>
-Amendments & Updates: We reserve the right to modify this Agreement at any time. Continued use of our services after updates indicates acceptance of the revised terms.
 <br>
-            </small>
-            <br>
-        </div>
+    <u>Discounts:</u> Students can get a 10% discount off in-store snacks and drinks with their student ID card. Please tell the staff when you are ordering. <br>
+<u>Amendments & Updates:</u> We reserve the right to modify this Agreement at any time. Continued use of our services after updates indicates acceptance of the revised terms.
+    <br>
+    </small>
+    <br>
     </div>
-<br><br> <br> <br>
+<br><br>
         <button type="submit" class="submit">Reserve</button>
 </div>
-</div></div>
+</div>
        </form>
        <script src="script.js"></script>
 
@@ -247,5 +245,6 @@ Amendments & Updates: We reserve the right to modify this Agreement at any time.
      <br>
 
      <?php include('footer.php'); ?>
+</div> 
 </body>
 </html>

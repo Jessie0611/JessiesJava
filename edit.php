@@ -15,8 +15,8 @@ function convertTo12Hour($time) {
 }
 
 // Business hours
-$openTime = "08:00:00";
-$closeTime = "18:00:00";
+$openTime = "09:00:00";
+$closeTime = "21:00:00";
 
 // Get reservation info
 $stmt = $conn->prepare("
