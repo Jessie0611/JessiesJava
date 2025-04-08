@@ -121,10 +121,10 @@ try {
     <small>If you have any questions or need to make any changes contact us.</small>
  
     <address class="address-container">
-    <strong>Jessie's Java Address:</strong>
+    <strong>Jessie's Java Address:</strong> <br>
     123 Java Avenue, Suite 200<br>
     Atlanta, GA 30303<br><br>
-    <strong>Jessie's Java Phone:</strong>
+    <strong>Jessie's Java Phone:</strong> <br>
     (404) 555-0198
   </address>
             <p>Enjoy your Jessie's Java Coding Experience!</p>

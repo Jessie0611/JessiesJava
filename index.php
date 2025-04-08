@@ -19,9 +19,9 @@ include("database.php");
             <br>
             <br>
             <div class="calendar-header">
-              <button id="prev-month">&lt;</button>
+              <button id="prev-month"> &lt; </button>
               <h2 id="month-year"></h2>
-              <button id="next-month">&gt;</button>
+              <button id="next-month"> &gt; </button>
               <br>
             </div>
         

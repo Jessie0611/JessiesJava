@@ -12,7 +12,7 @@ body{
     text-align: center;
 }
 .content{
-    width: 85%;
+    width: 80%;
     height: 100%;
     background-color: #b7b19e;
     padding-bottom: 100px;
@@ -27,7 +27,7 @@ nav{
 }
 .btn{
     margin-top: 20px;
-    margin-left: 30px;
+    margin-left: 40px;
     border: none;
     background-color: #b0907b;
     border: 3px solid #625750;
@@ -38,7 +38,7 @@ nav{
 }
 .btn:hover {
     background-color: hsl(23, 7%, 23%);
-    border: 5px solid #78ada5;
+    border: 4px solid #78ada5;
     color: #78ada5;
 }
 a{
@@ -61,7 +61,7 @@ h2, h3{
     color: hsl(23, 7%, 23%);
 }
 button {
-    font-size: 12px;
+    font-size:medium;
     width: 15%;
     padding: 10px;
     background-color: #b0907b;
@@ -73,10 +73,6 @@ button {
 button:hover {
     background-color: #625750;
     border: 2px solid #78ada5;
-}
-.btn:hover {
-    background-color: hsl(23, 7%, 23%);
-    border: 3px solid #78ada5;
 }
 a {
     color: white;
@@ -95,8 +91,6 @@ h2, h3 {
     align-items: center;
     color: hsl(23, 7%, 23%);
 }
-
-
 
 
 /*RESERVATION PAGE*/
@@ -248,21 +242,28 @@ h4{
 }
 
 /*MENU PAGE*/
+
 .menu-item span {
     font-weight: bold;
 }
 .menu-section {
-    margin: 20px;
+    margin: 10px;
     padding: 10px;
     border: 3px solid #625750;
     border-radius: 8px;
     background-color: #fff;
 }
 .menu-item {
-    margin: 5px 0;
-    font-size: 16px;
-    padding: 5px;
-}
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed #625750;
+  }
+  
+  .menu-desc {
+    margin: 4px 0 0 0;
+    font-size: 0.85rem;
+    color: #625750;
+  }
 .menu-item span {
     font-weight: bold;
 }
@@ -362,8 +363,8 @@ h4{
 
 /* HOME PAGE - CALANDER */
 .calendar-container {
-    width: 400px;
-    height: 530px;
+    width: 500px;
+    height: 580px;
     padding: 0px;
     background-color: #b7b19e;
     display: flex;
@@ -378,11 +379,17 @@ h4{
     margin-bottom: 10px;
     padding: 10px;
 }
+#prev-month{
+    margin-left: 30px;
+}
+#prev-month, #next-month{
+    font-size: medium;
+}
 button {
     background-color: hsl(23, 7%, 23%);
     align-items: center;
     color:#4EC9B0;
-    border: 2px solid #CE9178;
+    border: 1px solid #CE9178;
     border: none;
     padding: 10px;
     cursor: pointer;
@@ -411,24 +418,21 @@ button:hover {
 
 /* Upcoming Events Section */
 .upcoming-events {
-    margin-top: 5px;
+    margin-top: 3px;
     width: 100%;
-    min-height: 400px;
 }
 #events-list {
     list-style: none;
     padding: 5px;
-    max-width: 600px;
+    max-width: 500px;
 }
 li {
     display: flex;
     justify-content: left;
-    max-width: 660px;
-    padding-top: 6px;
+    padding-top: 7px;
     padding-bottom: 6px;
     white-space: nowrap; 
 }
-
 
 .aboutUs{
     width: 100%;

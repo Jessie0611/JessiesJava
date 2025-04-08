@@ -22,11 +22,9 @@
                    <option value="icedLattes">Iced Lattes</option>
                    <option value="hotEspresso">Hot Espresso Drinks</option>
                    <option value="icedEspresso">Iced Espresso Drinks</option>
+                   <option value="teaOptions">Tea Options</option>
                </select>
-           <br>
-           <br>
                <div id="menu" class="menu-section"></div>
-           <br>
            </body>
            </html>
            
