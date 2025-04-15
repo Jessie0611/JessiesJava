@@ -68,7 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Search Reservation - Jessie's Java</title>
+    <title>Jessie's Java</title>
 </head>
 <body>
 <div class="content">
@@ -107,8 +107,10 @@ input{
 
 <br><br>
 <a href="search.php"><button>Back to Search</button></a>
-<br> <br>
-  <?php include('footer.php'); ?>
+<br> <br> <br>
+<br>
+<?php include('footer.php'); ?>
+    <script src="script.js"></script>
     </div>
 </body>
 </html>

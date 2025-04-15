@@ -21,7 +21,7 @@ if ($resID) {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Reservation Canceled</title>
+    <title>Jessie's Java</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -33,6 +33,7 @@ if ($resID) {
 <br>
 <h2>Reservation Canceled</h2>
 <br>
+<br>
 <?php if ($res): ?>
         <h4>Reservation #<?= htmlspecialchars($resID) ?> for <?= $res['fName'] . " " . $res['lName'] ?> has been successfully canceled.</h4>
     <?php else: ?>
@@ -40,7 +41,9 @@ if ($resID) {
 <br> <br>
     <a href="search.php"><button>Back To Search</button></a>
     <br>
-    <?php include('footer.php'); ?>
+<br>
+<?php include('footer.php'); ?>
+    <script src="script.js"></script>
 </div>
 </body>
 </html>

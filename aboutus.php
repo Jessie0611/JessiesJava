@@ -55,23 +55,9 @@ At Jessie's Java, we've brewed up the perfect blend of productivity and comfort 
           <button type="submit" class="submit">Send Message</button>
         </form>
       </div> </div>
-      <button id="chatbotButton" onclick="toggleChatbot()">💬 Brewgle</button>
-      <div id="chatbotContainer">
-          <div id="chatbotHeader" onclick="toggleChatbot()">💬 Close Brewgle  &nbsp;&nbsp;&nbsp;&nbsp; ✖<span id="close-chatbot" onclick="toggleChatbot()">
-          </span></div>
-           <iframe
-             id="chatbotiFrame"
-             title="Brewgle"
-             src="https://jessiesjava.ai.copilot.live"
-             style="border:none;"
-             loading="lazy"
-             allow="microphone;camera;speaker;clipboard-read;clipboard-write;geolocation;"
-             width="400px"
-             height="540px"
-          ></iframe>
-      </div>
  <br>
  <?php include('footer.php'); ?>
     <script src="script.js"></script>
+</div>
 </body>
 </html>

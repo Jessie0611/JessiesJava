@@ -94,7 +94,7 @@ try {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jessie's Java Confirmation</title>
+    <title>Jessie's Java</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -134,26 +134,8 @@ try {
       <button onclick="window.print()" class="no-print"> <div class="printBtn"> Print / Save as PDF</div></button> <br>
         <small>You will also receive a confirmation e-mail, please check your spam or junk folder.</small>
 
-        <button id="chatbotButton" class="no-print" onclick="toggleChatbot()">💬 Brewgle</button>
-        <div id="chatbotContainer" class="no-print">
-            <div id="chatbotHeader" onclick="toggleChatbot()">💬 Close Brewgle  &nbsp;&nbsp;&nbsp;&nbsp; ✖</div>
-            <iframe id="chatbotiFrame" title="Brewgle" src="https://jessiesjava.ai.copilot.live"
-                style="border:none;" loading="lazy"
-                allow="microphone;camera;speaker;clipboard-read;clipboard-write;geolocation;"
-                width="400px" height="540px"></iframe>
-        </div>
-        <footer class="footer no-print">
-            <div class="socialLinks">
-                <a href="https://www.facebook.com" target="_blank" class="socialLink">
-                    <img src="Images/facebook.jpg" class="socialIcon">
-                </a>
-                <a href="https://www.instagram.com" target="_blank" class="socialLink">
-                    <img src="Images/insta.jpg" class="socialIcon">
-                </a>
-            </div>
-            <hr>
-        </footer>
+        <?php include('footer.php'); ?>
+        <script src="script.js"></script>
     </div>
-    <script src="script.js"></script>
 </body>
 </html>
