@@ -1,9 +1,9 @@
 <?php 
-session_start();
+session_start(); // allows you to use session variables (like saving user info across pages)
 include("database.php");
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Sanitize input
+if ($_SERVER["REQUEST_METHOD"] == "POST") {  //Ensures the code only runs if the form is submitted via POST (a secure way to send data).
+    // Sanitize input, this protects against basic XSS and injection attacks.
     $fName = filter_input(INPUT_POST, 'fName', FILTER_SANITIZE_SPECIAL_CHARS);
     $lName = filter_input(INPUT_POST, 'lName', FILTER_SANITIZE_SPECIAL_CHARS);
     $eMail = filter_input(INPUT_POST, 'eMail', FILTER_SANITIZE_EMAIL);
@@ -18,17 +18,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 alert('Error: All fields are required.');
                 window.location.href = 'reservation.php'; // Redirect back to the form
               </script>";
-        exit;
+        exit; //Ensures all form fields are filled in, if not, shows an alert and redirects back.
     }
 // Function to convert 24-hour time to 12-hour format with AM/PM
 function convertTo12Hour($time) {
     return date("g:i A", strtotime($time)); 
-}
+}//g	Hour in 12-hour format (1–12)	1 to 12 : i	Minutes with leading zero	00, 01, 59 // A	AM or PM in uppercase	AM, PM
+
 // Define current date and time for validation
 $currentDate = date("Y-m-d");
 $currentTime = date("H:i");
 
-// Check if the selected date is in the past
+// Check if the selected date is in the past, Rejects reservations in the past (either wrong date or earlier today).
 if ($resDate < $currentDate) {
     echo "<script type='text/javascript'>
             alert('The selected date is in the past.');
@@ -42,6 +43,7 @@ if ($resDate < $currentDate) {
           </script>";
     exit;
 }
+
 // Get day of the week for the selected reservation date
 $dayOfWeek = date('w', strtotime($resDate));
 // Validate time based on business hours
@@ -69,7 +71,8 @@ switch ($dayOfWeek) {
               </script>";
         exit;
 }
-// Check if the reservation time is outside business hours
+
+// Ensures the reservation time falls within business hours.
 if ($resTime < $openTime || $resTime > $closeTime) {
     echo "<script type='text/javascript'>
             alert('Reservations are only allowed from " . convertTo12Hour($openTime) . " to " . convertTo12Hour($closeTime) . " on this day.');
@@ -77,7 +80,7 @@ if ($resTime < $openTime || $resTime > $closeTime) {
           </script>";
     exit;
 }
-    // Check if user exists based on email OR phone
+    //Check if user exists based on email OR phone, if found use same userID for repeat customers/not found->insert info into users table
     $checkUserQuery = "SELECT userID FROM users WHERE eMail = ? OR phone = ?";
     $stmt = $conn->prepare($checkUserQuery);
     $stmt->bind_param("ss", $eMail, $phone);
@@ -98,6 +101,7 @@ if ($resTime < $openTime || $resTime > $closeTime) {
     }
     
     $stmt->close();
+    
     // Insert reservation into `reservations` table
     $insertReservationQuery = "INSERT INTO reservations (userID, resTypeID, resDate, resTime, status) 
                                VALUES (?, ?, ?, ?, 'pending')";

@@ -1,11 +1,11 @@
 <?php
 include("database.php");
-
+//initialize var and array
 $searchTerm = "";
 $reservations = [];
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $searchTerm = trim($_POST["search"]);
+if ($_SERVER["REQUEST_METHOD"] == "POST") { //handle form submittion POST
+    $searchTerm = trim($_POST["search"]); //Trims whitespace from user input.
 
     // Query user based on reservation ID (resID)
     $stmt = $conn->prepare("
@@ -15,14 +15,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     JOIN restype rt ON r.resTypeID = rt.resTypeID
     WHERE r.resID = ?
     ");
-
+//This query joins three tables: reservations (r) users (u) → to get user info restype (rt) → to get the type of reservation
     // Bind the search term (resID)
     $stmt->bind_param("i", $searchTerm);
     $stmt->execute();
-    $result = $stmt->get_result();
+    $result = $stmt->get_result(); //runs query, gets results
 
     while ($row = $result->fetch_assoc()) {
-        $reservations[] = $row;
+        $reservations[] = $row; //Adds each result to the $reservations array.
     }
 }
 

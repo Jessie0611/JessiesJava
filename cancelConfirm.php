@@ -1,16 +1,16 @@
 <?php
 include("database.php");
 
-$resID = $_GET['resID'] ?? null;
+$resID = $_GET['resID'] ?? null; //get resID
 $res = null;
 
-if ($resID) {
+if ($resID) {//If a reservation ID was provided, Query DB for info. 
     $stmt = $conn->prepare("
         SELECT r.resID, u.fName, u.lName 
         FROM reservations r 
         JOIN users u ON r.userID = u.userID 
         WHERE r.resID = ?
-    ");
+    ");//Joins  reservations & users tables to get first and last name. Fetches the result into $res.
     $stmt->bind_param("i", $resID);
     $stmt->execute();
     $result = $stmt->get_result();

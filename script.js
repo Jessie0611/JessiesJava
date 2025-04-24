@@ -1,5 +1,5 @@
 //MENU select
-function showMenu() {
+function showMenu() { //displays menu items, price, description via dropdown menu selection on menu page
   const menu = {
       hotLattes: [
         { name: "Caramel Cache", price: "$4.50", description: "As smooth as your final commit — buttery caramel that refactors your mood." },
@@ -46,22 +46,24 @@ function showMenu() {
         { name: "Iced Matcha Latte", price: "$5.00", description: "Chilled matcha and milk — a refreshing, energizing drink to power through your tasks." },
       ]
   };
-    const selectedType = document.getElementById("drinkType").value;
-    const menuContainer = document.getElementById("menu");
+    const selectedType = document.getElementById("drinkType").value; //Grabs the value of the <select> element with ID drinkType
+    const menuContainer = document.getElementById("menu");//Gets the HTML element where the menu will be displayed (with ID menu).
     menuContainer.innerHTML = ""; // Clear previous menu
 
-    if (selectedType) {
-        const drinks = menu[selectedType];
-        const sectionTitle = selectedType.replace(/([A-Z])/g, ' $1').toUpperCase(); // Capitalize words
-        menuContainer.innerHTML = `<h2>${sectionTitle}</h2>`;      
-        drinks.forEach(drink => {
-            const drinkElement = document.createElement("div");
+    if (selectedType) {//Checks if a drink type is selected.
+        const drinks = menu[selectedType]; //uses the selected type to pull a corresponding array of drinks from menu object
+        const sectionTitle = selectedType.replace(/([A-Z])/g, ' $1').toUpperCase();
+         //^uses regex to add space before capitalize letter& convert entire string to upper, used as section header
+        menuContainer.innerHTML = `<h2>${sectionTitle}</h2>`; //adds header to menu area     
+        
+        drinks.forEach(drink => { //Loops over each drink in the list.
+            const drinkElement = document.createElement("div"); //Creates a new <div> for each drink with the class menu-item.
             drinkElement.classList.add("menu-item");
             drinkElement.innerHTML = `
-              <strong>${drink.name}</strong> - <span>${drink.price}</span>
+              <strong>${drink.name}</strong> - <span>${drink.price}</span>  
               <p class="menu-desc">${drink.description || ""}</p>
-            `;
-            menuContainer.appendChild(drinkElement);
+            `;// Adds the drink’s name and price in bold. If description exists, shown — if not just blank ("").
+            menuContainer.appendChild(drinkElement); //Appends each drink element to the menu so they appear on the page.
         });
     }
 }
@@ -87,38 +89,45 @@ const events = [
 { date: '2025-06-20', title: 'June 20: Summer Solistice: Create digital art inspired by the solistice.'},
 { date: '2025-07-04', title: 'July 4: CLOSED FOR 4TH OF JULY! Take a screen break! :) '}
 ];
-
+//This makes sure all the required HTML elements exist before the calendar logic runs:
 if (monthYearDisplay && prevMonthBtn && nextMonthBtn && calendarBody) {
-  let currentDate = new Date();
+  let currentDate = new Date();  // Gets today's date
+
   function renderCalendar() {
-    const year = currentDate.getFullYear();
-    const month = currentDate.getMonth();
-    monthYearDisplay.textContent = `${currentDate.toLocaleString('default', { month: 'long' })} ${year}`;
+    const year = currentDate.getFullYear();//extract year from  current date
+    const month = currentDate.getMonth(); //extract month from current date
+    monthYearDisplay.textContent = `${currentDate.toLocaleString('default', { month: 'long' })} ${year}`; 
+    //^ Displays the current month and year like April 2025.
     calendarBody.innerHTML = '';
-    const firstDay = new Date(year, month, 1);
-    const lastDay = new Date(year, month + 1, 0);
-    const startDay = firstDay.getDay();
-    const totalDays = lastDay.getDate();
+    
+    //Building the Calendar Grid
+    const firstDay = new Date(year, month, 1); //1st day of calander month
+    const lastDay = new Date(year, month + 1, 0); //last dat of month
+    const startDay = firstDay.getDay(); //Sun,Mon,Tues...
+    const totalDays = lastDay.getDate();//how many days in the month?
 
     let day = 1;
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < 6; i++) { //Creates up to 6 rows (weeks) in the calendar
       const row = document.createElement('tr');
-      for (let j = 0; j < 7; j++) {
+
+      for (let j = 0; j < 7; j++) { //Each row gets 7 columns (Sunday to Saturday)
         const cell = document.createElement('td');
+      
         if (i === 0 && j < startDay) {
           cell.textContent = '';
-        } else if (day <= totalDays) {
-          const cellDate = new Date(year, month, day);
+        } else if (day <= totalDays) { //The first row may have empty cells until the first day of the month, Then it starts filling in day numbers
+          
+          const cellDate = new Date(year, month, day); //Creates an ISO string like 2025-04-24 for comparing with events
           const dateString = cellDate.toISOString().split('T')[0];
           cell.textContent = day;
-          cell.dataset.date = dateString;
+          cell.dataset.date = dateString; //Saves the date into a data-date attribute for reference
 
           const eventForDay = events.filter(event => event.date === dateString);
           if (eventForDay.length > 0) {
-            cell.style.backgroundColor = '#78ada5';
+            cell.style.backgroundColor = '#78ada5'; //If any event matches this day, the cell is highlighted and gets a tooltip
             cell.title = eventForDay.map(event => event.title).join(', ');
           }
-          cell.addEventListener('click', () => showEventsForDate(dateString));
+          cell.addEventListener('click', () => showEventsForDate(dateString)); //Adds a click listener that shows the events for that day
           day++;
         }
         row.appendChild(cell);
@@ -127,9 +136,9 @@ if (monthYearDisplay && prevMonthBtn && nextMonthBtn && calendarBody) {
     }
   }
 
-function showEventsForDate(date) {
+function showEventsForDate(date) { 
   const eventForDate = events.filter(event => event.date === date);
-  const eventsList = document.getElementById('events-list');
+  const eventsList = document.getElementById('events-list'); //Finds all events for the clicked day
   if (!eventsList) return;
 
   eventsList.innerHTML = '';
@@ -141,7 +150,7 @@ function showEventsForDate(date) {
     });
   } else {
     eventsList.innerHTML = '<li>No events for this day.</li>';
-  }
+  } //Updates the event list or shows a "no events" message
 }
 
 prevMonthBtn.addEventListener('click', () => {
@@ -155,43 +164,23 @@ nextMonthBtn.addEventListener('click', () => {
 });
   renderCalendar();
 }
+
+//UPCOMING EVENT LIST
 function renderUpcomingEvents() {
   const today = new Date();
-  const upcomingEvents = events.filter(event => new Date(event.date) > today);
+  const upcomingEvents = events.filter(event => new Date(event.date) > today); //Filters events that are after today
   
   const eventsList = document.getElementById('events-list');
   if (!eventsList) return;
-  
   eventsList.innerHTML = '';
   upcomingEvents.forEach(event => {
     const li = document.createElement('li');
     li.textContent = event.title;
     eventsList.appendChild(li);
-  });
+  }); //Populates an upcoming events list
 }
   
-document.addEventListener('DOMContentLoaded', renderUpcomingEvents);
-document.addEventListener('DOMContentLoaded', function () {
-    // All your DOM-related code here:
-    
-  const prevMonthBtn = document.getElementById('prev-month');
-  const nextMonthBtn = document.getElementById('next-month');
-  
-  if (prevMonthBtn) {
-    prevMonthBtn.addEventListener('click', () => {
-      currentDate.setMonth(currentDate.getMonth() - 1);
-      renderCalendar();
-    });
-  }
-  
-  if (nextMonthBtn) {
-    nextMonthBtn.addEventListener('click', () => {
-      currentDate.setMonth(currentDate.getMonth() + 1);
-      renderCalendar();
-    });
-  }
-});
-renderUpcomingEvents();
+document.addEventListener('DOMContentLoaded', renderUpcomingEvents); //Ensures the upcoming events list loads when the page is ready
 
 
 //BREWGLE -- AI CHATBOT
@@ -208,23 +197,27 @@ function toggleChatbot() {
 }
 
 
-
-//LIMIT RES TIME TO BUSINESS HOURS -1H FOR CLOSING
-document.addEventListener('DOMContentLoaded', function() {
+/*LIMIT RES TIME TO BUSINESS HOURS -1H FOR CLOSING
+The code inside the DOMContentLoaded event handler ensures that the script runs after the HTML is loaded and parsed
+It won't execute before the DOM is ready, so you won't run into issues with elements not being available yet*/
+document.addEventListener('DOMContentLoaded', function() { 
   const resDateInput = document.getElementById('resDate');
   const resTimeInput = document.getElementById('resTime');
 
-  if (!resDateInput || !resTimeInput) return; // 🚫 Exit if not on reservation page
+  if (!resDateInput || !resTimeInput) return; //Exit if not on reservation page
 
-  const today = new Date().toISOString().split('T')[0];
+  const today = new Date().toISOString().split('T')[0]; 
+  //.toISOString() convert the date and time to an ISO 8601 string format.
+  //.split('T') method splits the ISO string at the character 'T', which separates the date and time parts.
   resDateInput.setAttribute('min', today);
+//The resDate input's minimum date (min attribute) is set to today's date, meaning users cannot select a date in the past.
 
-  function updateTimeLimits() {
+  function updateTimeLimits() { //function triggered when user changes date, first checks if a date is selected.
     if (!resDateInput.value) return;
 
     const selectedDate = new Date(resDateInput.value + "T00:00");
     const dayOfWeek = selectedDate.getUTCDay();
-
+//converts into Date object and retrieves the day of the week (dayOfWeek), which is a number from 0 (Sunday) to 6 (Saturday).
     let minTime = "06:00", maxTime = "22:00", timeMessage = "";
 
     switch (dayOfWeek) {
@@ -251,6 +244,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     resTimeInput.setAttribute('min', minTime);
     resTimeInput.setAttribute('max', maxTime);
+  //The minimum and maximum time values are set for the resTime input element based on the selected date
 
     if (resTimeInput.value && (resTimeInput.value < minTime || resTimeInput.value > maxTime)) {
       resTimeInput.value = "";
@@ -274,12 +268,12 @@ resDateInput.dispatchEvent(new Event('change'));
 });
 
 //DISCLOSURE ACCORDION
-var acc = document.getElementsByClassName("accordionHeader");
+var acc = document.getElementsByClassName("accordionHeader"); //accordionHeader—clickable headers
 var i;
 
-for (i = 0; i < acc.length; i++) {
-  acc[i].addEventListener("click", function() {
-    this.classList.toggle("active");
+for (i = 0; i < acc.length; i++) { //Loops through each accordion header.
+  acc[i].addEventListener("click", function() { //Adds a click event listener 
+    this.classList.toggle("active"); //Toggles the active class 
     var panel = this.nextElementSibling;
     if (panel.style.maxHeight) {
       panel.style.maxHeight = null;

@@ -1,13 +1,13 @@
 <?php
 include("database.php");
 
-if (!isset($_GET['resID'])) {
+if (!isset($_GET['resID'])) { //Checks if the reservation ID (resID) is provided via the URL (GET).
     echo "Reservation ID missing.";
     exit;
 }
 
 $resID = $_GET['resID'];
-$success = false;
+$success = false; //Retrieves the reservation ID and sets a $success flag for later.
 
 // Function to convert 24-hour time to 12-hour format
 function convertTo12Hour($time) {
@@ -15,10 +15,45 @@ function convertTo12Hour($time) {
 }
 
 // Business hours
-$openTime = "09:00:00";
-$closeTime = "21:00:00";
+// Get day of the week from the submitted date
+$dayOfWeek = date('w', strtotime($_POST['resDate']));
 
-// Get reservation info
+// Set open and close times based on day
+switch ($dayOfWeek) {
+    case 0: // Sunday
+        $openTime = "09:00";
+        $closeTime = "20:00";
+        break;
+    case 1: // Monday
+    case 2: // Tuesday
+    case 3: // Wednesday
+    case 4: // Thursday
+        $openTime = "06:00";
+        $closeTime = "21:00";
+        break;
+    case 5: // Friday
+    case 6: // Saturday
+        $openTime = "06:00";
+        $closeTime = "22:00";
+        break;
+    default:
+        echo "<script>
+                alert('Invalid day selected.');
+                window.location.href = 'edit.php?resID=" . $resID . "';
+              </script>";
+        exit;
+}
+if ($newTime < $openTime || $newTime > $closeTime) {
+    echo "<script>
+        alert('Reservations are only allowed from " . convertTo12Hour($openTime) . " to " . convertTo12Hour($closeTime) . " on this day.');
+        window.location.href = 'edit.php?resID=" . $resID . "';
+      </script>";
+    exit;
+}//checks new reservation time ($newTime) is within business hours for that day.
+//outside the allowed hours, an alert is shown, and the user is redirected to the edit page.
+
+
+// Get reservation info 
 $stmt = $conn->prepare("
     SELECT r.*, u.fName, u.lName, rt.typeName 
     FROM reservations r
@@ -30,7 +65,7 @@ $stmt->bind_param("i", $resID);
 $stmt->execute();
 $res = $stmt->get_result()->fetch_assoc();
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] == "POST") {//handle form submission
     $newDate = $_POST['resDate'];
     $newTime = $_POST['resTime'];
 
@@ -42,7 +77,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       </script>";
     exit;
     }
-
+//SQL update query
     $update = $conn->prepare("UPDATE reservations SET resDate = ?, resTime = ? WHERE resID = ?");
     $update->bind_param("ssi", $newDate, $newTime, $resID);
     if ($update->execute()) {

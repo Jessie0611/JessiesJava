@@ -6,14 +6,14 @@ require 'PHPMailer/src/Exception.php';
 require 'PHPMailer/src/SMTP.php';
 include("database.php");
 
-if (!isset($_GET['userID']) || empty($_GET['userID'])) {
-    echo "Invalid request.";
+if (!isset($_GET['userID']) || empty($_GET['userID'])) { //Checks if a userID was passed via URL (GET request).
+    echo "Invalid request."; //If not, it stops the script and prints "Invalid request.".
     exit();
 }
 
 $userID = intval($_GET['userID']);
 // Fetch user details
-$userQuery = "SELECT * FROM users WHERE userID = ?";
+$userQuery = "SELECT * FROM users WHERE userID = ?"; //Prepares a secure SQL query to fetch user details based on their ID.
 $stmtUser = $conn->prepare($userQuery);
 $stmtUser->bind_param("i", $userID);
 $stmtUser->execute();
@@ -24,10 +24,11 @@ if (!$user) {
     echo "User not found.";
     exit();
 }
-// Fetch reservation details
+// Fetch reservation details - Joins reservation data with reservation types
 $resQuery = "SELECT reservations.*, restype.typeName FROM reservations 
              JOIN restype ON reservations.resTypeID = restype.resTypeID 
-             WHERE userID = ? ORDER BY resID DESC LIMIT 1";
+             WHERE userID = ? ORDER BY resID DESC LIMIT 1"; 
+//Only grabs the most recent reservation for this user using ORDER BY resID DESC LIMIT 1.
 $stmtRes = $conn->prepare($resQuery);
 $stmtRes->bind_param("i", $userID);
 $stmtRes->execute();
@@ -48,17 +49,19 @@ $stmtRes->bind_param("i", $userID);
 $stmtRes->execute();
 $resResult = $stmtRes->get_result();
 $reservation = $resResult->fetch_assoc();
+
 // Format Date and Time
 $resDate = date("m/d/Y", strtotime($reservation['resDate']));
 $resTime = date("g:i A", strtotime($reservation['resTime']));
+
 // Send confirmation email
-$mail = new PHPMailer(true);
+$mail = new PHPMailer(true); //Sets up PHPMailer to send a formatted HTML email via Gmail SMTP
 try {
     $mail->isSMTP();
     $mail->Host = 'smtp.gmail.com'; // Use your SMTP server
     $mail->SMTPAuth = true;
     $mail->Username = 'jessies.java.1@gmail.com';
-    $mail->Password = 'szch tstb dxtn fozh';
+    $mail->Password = 'szch tstb dxtn fozh'; //Note: This password should never be exposed, used app generated password
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
     $mail->Port = 587;
 
