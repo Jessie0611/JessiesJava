@@ -110,8 +110,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <option value="1" <?= ($res['resTypeID'] == 1) ? 'selected' : '' ?>>($60.00) BYOL Table</option>
                 <option value="2" <?= ($res['resTypeID'] == 2) ? 'selected' : '' ?>>($100.00) Computer Booth</option>
                 <option value="3" <?= ($res['resTypeID'] == 3) ? 'selected' : '' ?>>($200.00) Collaboration Room</option>
-            </select><br>
-
+           </select><br>
             <label for="resDate">Date:</label>
             <input type="date" name="resDate" value="<?= htmlspecialchars($res['resDate']) ?>" required><br>
 
@@ -124,7 +123,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <button type="submit" class="button">Save Changes</button>
         </form>
 
-        <br>
+
+        <p>- OR -</p>
         <a href="search.php"><button>Back to Search</button></a>
 
         <?php include('footer.php'); ?>
