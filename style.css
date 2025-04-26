@@ -103,7 +103,13 @@ h2, h3 {
     align-self: center;
     max-width: 620px;
     text-align: left;
-    padding: 20px;
+    padding: 10px;
+}
+.checkoutAlign{
+    align-self: center;
+    max-width: 700px;
+    text-align: left;
+    padding: 5px;
 }
 form{
     align-items: center;
@@ -156,7 +162,7 @@ input, select, textarea{
     border-radius: 8px;
     box-shadow: 1px 1px 6px 1px  hsl(23, 7%, 23%);
 }
-#resDate, #resTime, #resEndTime {
+#resDate, #resStartTime, #resEndTime {
     font-size: 14px;
     background-color: #ffffff;
     height: 30px;
@@ -172,10 +178,12 @@ input, select, textarea{
     border-radius: 8px;
 }
 #expDate, #sCode{
+    display: flex;
+    flex-direction: column;
     font-size: 10px;
     background-color: #ffffff;
     height: 20px;
-    width: 100px;
+    width: 90px;
     border-radius: 8px;
 }
 .accordionHeader{
@@ -258,10 +266,10 @@ h4{
 }
 .confirmation-container{
     align-self: center;
-    max-width: 500px;
+    max-width: 550px;
     text-align: left;
     background-color: white;
-    padding: 20px;
+    padding: 50px;
     border-radius: 8px;
     box-shadow: 3px 3px 10px 4px  #372115;
 }

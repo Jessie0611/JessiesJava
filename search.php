@@ -51,11 +51,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") { //handle form submittion POST
         </form>
 <style>
     th, td{
-        padding-left: 14px;
+        padding-left: 18px;
     }
     input{
         width: 200px;
-        padding: 10px;
+        padding: 17px;
         border: 1px solid #ddd;
         border-radius: 4px;
         box-shadow: 1px 1px 6px 1px  hsl(23, 7%, 23%);
@@ -70,7 +70,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") { //handle form submittion POST
                <th>Name</th>
                <th>Type</th>
                <th>Date</th>
-               <th>Time</th>
+               <th>Start Time</th>
+               <th>End Time</th>
                <th>Status</th>
                <th>Actions</th>
             </tr>
@@ -80,7 +81,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") { //handle form submittion POST
             <td><?= $res['fName'] . ' ' . $res['lName'] ?></td>
             <td><?= $res['typeName'] ?></td>
             <td><?= $res['resDate'] ?></td>
-            <td><?= $res['resTime'] ?></td>
+            <td><?= $res['resStartTime'] ?></td>
+            <td><?= $res['resEndTime'] ?></td>
+
             <td><?= $res['status'] ?></td>
             <td>
         <form class="inline" action="edit.php" method="get">

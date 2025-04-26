@@ -6,16 +6,16 @@ if (!isset($_GET['resID'])) {
     exit;
 }
 
-$resID = $_GET['resID'];
+$resID = intval($_GET['resID']);
 $success = false;
 
 function convertTo12Hour($time) {
     return date("g:i A", strtotime($time));
 }
 
-// Get reservation info before POST
+// Fetch reservation details
 $stmt = $conn->prepare("
-    SELECT r.*, u.fName, u.lName, rt.typeName 
+    SELECT r.*, u.fName, u.lName, rt.typeName, rt.resPrice 
     FROM reservations r
     JOIN users u ON r.userID = u.userID
     JOIN restype rt ON r.resTypeID = rt.resTypeID
@@ -25,81 +25,46 @@ $stmt->bind_param("i", $resID);
 $stmt->execute();
 $res = $stmt->get_result()->fetch_assoc();
 
+if (!$res) {
+    echo "Reservation not found.";
+    exit;
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $newDate = $_POST['resDate'];
     $startTime = $_POST['resStartTime'];
     $endTime = $_POST['resEndTime'];
-    $newResTypeID = $_POST['resTypeID'];
+    $newResTypeID = intval($_POST['resTypeID']);
+    $resID = intval($_POST['resID']); // Get the resID from POST if using the hidden field approach
 
-    // Determine business hours for the selected date
+    $currentDate = new DateTime();
+    $currentTime = new DateTime();
+
+    // Validate if selected time is in the past
+    $selectedDateTime = new DateTime("$newDate $startTime");
+    if ($selectedDateTime < $currentDate) {
+        echo "<p class='error'>Selected time is in the past. Please choose a future date and time.</p>";
+        exit;
+    }
+
+    // Set open and close times based on the day of the week
     $dayOfWeek = date('w', strtotime($newDate));
     switch ($dayOfWeek) {
         case 0: $openTime = "09:00"; $closeTime = "20:00"; break;
         case 1: case 2: case 3: case 4: $openTime = "06:00"; $closeTime = "21:00"; break;
         case 5: case 6: $openTime = "06:00"; $closeTime = "22:00"; break;
         default:
-            echo "<script>alert('Invalid day selected.'); window.location.href = 'edit.php?resID=$resID';</script>";
+            echo "<p class='error'>Invalid day selected. Please choose a valid day.</p>";
             exit;
     }
 
-    // Time validations
-
-// Define current date and time for validation
-$currentDate = date("Y-m-d");
-$currentTime = date("H:i");
-
-// Check if the selected date is in the past, Rejects reservations in the past (either wrong date or earlier today).
-if ($resDate < $currentDate) {
-    echo "<script type='text/javascript'>
-            alert('The selected date is in the past.');
-            window.location.href = 'reservation.php';
-          </script>";
-    exit;
-} elseif ($resDate == $currentDate && $resTime < $currentTime) {
-    echo "<script type='text/javascript'>
-            alert('The selected time is in the past.');
-            window.location.href = 'reservation.php';
-          </script>";
-    exit;
-}
-
-// Get day of the week for the selected reservation date
-$dayOfWeek = date('w', strtotime($resDate));
-// Validate time based on business hours
-switch ($dayOfWeek) {
-    case 0: // Sunday
-        $openTime = "09:00"; 
-        $closeTime = "20:00";
-        break;
-    case 1: // Monday
-    case 2: // Tuesday
-    case 3: // Wednesday
-    case 4: // Thursday
-        $openTime = "06:00";
-        $closeTime = "21:00";
-        break;
-    case 5: // Friday
-    case 6: // Saturday
-        $openTime = "06:00";
-        $closeTime = "22:00";
-        break;
-    default:
-        echo "<script type='text/javascript'>
-                alert('Invalid day of the week.');
-                window.location.href = 'reservation.php';
-              </script>";
+    // Check if start and end times are within the allowed hours
+    if ($startTime < $openTime || $endTime > $closeTime) {
+        echo "<p class='error'>Reservation must be between " . convertTo12Hour($openTime) . " and " . convertTo12Hour($closeTime) . ".</p>";
         exit;
-}
+    }
 
-// Ensures the reservation time falls within business hours.
-if ($resTime < $openTime || $resTime > $closeTime) {
-    echo "<script type='text/javascript'>
-            alert('Reservations are only allowed from " . convertTo12Hour($openTime) . " to " . convertTo12Hour($closeTime) . " on this day.');
-            window.location.href = 'reservation.php';
-          </script>";
-    exit;
-}
-    // Update reservation
+    // Update reservation in the database
     $update = $conn->prepare("
         UPDATE reservations 
         SET resDate = ?, resStartTime = ?, resEndTime = ?, resTypeID = ? 
@@ -108,83 +73,62 @@ if ($resTime < $openTime || $resTime > $closeTime) {
     $update->bind_param("sssii", $newDate, $startTime, $endTime, $newResTypeID, $resID);
     if ($update->execute()) {
         $success = true;
-        $res['resDate'] = $newDate;
-        $res['resStartTime'] = $startTime;
-        $res['resEndTime'] = $endTime;
-        $res['resTypeID'] = $newResTypeID;
+        header("Location: confirmation.php?resID=$resID&edit=1");
+        exit;
     }
 }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jessie's Java</title>
+    <title>Edit Reservation - Jessie's Java</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
-</body>
-</html>
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Jessie's Java</title>
-</head>
-<body>
-<div class="content">
+    <div class="content">
         <div class="hero">
-            <img src="Images/JJ-resPaymentHero.png" alt="Hero Image Unavailable" width="100%">
+            <img src="Images/JJ-resPaymentHero.png" alt="Hero Image" width="100%">
         </div>
+
         <?php include('nav.php'); ?>
 
+        <h2>Edit Reservation for <?= htmlspecialchars($res['fName'] . " " . $res['lName']) ?></h2>
 
-<h2>Edit Reservation for <?= $res['fName'] . " " . $res['lName'] ?></h2>
+        <?php if ($success): ?>
+            <p class="success">Reservation updated successfully!</p>
+        <?php endif; ?>
 
-<?php if ($success): ?>
-    <p style="color: green;">Reservation updated successfully!</p>
-<?php endif; ?>
-<style>
-input{
-    width: 200px;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    box-shadow: 1px 1px 6px 1px  hsl(23, 7%, 23%);
-    background-color: #ffffff;
-}
-</style>
-<form method="post" action="edit.php?resID=<?= $resID ?>
-">
-    <label>Reservation Type: <strong><?= $res['typeName'] ?></strong></label><br>
-    <label for="resTypeID">Select Your Space</label><br>
-<select id="resTypeID" name="resTypeID" required>
-    <option value="">-- Select Your Space --</option>
-    <option value="1" <?= $res['resTypeID'] == 1 ? 'selected' : '' ?>>($60.00) BYOL Table</option>
-    <option value="2" <?= $res['resTypeID'] == 2 ? 'selected' : '' ?>>($100.00) Computer Booth</option>
-    <option value="3" <?= $res['resTypeID'] == 3 ? 'selected' : '' ?>>($200.00) Collaboration Room</option>
-</select><br><br>
+        <form action="edit.php?resID=<?= $resID ?>" method="POST">
+            <input type="hidden" name="resID" value="<?= $resID ?>">
 
-    <label for="resDate">Date:</label><br>
-    <input type="date" name="resDate" value="<?= $res['resDate'] ?>" required><br>
+            <label>Reservation Type: <strong><?= htmlspecialchars($res['typeName']) ?></strong></label><br><br>
 
-    <label for="resTime">Time:</label><br>
-    <input type="time" name="resTime" value="<?= $res['resTime'] ?>" required><br>
-<label for="resEndTime">End Time:</label><br>
-<input type="time" name="resEndTime" value="<?= $res['resEndTime'] ?>" required><br>
+            <label for="resTypeID">Select Your Space</label>
+            <select id="resTypeID" name="resTypeID" required>
+                <option value="1" <?= ($res['resTypeID'] == 1) ? 'selected' : '' ?>>($60.00) BYOL Table</option>
+                <option value="2" <?= ($res['resTypeID'] == 2) ? 'selected' : '' ?>>($100.00) Computer Booth</option>
+                <option value="3" <?= ($res['resTypeID'] == 3) ? 'selected' : '' ?>>($200.00) Collaboration Room</option>
+            </select><br>
 
-    <button type="submit">Save Changes</button>
-</form>
+            <label for="resDate">Date:</label>
+            <input type="date" name="resDate" value="<?= htmlspecialchars($res['resDate']) ?>" required><br>
 
-<br><br>
-<a href="search.php"><button>Back to Search</button></a>
-<br> <br> <br>
-<br>
-<?php include('footer.php'); ?>
-    <script src="script.js"></script>
+            <label for="resStartTime">Start Time:</label>
+            <input type="time" name="resStartTime" value="<?= htmlspecialchars($res['resStartTime']) ?>" required><br>
+
+            <label for="resEndTime">End Time:</label>
+            <input type="time" name="resEndTime" value="<?= htmlspecialchars($res['resEndTime']) ?>" required><br>
+
+            <button type="submit" class="button">Save Changes</button>
+        </form>
+
+        <br>
+        <a href="search.php"><button>Back to Search</button></a>
+
+        <?php include('footer.php'); ?>
+        <script src="script.js"></script>
     </div>
 </body>
 </html>

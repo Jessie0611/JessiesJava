@@ -2,11 +2,13 @@
 session_start();
 include("database.php");
 
+
 //Proper session check
 if (!isset($_SESSION['userID']) || empty($_SESSION['userID'])) {
     echo "Invalid request.";
     exit();
 }
+
 $userID = intval($_SESSION['userID']);
 //Fetch user details
 $userQuery = "SELECT * FROM users WHERE userID = ?";
@@ -20,19 +22,27 @@ if (!$user) {
     exit();
 }
 //Fetch latest reservation
+
+if (!isset($_SESSION['resID']) || empty($_SESSION['resID'])) {
+    echo "Invalid reservation session.";
+    exit();
+    
+}
+// Moved resID assignment before query
+$resID = intval($_SESSION['resID']);
+
 $resQuery = "SELECT reservations.*, restype.typeName, restype.resPrice 
              FROM reservations 
              JOIN restype ON reservations.resTypeID = restype.resTypeID 
-             WHERE userID = ? 
-             ORDER BY resID DESC LIMIT 1";
-
+             WHERE reservations.resID = ? AND reservations.userID = ?";
 $stmtRes = $conn->prepare($resQuery);
-$stmtRes->bind_param("i", $userID);
+$stmtRes->bind_param("ii", $resID, $userID);
 $stmtRes->execute();
-$resResult = $stmtRes->get_result();
-$reservation = $resResult->fetch_assoc();
+$resResult = $stmtRes->get_result();  //get the result
+
+$reservation = $resResult->fetch_assoc();  //NOW fetch
 // Convert times to DateTime objects
-$start = new DateTime($reservation['resTime']);
+$start = new DateTime($reservation['resStartTime']);
 $end = new DateTime($reservation['resEndTime']);
 
 // Calculate the difference in hours
@@ -51,7 +61,7 @@ if (!$reservation) {
 }
 //Format date and time
 $resDate = date("m/d/Y", strtotime($reservation['resDate']));
-$resTime = date("g:i A", strtotime($reservation['resTime']));
+$resStartTime = date("g:i A", strtotime($reservation['resStartTime']));
 $resEndTime = date("g:i A", strtotime($reservation['resEndTime']));
 
 ?>
@@ -70,7 +80,7 @@ $resEndTime = date("g:i A", strtotime($reservation['resEndTime']));
         </div>
         <?php include('nav.php'); ?>
         <div class="serviceOpt">
-        <div class="resAlign">
+        <div class="checkoutAlign">
             </h2>
             <h3>Reservation Details for  <?= htmlspecialchars($user['fName'] . " " . $user['lName']); ?>:
             </h3>
@@ -80,17 +90,15 @@ $resEndTime = date("g:i A", strtotime($reservation['resEndTime']));
             <p><strong>Price:</strong> $<?= number_format($totalPrice, 2); ?>
              (<?= $hours ?> hour<?= $hours > 1 ? 's' : '' ?> @ $<?= number_format($reservation['resPrice'], 2) ?>/hr)</p>
             <p><b>Reservation Date: </b><?= htmlspecialchars(date("m/d/Y", strtotime($reservation['resDate']))); ?></p>
-            <p><b>Time: </b><?= htmlspecialchars(date("g:i A", strtotime($reservation['resTime']))); ?> - 
+            <p><b>Time: </b><?= htmlspecialchars(date("g:i A", strtotime($reservation['resStartTime']))); ?> - 
                         <?= htmlspecialchars(date("g:i A", strtotime($reservation['resEndTime']))); ?></p>
     <small>If you have any questions or need to make any changes contact us.</small>
  <br> <br><br>
  <form action="confirmation.php" method="POST">
-    <label for="payment">Payment Information:</label> <br><br>
-
-    <input type="text" id="cNum" name="cNum" placeholder="#### #### #### ####" maxlength="19" required
-           inputmode="numeric" oninput="formatCardNumber(this)"> <br>
-    <input type="month" id="expDate" name="expDate" required>
-        <input type="text" id="sCode" name="sCode" placeholder="Security Code" required><br>
+    <label for="payment">Payment Information:</label> <br>
+<input type="text" id="cNum" name="cNum" placeholder="Card Number" maxlength="19" required inputmode="numeric" oninput="formatCardNumber(this)">
+<input type="month" id="expDate" name="expDate" required>
+<input type="text" id="sCode" name="sCode" placeholder="Security Code" required>
     <input type="text" id="cName" name="cName" placeholder="Name on card" required><br>
 
     <!-- You can also send hidden data like total price or userID if needed -->
