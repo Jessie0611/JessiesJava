@@ -282,3 +282,11 @@ for (i = 0; i < acc.length; i++) { //Loops through each accordion header.
     } 
   });
 }
+function formatCardNumber(input) {
+  // Remove all non-digit characters
+  let cleaned = input.value.replace(/\D/g, '');
+  // Group digits into chunks of 4
+  let formatted = cleaned.match(/.{1,4}/g);
+  // Join with a space
+  input.value = formatted ? formatted.join(' ') : '';
+}

@@ -1,5 +1,5 @@
 <?php 
-session_start(); // allows you to use session variables (like saving user info across pages)
+session_start();
 include("database.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {  //Ensures the code only runs if the form is submitted via POST (a secure way to send data).
@@ -11,7 +11,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {  //Ensures the code only runs if the
     $resTypeID = filter_input(INPUT_POST, 'resTypeID', FILTER_SANITIZE_NUMBER_INT);
     $resDate = filter_input(INPUT_POST, 'resDate', FILTER_SANITIZE_SPECIAL_CHARS);
     $resTime = filter_input(INPUT_POST, 'resTime', FILTER_SANITIZE_SPECIAL_CHARS);
+    $resEndTime = filter_input(INPUT_POST, 'resEndTime', FILTER_SANITIZE_SPECIAL_CHARS);
     $resID = $conn->insert_id;
+
+    // Validate end time is after start time
+    if ($resEndTime <= $resTime) {
+        echo "<script type='text/javascript'>
+                alert('End time must be after start time.');
+                window.location.href = 'reservation.php';
+              </script>";
+        exit;
+    }
+
+$availabilityQuery = "SELECT COUNT(*) as count FROM reservations WHERE resTypeID = ? AND resDate = ? AND ((resTime < ? AND resEndTime > ?))";
+$stmt = $conn->prepare($availabilityQuery);
+$stmt->bind_param("isss", $resTypeID, $resDate, $resEndTime, $resTime);
+$stmt->execute();
+$stmt->bind_result($currentCount);
+$stmt->fetch();
+$stmt->close();
+
+// Max allowed per resource
+$maxAllowed = [1 => 20, 2 => 10, 3 => 3];
+if ($currentCount >= $maxAllowed[$resTypeID]) {
+    echo "<script type='text/javascript'>
+            alert('Sorry, that time slot is fully booked.');
+            window.location.href = 'reservation.php';
+          </script>";
+    exit;
+}
 
     if (empty($fName) || empty($lName) || empty($eMail) || empty($phone) || empty($resDate) || empty($resTime)) {
         echo "<script type='text/javascript'>
@@ -71,7 +99,6 @@ switch ($dayOfWeek) {
               </script>";
         exit;
 }
-
 // Ensures the reservation time falls within business hours.
 if ($resTime < $openTime || $resTime > $closeTime) {
     echo "<script type='text/javascript'>
@@ -103,16 +130,16 @@ if ($resTime < $openTime || $resTime > $closeTime) {
     $stmt->close();
     
     // Insert reservation into `reservations` table
-    $insertReservationQuery = "INSERT INTO reservations (userID, resTypeID, resDate, resTime, status) 
-                               VALUES (?, ?, ?, ?, 'pending')";
-    $stmt2 = $conn->prepare($insertReservationQuery);
-    $stmt2->bind_param("iiss", $userID, $resTypeID, $resDate, $resTime);
+    $insertReservationQuery = "INSERT INTO reservations (userID, resTypeID, resDate, resTime, resEndTime, status) 
+    VALUES (?, ?, ?, ?, ?, 'pending')";
+$stmt2 = $conn->prepare($insertReservationQuery);
+$stmt2->bind_param("iisss", $userID, $resTypeID, $resDate, $resTime, $resEndTime);
 
     if ($stmt2->execute()) {
-        // Redirect to confirmation page
-        header("Location: confirmation.php?userID=$userID");
+        $_SESSION['userID'] = $userID;
+        header("Location: checkout.php");
         exit();
-    } else {
+            } else {
         echo "<script type='text/javascript'>
                 alert('Error: Reservation could not be saved.');
                 window.location.href = 'reservation.php'; // Redirect back to the form
@@ -155,15 +182,21 @@ Our collaboration rooms are designed to provide just that, with two computer boo
     <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
     <label for="resTypeID">Select Your Space</label>
     <select id="resTypeID" name="resTypeID" required>
-        <option value="">- - - Select Your Space - --</option>
+        <option value="">- - - Select Your Space - - -</option>
         <option value="1">($60.00) BYOL Table</option>
         <option value="2">($100.00) Computer Booth</option>
         <option value="3">($200.00) Collaboration Room</option>
     </select> 
+    <label for="resDate">Reservation Date:</label>
 
     <input type="date" id="resDate" name="resDate" required>
 
+    <label for="resTime">Reservation Begin Time:</label>
     <input type="time" id="resTime" name="resTime" required>
+    <label for="resEndTime">Reservation End Time:</label>
+    <input type="time" id="resEndTime" name="resEndTime" required>
+<br>
+<label for="fName">Customer Information:</label>
 
     <input type="text" id="fName" name="fName" placeholder="First Name" required>
 
@@ -187,45 +220,41 @@ Our collaboration rooms are designed to provide just that, with two computer boo
     <div class="accordionHeader">Disclosure Agreement</div>
     <div class="accordionContent">
     <small>
-              <u> Reservations & Walk-Ins</u> <br>
-Customers may reserve a BYOL table, computer booth, or collaboration room in advance via our website, phone, or in person. Walk-ins are welcome, but availability is not guaranteed. 
-Prepaid Reservations: Customers who pay for their reservation upfront will have their table or room held for the full reservation period.
-Non-Prepaid Reservations (Made In-House): Customers who make a reservation without prepayment will have their table or room held for 20 minutes (BYOL tables and computer booths). If the customer fails to arrive within the hold time, the reservation will be forfeited, and the space will be made available to walk-in customers.
-Collaboration Rooms: Due to limited availability, collaboration rooms must be prepaid at the time of booking.
-<br>
-               <U>Rental of Additional Tech Equipment</U> <br>
-Customers may rent extra tech accessories (e.g., monitors, keyboards, mice, chargers, gaming controllers) based on availability.
-Rental fees must be paid upfront, and certain high-value items may require a security deposit.
-Customers are responsible for returning rented equipment in the same condition. Any damage or loss will result in additional fees.
-<br>
-            <U>   Cancellation & No-Show Policy</U> <br>
-Prepaid Reservations: Cancellations must be made at least 2 hours before the reservation time for BYOL tables & computer booths and at least 4 hours before the reservation time for collaboration rooms to receive a full refund.
-Cancellations made after the respective window will result in no refund. Failure to cancel or show up within the hold time will result in forfeiting the reservation, and no refund will be issued.
-Non-Prepaid Reservations (Made In-House): Please cancel at least 2 hours before the reservation time for BYOL tables & computer booths if you need to cancel.
-<br>
-             <U>  Customer Responsibilities</U> <br>
-Customers must use all facilities and equipment responsibly.
-No unauthorized software downloads or modifications are allowed on provided computer booths. Customers must comply with all shop policies, including food and drink restrictions near electronic devices.
-Any disruptive behavior (e.g., excessive noise, inappropriate tech use) may result in removal from the premises.
-<br>
-    <U>Liability & Damage</U> <br>
-Jessie's Java is not responsible for any loss, theft, or damage to personal laptops or other belongings. Customers assume full responsibility for any damage to rented equipment and will be charged for repairs or replacement.
-We are not liable for data loss, connectivity issues, or personal technical malfunctions.
-<br>
-    <u>Privacy & Security </u>
-<br>
-We may monitor public computer booths to ensure compliance with shop policies.
-Customers must log out of any personal accounts before leaving to protect their data.
-Wi-Fi access is provided as a courtesy, and we are not responsible for security risks or interruptions.
-<br>
-    <u>Discounts:</u> Students can get a 10% discount off in-store snacks and drinks with their student ID card. Please tell the staff when you are ordering. <br>
-<u>Amendments & Updates:</u> We reserve the right to modify this Agreement at any time. Continued use of our services after updates indicates acceptance of the revised terms.
+        <u>Reservations & Walk-Ins</u> <br>
+Customers may reserve a BYOL table, computer booth, or collaboration room in advance via our website, phone, or in person. Walk-ins are welcome, but availability is not guaranteed. All reservations are billed by the hour at the time of service—no prepayment is required.
+<br><br>
+Reservations for BYOL tables and computer booths will be held for 20 minutes past the reservation start time. If the customer fails to arrive within this grace period, the reservation will be forfeited, and the space may be given to walk-in customers.
+<br><br>
+Collaboration Rooms are in high demand; if a customer does not arrive within 20 minutes of the reserved time, the room may be released for other use.
+<br><br>
+<u>Rental of Additional Tech Equipment</u> <br>
+Customers may rent tech accessories (e.g., monitors, keyboards, mice, chargers, gaming controllers) depending on availability. All rentals are charged hourly and must be paid for at the time of checkout. High-value items may require a security deposit. Equipment must be returned in the same condition; damage or loss will incur additional fees.
+<br><br>
+<u>Cancellation & No-Show Policy</u> <br>
+If you need to cancel a reservation, please let us know at least 2 hours in advance for BYOL tables and computer booths, and 4 hours in advance for collaboration rooms. There is no charge for cancellations made within these timeframes.
+<br><br>
+Customers who fail to cancel or show up within the hold period may forfeit their reserved time slot. No charges apply unless the customer uses the space.
+<br><br>
+<u>Customer Responsibilities</u> <br>
+Customers must use all facilities and equipment responsibly. Unauthorized software downloads or modifications to shop-owned computer booths are prohibited. Please follow all shop rules, including food and drink restrictions near electronics. Disruptive behavior (e.g., excessive noise, misuse of equipment) may result in removal from the premises.
+<br><br>
+<u>Liability & Damage</u> <br>
+Jessie’s Java is not responsible for loss, theft, or damage to personal belongings, including laptops. Customers are fully responsible for any rented equipment and may be charged for repair or replacement costs if items are damaged or lost. We are not liable for data loss, connectivity issues, or technical malfunctions on customer-owned devices.
+<br><br>
+<u>Privacy & Security</u> <br>
+Public computer booths may be monitored to ensure policy compliance. Customers must log out of all personal accounts before leaving to protect their data. Wi-Fi access is provided as a courtesy; we are not responsible for security risks or service interruptions.
+<br><br>
+<u>Discounts</u> <br>
+Students receive a 10% discount on in-store snacks and drinks with a valid student ID. Please show your ID at the time of purchase.
+<br><br>
+<u>Amendments & Updates</u> <br>
+We reserve the right to modify this Agreement at any time. Continued use of our services after changes indicates acceptance of the revised terms.
     <br>
     </small>
     <br>
     </div>
 <br><br>
-        <button type="submit" class="submit">Reserve</button>
+<button type="submit" class="submit">Go To Checkout</button>
 </div>
 </div>
        </form>

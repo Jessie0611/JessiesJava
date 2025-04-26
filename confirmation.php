@@ -25,9 +25,12 @@ if (!$user) {
     exit();
 }
 // Fetch reservation details - Joins reservation data with reservation types
-$resQuery = "SELECT reservations.*, restype.typeName FROM reservations 
+$resQuery = "SELECT reservations.*, restype.typeName, restype.resPrice 
+             FROM reservations 
              JOIN restype ON reservations.resTypeID = restype.resTypeID 
-             WHERE userID = ? ORDER BY resID DESC LIMIT 1"; 
+             WHERE userID = ? 
+             ORDER BY resID DESC LIMIT 1";
+
 //Only grabs the most recent reservation for this user using ORDER BY resID DESC LIMIT 1.
 $stmtRes = $conn->prepare($resQuery);
 $stmtRes->bind_param("i", $userID);
@@ -52,7 +55,9 @@ $reservation = $resResult->fetch_assoc();
 
 // Format Date and Time
 $resDate = date("m/d/Y", strtotime($reservation['resDate']));
-$resTime = date("g:i A", strtotime($reservation['resTime']));
+$resTime = date("g:i A", strtotime($reservation['resStartTime']));
+$resEndTime = date("g:i A", strtotime($reservation['resEndTime']));
+
 
 // Send confirmation email
 $mail = new PHPMailer(true); //Sets up PHPMailer to send a formatted HTML email via Gmail SMTP
@@ -77,7 +82,7 @@ try {
     <p><b>Reservation Type:</b> " . strtoupper($reservation['typeName']) . "</p>
     <p><b>Price:</b> $" . $reservation['resPrice'] . "</p>
     <p><b>Date:</b> $resDate</p>
-    <p><b>Time:</b> $resTime</p>
+    <p><b>Time:</b> $resTime - $resEndTime</p>
     <br>
     <p>For any changes or cancellations, contact us at (404) 555-0198.</p>
     <br>
@@ -119,7 +124,8 @@ try {
             <p><b>Reservation Type: </b> <?= htmlspecialchars(strtoupper($reservation['typeName'])); ?></p>
             <p><strong>Price:</strong> $<?= htmlspecialchars($reservation['resPrice']); ?></p>
             <p><b>Date: </b><?= htmlspecialchars(date("m/d/Y", strtotime($reservation['resDate']))); ?></p>
-            <p><b>Time: </b><?= htmlspecialchars(date("g:i A", strtotime($reservation['resTime']))); ?></p>
+            <p><b>Time: </b><?= htmlspecialchars(date("g:i A", strtotime($reservation['resTime']))); ?> - 
+                        <?= htmlspecialchars(date("g:i A", strtotime($reservation['resEndTime']))); ?></p>
             <br>
     <small>If you have any questions or need to make any changes contact us.</small>
  

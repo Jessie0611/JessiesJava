@@ -148,13 +148,35 @@ input, select, textarea{
     border-radius: 8px;
     box-shadow: 1px 1px 6px 1px  hsl(23, 7%, 23%);
 }
-#resDate, #resTime, #fName, #lName, #email, #eMail, #phone, #drinkType, #message, #name{
+#fName, #lName, #email, #eMail, #phone, #drinkType, #message, #name{
     font-size: 14px;
     background-color: #ffffff;
     height: 30px;
     width: 320px;
     border-radius: 8px;
     box-shadow: 1px 1px 6px 1px  hsl(23, 7%, 23%);
+}
+#resDate, #resTime, #resEndTime {
+    font-size: 14px;
+    background-color: #ffffff;
+    height: 30px;
+    width: 180px;
+    border-radius: 8px;
+    box-shadow: 1px 1px 6px 1px  hsl(23, 7%, 23%);
+}
+#cNum, #cName{
+    font-size: 12px;
+    background-color: #ffffff;
+    height: 20px;
+    width: 220px;
+    border-radius: 8px;
+}
+#expDate, #sCode{
+    font-size: 10px;
+    background-color: #ffffff;
+    height: 20px;
+    width: 100px;
+    border-radius: 8px;
 }
 .accordionHeader{
     background: hsl(23, 7%, 23%);
@@ -170,6 +192,9 @@ input, select, textarea{
     outline: none;
     transition: 0.3s;
     border: 2px solid #78ada5;
+}
+.pay{
+    width: 90px;;
 }
 .active, .accordionHeader:hover {
     background: #b0907b;
