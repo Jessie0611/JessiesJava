@@ -68,6 +68,17 @@ if (!$reservation) {
 $resDate = date("m/d/Y", strtotime($reservation['resDate']));
 $resStartTime = date("g:i A", strtotime($reservation['resStartTime']));
 $resEndTime = date("g:i A", strtotime($reservation['resEndTime']));
+// Calculate the number of hours for the reservation
+$startTime = new DateTime($reservation['resStartTime']);
+$endTime = new DateTime($reservation['resEndTime']);
+$interval = $startTime->diff($endTime);
+$hours = $interval->h + ($interval->i / 60); // Convert minutes to hours
+
+// Round up the number of hours
+$hours = ceil($hours);
+
+// Calculate the total price (number of hours * price per hour)
+$totalPrice = $hours * $reservation['resPrice'];
 
 //SEND CONFIRMATION EMAIL
 $mail = new PHPMailer(true);
@@ -85,17 +96,17 @@ try {
     $mail->Subject = 'Jessie\'s Java - Reservation Confirmation';
 
     $emailBody = "
-    <h2>Reservation Confirmation</h2>
-    <p>Thank you, <b>{$user['fName']} {$user['lName']}</b>, for your reservation at Jessie's Java!</p>
-    <h3>Your Reservation Details:</h3>
-    <p><b>Reservation Type:</b> " . strtoupper($reservation['typeName']) . "</p>
-    <p><b>Price:</b> $" . number_format($reservation['resPrice'], 2) . "</p>
-    <p><b>Date:</b> $resDate</p>
-    <p><b>Time:</b> $resStartTime - $resEndTime</p>
-    <br>
-    <p>For any changes or cancellations, contact us at (404) 555-0198.</p>
-    <p><b>Jessie's Java</b><br>123 Java Avenue, Suite 200<br>Atlanta, GA 30303</p>
-    ";
+<h2>Reservation Confirmation</h2>
+<p>Thank you, <b>{$user['fName']} {$user['lName']}</b>, for your reservation at Jessie's Java!</p>
+<h3>Your Reservation Details:</h3>
+<p><b>Reservation Type:</b> " . strtoupper($reservation['typeName']) . "</p>
+<p><b>Total Price:</b> $" . number_format($totalPrice, 2) . "</p>
+<p><b>Date:</b> $resDate</p>
+<p><b>Time:</b> $resStartTime - $resEndTime</p>
+<br>
+<p>For any changes or cancellations, contact us at (404) 555-0198.</p>
+<p><b>Jessie's Java</b><br>123 Java Avenue, Suite 200<br>Atlanta, GA 30303</p>
+";
 
     $mail->isHTML(true);
     $mail->Body = $emailBody;
@@ -136,12 +147,12 @@ $conn->close();
             <p><b>E-Mail Address: </b> <?= htmlspecialchars($user['eMail']); ?></p>
             <p><b>Phone Number: </b> <?= htmlspecialchars($user['phone']); ?></p>
             <p><b>Reservation Type: </b> <?= htmlspecialchars(strtoupper($reservation['typeName'])); ?></p>
-            <p><strong>Price:</strong> $<?= htmlspecialchars($reservation['resPrice']); ?></p>
+            <p><strong>Price:</strong> $<?= number_format($totalPrice, 2); ?></p>
             <p><b>Date: </b><?= htmlspecialchars(date("m/d/Y", strtotime($reservation['resDate']))); ?></p>
             <p><b>Time: </b><?= htmlspecialchars(date("g:i A", strtotime($reservation['resStartTime']))); ?> - 
                         <?= htmlspecialchars(date("g:i A", strtotime($reservation['resEndTime']))); ?></p>
             <br>
-    <small>If you have any questions or need to make any changes contact us.</small>
+            <small>If you have any questions or need assistance with making any changes, contact us.</small>
  
     <address class="address-container">
     <strong>Jessie's Java Address:</strong> <br>
@@ -155,7 +166,7 @@ $conn->close();
         </div>
         <br>
       <button onclick="window.print()" class="no-print"> <div class="printBtn"> Print / Save as PDF</div></button> <br> <br>
-        <small>You will also receive a confirmation e-mail, please check your spam or junk folder.</small>
+      <small>You will also receive a confirmation email, so please check your spam or junk folder.</small>
 
         <?php include('footer.php'); ?>
         <script src="script.js"></script>
