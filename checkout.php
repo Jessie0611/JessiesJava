@@ -73,6 +73,13 @@ $resEndTime = date("g:i A", strtotime($reservation['resEndTime']));
     <title>Jessie's Java</title>
     <link rel="stylesheet" href="style.css">
 </head>
+<style>
+    a{
+        font-size: small;
+        color: #372115;
+        font-weight: bold;
+    }
+</style>
 <body>
     <div class="content">
         <div class="hero">
@@ -84,15 +91,18 @@ $resEndTime = date("g:i A", strtotime($reservation['resEndTime']));
             </h2>
             <h3>Reservation Details for  <?= htmlspecialchars($user['fName'] . " " . $user['lName']); ?>:
             </h3>
-            <p><b>E-Mail Address: </b> <?= htmlspecialchars($user['eMail']); ?></p>
-            <p><b>Phone Number: </b> <?= htmlspecialchars($user['phone']); ?></p>
-            <p><b>Reservation Type: </b> <?= htmlspecialchars(strtoupper($reservation['typeName'])); ?></p>
-            <p><strong>Price:</strong> $<?= number_format($totalPrice, 2); ?>
+            <p><b>E-Mail Address: &nbsp;</b> <?= htmlspecialchars($user['eMail']); ?></p>
+            <p><b>Phone Number: &nbsp;</b> <?= htmlspecialchars($user['phone']); ?></p>
+            <p><b>Reservation Type: &nbsp;</b> <?= htmlspecialchars(strtoupper($reservation['typeName'])); ?></p>
+            <p><b>Price: &nbsp;</b> $<?= number_format($totalPrice, 2); ?>
              (<?= $hours ?> hour<?= $hours > 1 ? 's' : '' ?> @ $<?= number_format($reservation['resPrice'], 2) ?>/hr)</p>
-            <p><b>Reservation Date: </b><?= htmlspecialchars(date("m/d/Y", strtotime($reservation['resDate']))); ?></p>
-            <p><b>Time: </b><?= htmlspecialchars(date("g:i A", strtotime($reservation['resStartTime']))); ?> - 
+            <p><b>Reservation Date: &nbsp; </b><?= htmlspecialchars(date("m/d/Y", strtotime($reservation['resDate']))); ?></p>
+            <p><b>Time: &nbsp;</b><?= htmlspecialchars(date("g:i A", strtotime($reservation['resStartTime']))); ?> - 
                         <?= htmlspecialchars(date("g:i A", strtotime($reservation['resEndTime']))); ?></p>
-    <small>If you have any questions or need to make any changes contact us.</small>
+    <small> <br>
+    PAYMENTS WILL NOT BE PROCESSED UNTIL 24 HOURS PRIOR TO YOUR RESERVATION <br> 
+        If you have any questions please call or send us an email. <br> 
+        Contact infromation can be found on the <a href="aboutus.php"> About US</a> page.</small>
  <br> <br><br>
  <form action="confirmation.php" method="POST">
     <label for="payment">Payment Information:</label> <br>
@@ -107,14 +117,12 @@ $resEndTime = date("g:i A", strtotime($reservation['resEndTime']));
 
     <button type="submit" class="pay">Pay Now</button>
 </form>
- </div>  
-  
+ </div> 
         <br>
-  
-            </div>
+ </div>
         <?php include('footer.php'); ?>
         <script src="script.js"></script>
-    </div>              
-
+            
+ </div>    
 </body>
 </html>

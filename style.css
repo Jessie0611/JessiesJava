@@ -222,7 +222,7 @@ input, select, textarea{
     justify-content: center;
 }
 .search {
-    width: 80px;
+    width: 95px;
     background: hsl(23, 7%, 23%);
     color: white;
     border-radius: 12px;
@@ -242,6 +242,18 @@ input, select, textarea{
 }
 .edit:hover {
     background-color: #be641a;
+}
+.editSuccess{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+}
+.success{
+    align-self: center;
+    max-width: 600px;
+    text-align: left;
+    padding: 10px;
 }
 .cancel {
     border-radius: 30px;

@@ -129,11 +129,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <p>Already made a reservation? <br> <a href="search.php"><button> Manage Reservation </button></a></p>
 <div class="serviceOpt">
     <div class="resAlign"><h3>Service Options:</h3>
-  <p> <b>💻BYOL [$60.00]</b> A bring-your-own-laptop  table equpied with the optional otional extra monitor, headphones, keyboard and mouse. 
+  <p> <b>💻BYOL [$60.00 an hour]</b> A bring-your-own-laptop  table equpied with the optional otional extra monitor, headphones, keyboard and mouse. 
  <br><br>
-<b>🖥️ Computer Booth [$100.00]</b> Booths come fully equipped with a programming computer, extra monitor, headphones, keyboard, and mouse.
+<b>🖥️ Computer Booth [$100.00 an hour]</b> Booths come fully equipped with a programming computer, extra monitor, headphones, keyboard, and mouse.
 <br><br>
-<b>👨‍👨‍👦‍👦Collaboration Room [$200.00] </b> Looking for a more relaxed setting for your collaboration projects, away from the office grind? 
+<b>👨‍👨‍👦‍👦Collaboration Room [$200.00 an hour] </b> Looking for a more relaxed setting for your collaboration projects, away from the office grind? 
 Our collaboration rooms are designed to provide just that, with two computer booths and space for up to eight BYOL areas,
  it's the perfect space for creative work. <br><br>
  <br>
@@ -142,9 +142,9 @@ Our collaboration rooms are designed to provide just that, with two computer boo
     <label for="resTypeID">Select Your Space</label>
     <select id="resTypeID" name="resTypeID" required>
         <option value="">- - - Select Your Space - - -</option>
-        <option value="1">($60.00) BYOL Table</option>
-        <option value="2">($100.00) Computer Booth</option>
-        <option value="3">($200.00) Collaboration Room</option>
+        <option value="1">($60.00/hr) BYOL Table</option>
+        <option value="2">($100.00/hr) Computer Booth</option>
+        <option value="3">($200.00/hr) Collaboration Room</option>
     </select> 
     <label for="resDate">Reservation Date:</label>
 
@@ -180,6 +180,9 @@ Our collaboration rooms are designed to provide just that, with two computer boo
     <div class="accordionContent">
     <small>
     <u>Reservations & Walk-Ins</u> <br>
+    *** PAYMENTS WILL NOT BE PROCESSED UNTIL WITHIN 24 HOURS OF YOUR RESERVATION *** <br>
+    This is due to any edits or cancelations that may occur before your reservation date.
+<br><br>
 Customers may reserve a BYOL table, computer booth, or collaboration room in advance via our website, phone, or in person. Walk-ins are welcome, but availability is not guaranteed. All reservations require prepayment, which will be billed at the time of service.<br><br>
 
 Reservations for BYOL tables and computer booths will be held for 20 minutes past the reservation start time. If the customer fails to arrive within this grace period, the reservation will be forfeited, and the space may be given to walk-in customers.<br><br>
@@ -211,7 +214,6 @@ Students receive a 10% discount on in-store snacks and drinks with a valid stude
 
 <u>Amendments & Updates</u> <br>
 We reserve the right to modify this Agreement at any time. Continued use of our services after changes indicates acceptance of the revised terms.
-
     </small>
     <br>
     </div>

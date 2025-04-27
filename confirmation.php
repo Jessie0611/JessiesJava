@@ -147,7 +147,7 @@ $conn->close();
             <p><b>E-Mail Address: </b> <?= htmlspecialchars($user['eMail']); ?></p>
             <p><b>Phone Number: </b> <?= htmlspecialchars($user['phone']); ?></p>
             <p><b>Reservation Type: </b> <?= htmlspecialchars(strtoupper($reservation['typeName'])); ?></p>
-            <p><strong>Price:</strong> $<?= number_format($totalPrice, 2); ?></p>
+            <p><b>Price:</b> $<?= number_format($totalPrice, 2); ?></p>
             <p><b>Date: </b><?= htmlspecialchars(date("m/d/Y", strtotime($reservation['resDate']))); ?></p>
             <p><b>Time: </b><?= htmlspecialchars(date("g:i A", strtotime($reservation['resStartTime']))); ?> - 
                         <?= htmlspecialchars(date("g:i A", strtotime($reservation['resEndTime']))); ?></p>
