@@ -16,18 +16,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") { //handle form submittion POST
     WHERE r.resID = ?
     ");
 //This query joins three tables: reservations (r) users (u) → to get user info restype (rt) → to get the type of reservation
-    // Bind the search term (resID)
+// Bind the search term (resID)
     $stmt->bind_param("i", $searchTerm);
     $stmt->execute();
     $result = $stmt->get_result(); //runs query, gets results
 
     while ($row = $result->fetch_assoc()) {
-        $reservations[] = $row; //Adds each result to the $reservations array.
+        // Format date and times
+        $row['resDate'] = date("m/d/Y", strtotime($row['resDate']));
+        $row['resStartTime'] = date("g:i A", strtotime($row['resStartTime']));
+        $row['resEndTime'] = date("g:i A", strtotime($row['resEndTime']));
+    
+        $reservations[] = $row;
     }
+    
 }
-
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
