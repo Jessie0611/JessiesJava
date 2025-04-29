@@ -193,7 +193,7 @@ Collaboration Rooms are in high demand; if a customer does not arrive within 20 
 Customers may rent tech accessories (e.g., monitors, keyboards, mice, chargers, gaming controllers) depending on availability. All rentals are charged hourly and must be paid for at the time of checkout. High-value items may require a security deposit. Equipment must be returned in the same condition; damage or loss will incur additional fees.<br><br>
 
 <u>Cancellation & No-Show Policy</u> <br>
-If you need to cancel a reservation, please let us know at least 2 hours in advance for BYOL tables and computer booths, and 4 hours in advance for collaboration rooms. There is no charge for cancellations made within these timeframes.<br><br>
+If you need to cancel a reservation, please submit a cancellation via the Manage Reservations link or let us know by calling. Cancellations should be made 24 hours prior to your reservation. There will be no charge for cancellations made before the 24 hour limit. Cancellations made after the 24 hour limit will receive a $20 charge.<br><br>
 
 Customers who fail to cancel or show up within the hold period may forfeit their reserved time slot. No charges apply unless the customer uses the space.<br><br>
 
