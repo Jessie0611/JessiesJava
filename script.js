@@ -291,38 +291,46 @@ function formatCardNumber(input) {
   input.value = formatted ? formatted.join(' ') : '';
 }
 
-document.getElementById("resDate").addEventListener("change", loadTimes);
-document.getElementById("resTypeID").addEventListener("change", loadTimes);
 
-function loadTimes() {
-    const date = document.getElementById("resDate").value;
-    const type = document.getElementById("resTypeID").value;
+document.addEventListener("DOMContentLoaded", function () {
+  const resDate = document.getElementById("resDate");
+  const resStartTime = document.getElementById("resStartTime");
+  const resEndTime = document.getElementById("resEndTime");
 
-    if (!date || !type) return;
+  function updateTimeLimits() {
+      const dateValue = resDate.value;
+      if (!dateValue) return;
 
-    fetch(`get-available-times.php?date=${date}&type=${type}`)
-        .then(res => res.json())
-        .then(data => {
-            const start = document.getElementById("resStartTime");
-            const end = document.getElementById("resEndTime");
+      const day = new Date(dateValue).getDay(); // 0 = Sunday
+      let openTime = "06:00";
+      let closeTime = "21:00";
 
-            start.innerHTML = "";
-            end.innerHTML = "";
+      if (day === 0) {
+          openTime = "09:00";
+          closeTime = "20:00";
+      } else if (day === 5 || day === 6) {
+          closeTime = "22:00";
+      }
 
-            data.availableTimes.forEach(t => {
-                const opt1 = new Option(t, t);
-                const opt2 = new Option(t, t);
-                start.add(opt1);
-                end.add(opt2);
-            });
-        });
-}
+      // Set limits
+      resStartTime.min = openTime;
+      resStartTime.max = closeTime;
+      resEndTime.min = openTime;
+      resEndTime.max = closeTime;
 
+      // Clear invalid selected times
+      if (resStartTime.value && (resStartTime.value < openTime || resStartTime.value > closeTime)) {
+          alert("Start time is outside business hours and has been cleared.");
+          resStartTime.value = "";
+      }
+      if (resEndTime.value && (resEndTime.value < openTime || resEndTime.value > closeTime)) {
+          alert("End time is outside business hours and has been cleared.");
+          resEndTime.value = "";
+      }
+  }
 
-function formatTime(time) {
-  const [hours, minutes] = time.split(":");
-  const h = parseInt(hours, 10);
-  const ampm = h >= 12 ? "PM" : "AM";
-  const hour12 = h % 12 === 0 ? 12 : h % 12;
-  return `${hour12}:${minutes} ${ampm}`;
-}
+  resDate.addEventListener("change", updateTimeLimits);
+
+  // Run once on load in case fields are pre-filled
+  updateTimeLimits();
+});

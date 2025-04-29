@@ -102,7 +102,8 @@ $resEndTime = date("g:i A", strtotime($reservation['resEndTime']));
     <small> <br>
     PAYMENTS WILL NOT BE PROCESSED UNTIL 24 HOURS PRIOR TO YOUR RESERVATION <br> 
         If you have any questions please call or send us an email. <br> 
-        Contact infromation can be found on the <a href="aboutus.php"> About US</a> page.</small>
+        E-Mail form is available on the <a href="contactUs.php">Contact Us</a> page.
+.</small>
  <br> <br><br>
  <form action="confirmation.php" method="POST">
     <label for="payment">Payment Information:</label> <br>
