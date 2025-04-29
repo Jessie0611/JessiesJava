@@ -290,3 +290,39 @@ function formatCardNumber(input) {
   // Join with a space
   input.value = formatted ? formatted.join(' ') : '';
 }
+
+document.getElementById("resDate").addEventListener("change", loadTimes);
+document.getElementById("resTypeID").addEventListener("change", loadTimes);
+
+function loadTimes() {
+    const date = document.getElementById("resDate").value;
+    const type = document.getElementById("resTypeID").value;
+
+    if (!date || !type) return;
+
+    fetch(`get-available-times.php?date=${date}&type=${type}`)
+        .then(res => res.json())
+        .then(data => {
+            const start = document.getElementById("resStartTime");
+            const end = document.getElementById("resEndTime");
+
+            start.innerHTML = "";
+            end.innerHTML = "";
+
+            data.availableTimes.forEach(t => {
+                const opt1 = new Option(t, t);
+                const opt2 = new Option(t, t);
+                start.add(opt1);
+                end.add(opt2);
+            });
+        });
+}
+
+
+function formatTime(time) {
+  const [hours, minutes] = time.split(":");
+  const h = parseInt(hours, 10);
+  const ampm = h >= 12 ? "PM" : "AM";
+  const hour12 = h % 12 === 0 ? 12 : h % 12;
+  return `${hour12}:${minutes} ${ampm}`;
+}

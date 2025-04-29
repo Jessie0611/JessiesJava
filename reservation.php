@@ -118,6 +118,58 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Jessie's Java</title>
     <link rel="stylesheet" href="style.css">
 </head>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.querySelector("form");
+
+    if (!form) return;
+
+    form.addEventListener("submit", function (e) {
+        const resDate = document.getElementById("resDate").value;
+        const resStartTime = document.getElementById("resStartTime").value;
+        const resEndTime = document.getElementById("resEndTime").value;
+
+        if (!resDate || !resStartTime || !resEndTime) {
+            e.preventDefault();
+            alert("Please fill in all time fields.");
+            return;
+        }
+
+        const selectedDay = new Date(resDate).getDay(); // 0 = Sunday
+        let openTime = "06:00";
+        let closeTime = "21:00";
+
+        if (selectedDay === 0) {
+            openTime = "09:00";
+            closeTime = "20:00";
+        } else if (selectedDay === 5 || selectedDay === 6) {
+            closeTime = "22:00";
+        }
+
+        if (resStartTime < openTime || resStartTime >= closeTime) {
+            e.preventDefault();
+            alert(`Start time must be between ${formatTime(openTime)} and ${formatTime(closeTime)}.`);
+            return;
+        }
+
+        if (resEndTime <= resStartTime) {
+            e.preventDefault();
+            alert("End time must be after start time.");
+            return;
+        }
+    });
+
+    // Converts "13:00" to "1:00 PM"
+    function formatTime(timeStr) {
+        const [h, m] = timeStr.split(":").map(Number);
+        const ampm = h >= 12 ? "PM" : "AM";
+        const hour12 = h % 12 || 12;
+        return `${hour12}:${String(m).padStart(2, '0')} ${ampm}`;
+    }
+});
+</script>
+
+
 <body>
     <div class="content">
     <div class="hero">
@@ -151,10 +203,10 @@ Our collaboration rooms are designed to provide just that, with two computer boo
     <input type="date" id="resDate" name="resDate" required>
 
     <label for="resStartTime">Reservation Begin Time:</label>
-    <input type="time" id="resStartTime" name="resStartTime" required>
+    <input type="time" id="resStartTime" name="resStartTime" step="900" required>
     <label for="resEndTime">Reservation End Time:</label>
-    <input type="time" id="resEndTime" name="resEndTime" required>
-<br>
+    <input type="time" id="resEndTime" name="resEndTime" step="900" required>
+    <br>
 <label for="fName">Customer Information:</label>
 
     <input type="text" id="fName" name="fName" placeholder="First Name" required>

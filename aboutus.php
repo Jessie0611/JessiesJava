@@ -27,7 +27,7 @@ At Jessie's Java, we've brewed up the perfect blend of productivity and comfort 
 <br><br>Join us at Jessie's Java, where every line of code is written with a side of exceptional coffee. Elevate your programming experience in an environment that's as dynamic as your code.
 <br> Your next breakthrough awaits—sip, code, repeat! 💻☕
 </p>
-   
+   <br>
     <section class="businessHours">
     <h2>Business Hours</h2>
     <ul>
@@ -39,6 +39,7 @@ At Jessie's Java, we've brewed up the perfect blend of productivity and comfort 
       <li><span class="day">Saturday</span><span class="hours">6:00 a.m. - 11:00 p.m.</span></li>
       <li><span class="day">Sunday</span><span class="hours">9:00 a.m. - 9:00 p.m.</span></li>
     </ul>
+    <br>
             <address class="addressContainer">
     <strong>Jessie's Java Address:</strong>
     123 Java Avenue, Suite 200<br>
@@ -47,15 +48,7 @@ At Jessie's Java, we've brewed up the perfect blend of productivity and comfort 
     (404) 555-0198
   </address>
   </section>
-        <h2>Contact Us</h2>
-        <form action="contact.php" method="POST">
-          <input type="name" id="name" name="name" required placeholder="Your Name">
-          <input type="email" id="email" name="email" required placeholder="Your Email">
-          <textarea id="message" name="message" required placeholder="Your Message"></textarea>
-          <button type="submit" class="submit">Send Message</button>
-        </form>
       </div> </div>
- <br>
  <?php include('footer.php'); ?>
     <script src="script.js"></script>
 </div>

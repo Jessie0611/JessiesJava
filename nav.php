@@ -4,5 +4,6 @@
       <a href="reservation.php"><button class="btn">Reservation</button></a>
       <a href="menu.php"><button class="btn">Menu</button></a>
       <a href="aboutus.php"> <button class="btn"> About Us</button></a>
+      <a href="contactUs.php"><button class="btn">Contact</button></a>
       </nav> <br>
       <hr>
