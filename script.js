@@ -76,13 +76,13 @@ const eventsList = document.getElementById('events-list');
 let currentDate = new Date();
 //events
 const events = [
-  { date: '2025-10-11', title: '10/11: JavaHaus Oktoberfest: Pretzels & Pumpkin Spice Pour Overs!' },
-  { date: '2025-10-31', title: '10/31: Spooky Sips & Syntax! Halloween Latte Art + Costume Contest 11a–7p' },
-  { date: '2025-04-20', title: 'April 20: CLOSED FOR EASTER SUNDAY! Take a screen break :) ' },
-  { date: '2025-05-04', title: 'May 4: May the 4th be with you! Star Wars Latte art!' },
-  { date: '2025-05-05', title: 'May 5: Cinco de Mayo: Café de Olla TODAY ONLY $5' },
-  { date: '2025-06-11', title: 'June 11: ☕Bugs & Beans: A Code & Coffee Birthday Bash! Code & Chill Lounge Open all day' },
-  { date: '2025-06-11', title: 'Fix the Bug Challenge, Latte Art Showdown 6A-6P, Coffee+Code Trivia 6p-8p -Swag Giveaway' }
+  { date: '2026-02-14', title: '❤️🐛 Love-Bug Challenge! Special Valentine’s Latte Art + $1 Hot Chocolate!' },
+  { date: '2026-05-04', title: 'May the 4th be with you! Star Wars Latte art!' },
+  { date: '2026-05-05', title: 'Cinco de Mayo: Café de Olla TODAY ONLY $5' },
+  { date: '2026-06-11', title: '☕Bugs & Beans: A Code & Coffee Birthday Bash! Code & Chill Lounge Open all day' },
+  { date: '2026-06-11', title: 'Fix the Bug Challenge, Latte Art Showdown 6A-6P, Coffee+Code Trivia 6p-8p -Swag Giveaway' },
+  { date: '2026-10-11', title: 'JavaHaus Oktoberfest: Pretzels & Pumpkin Spice Pour Overs!' },
+  { date: '2026-10-31', title: 'Spooky Sips & Syntax! Halloween Latte Art + Costume Contest 11a–7p' },
 ];
 //This makes sure all the required HTML elements exist before the calendar logic runs:
 if (monthYearDisplay && prevMonthBtn && nextMonthBtn && calendarBody) {
@@ -176,6 +176,7 @@ function renderUpcomingEvents() {
 }
 
 document.addEventListener('DOMContentLoaded', renderUpcomingEvents); //Ensures the upcoming events list loads when the page is ready
+
 
 
 //BREWGLE -- AI CHATBOT

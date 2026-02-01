@@ -1,6 +1,8 @@
 /*BODY, HERO, NAV*/
-body{
-    font-family: 'Inter', Arial, sans-serif;
+body {
+    font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     display: flex;
     justify-content: center;
     width: 100%;
@@ -10,7 +12,10 @@ body{
     border-bottom: none;
     background-color: #372115;
     text-align: center;
+    font-size: 1rem;
+    line-height: 1.5;
 }
+
 :root {
     --primary: #5e503f;
     --secondary: #d4cfc7;
@@ -20,30 +25,157 @@ body{
     --background: #f4f1ee;
 }
 
-.content{
+/* Typography baseline: consistent fonts, sizes and spacing across pages */
+html {
+    font-size: 16px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: inherit;
+    color: var(--text-dark);
+    margin: 0 0 0.6rem;
+    line-height: 1.15;
+}
+
+h1 {
+    font-size: 2.25rem;
+    font-weight: 800;
+}
+
+h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+h4 {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+p,
+ul,
+ol,
+dl,
+blockquote {
+    margin: 0 0 1rem;
+    color: var(--text-dark);
+    font-size: 1rem;
+}
+
+small {
+    font-size: 0.875rem;
+    color: #5b463d;
+}
+
+label {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+/* Make interactive elements inherit the baseline */
+button,
+.btn,
+.submit,
+input,
+select,
+textarea,
+a {
+    font-family: inherit;
+    font-size: 1rem;
+}
+
+/* Keep links readable but consistent */
+a {
+    color: inherit;
+}
+
+
+.content {
     width: 80%;
     height: 100%;
     background-color: #b7b19e;
     padding-bottom: 100px;
 }
-.hero{
-    opacity:98%;
+
+.hero {
+    opacity: 98%;
     width: 100%;
 }
-nav{
+
+/* Hero heading */
+.welcome {
+    display: block;
+    max-width: 1000px;
+    margin: 18px auto 12px;
+    padding: 6px 12px;
+    font-family: 'Inter', Arial, sans-serif;
+    font-weight: 800;
+    font-size: clamp(1.5rem, 4vw, 3rem);
+    line-height: 1.05;
+    text-align: center;
+    letter-spacing: -0.02em;
+    background: linear-gradient(90deg, #462e23 30%, #5e503f 70%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 2px 8px rgba(83, 71, 55, 0.45);
+}
+
+.welcome::after {
+    content: "";
+    display: block;
+    width: 110px;
+    height: 5px;
+    margin: 12px auto 0;
+    border-radius: 4px;
+    background: linear-gradient(90deg, #462e23, #5e503f);
+}
+
+@media (max-width: 480px) {
+    .welcome {
+        font-size: clamp(1.25rem, 6vw, 1.6rem);
+        margin-top: 12px;
+    }
+
+    .welcome::after {
+        width: 80px;
+        height: 4px;
+    }
+}
+
+nav {
     display: flex;
     justify-content: center;
 }
-button, .btn, .submit {
+
+button,
+.btn,
+.submit {
     transition: all 0.3s ease-in-out;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-button:hover, .btn:hover, .submit:hover {
+button:hover,
+.btn:hover,
+.submit:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
-.btn, .submit, button {
+
+.btn,
+.submit,
+button {
     background-color: var(--primary);
     color: var(--text-light);
     border: none;
@@ -53,7 +185,10 @@ button:hover, .btn:hover, .submit:hover {
     font-size: 1rem;
     cursor: pointer;
 }
-input, select, textarea {
+
+input,
+select,
+textarea {
     padding: 12px;
     border: 1px solid #ccc;
     border-radius: 10px;
@@ -62,15 +197,20 @@ input, select, textarea {
     transition: box-shadow 0.3s ease;
 }
 
-input:focus, textarea:focus, select:focus {
+input:focus,
+textarea:focus,
+select:focus {
     box-shadow: 0 0 0 3px rgba(169, 132, 103, 0.3);
     outline: none;
 }
 
 
-.btn:hover, .submit:hover, button:hover {
+.btn:hover,
+.submit:hover,
+button:hover {
     background-color: var(--accent);
 }
+
 #calendar th,
 #calendar td {
     padding: 12px;
@@ -78,6 +218,7 @@ input:focus, textarea:focus, select:focus {
     color: #333;
     border: 1px solid #e0e0e0;
 }
+
 #calendar td:hover {
     color: white;
     cursor: pointer;
@@ -87,14 +228,16 @@ input:focus, textarea:focus, select:focus {
     gap: 15px;
     justify-content: center;
 }
+
 a {
     transition: color 0.3s ease;
 }
+
 a:hover {
     color: var(--accent);
 }
 
-.btn{
+.btn {
     margin-top: 20px;
     margin-left: 40px;
     border: none;
@@ -102,35 +245,40 @@ a:hover {
     border: 3px solid #625750;
     border-radius: 13px;
     color: #fff2df;
-    width: 135px;
+    width: 138px;
     font-size: large;
 }
+
 .btn:hover {
     background-color: hsl(23, 7%, 23%);
-    border: 4px solid #78ada5;
+    border: 3px solid #78ada5;
     color: #78ada5;
 }
-a{
+
+a {
     color: white;
-    text-decoration:dotted;
+    text-decoration: dotted;
     font-size: 14px;
     pointer-events: visible;
     font-size: medium;
 }
-a:hover{
+
+a:hover {
     color: #78ada5;
-    text-decoration:dotted;
+    text-decoration: dotted;
     pointer-events: visible;
 }
 
-h2, h3{
+h2,
+h3 {
     display: flex;
     justify-content: center;
     align-items: center;
     color: hsl(23, 7%, 23%);
 }
+
 button {
-    font-size:medium;
+    font-size: medium;
     width: 15%;
     padding: 10px;
     background-color: #b0907b;
@@ -139,22 +287,27 @@ button {
     border: 1px solid #625750;
     cursor: pointer;
 }
+
 button:hover {
     background-color: #625750;
     border: 2px solid #78ada5;
 }
+
 a {
     color: white;
     text-decoration: dotted;
     font-size: medium;
     pointer-events: visible;
 }
+
 a:hover {
     color: #81e9da;
     text-decoration: dotted;
     pointer-events: visible;
 }
-h2, h3 {
+
+h2,
+h3 {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -163,43 +316,139 @@ h2, h3 {
 
 
 /*RESERVATION PAGE*/
-.serviceOpt{
+.serviceOpt {
     width: 100%;
     display: flex;
     justify-content: center;
 }
-.resAlign{
+
+.resAlign {
     align-self: center;
     max-width: 620px;
     text-align: left;
     padding: 10px;
 }
-.checkoutAlign{
+
+/* Reservation page: modern typography and form controls */
+.resAlign h3,
+.serviceOpt h3 {
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+    color: var(--text-dark);
+    letter-spacing: -0.01em;
+}
+
+.resAlign p,
+.serviceOpt p,
+.resAlign small,
+.serviceOpt small {
+    color: #46372f;
+    font-size: 0.98rem;
+    line-height: 1.6;
+}
+
+/* Labels and inputs */
+label {
+    display: block;
+    margin: 10px 0 6px;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+select,
+input[type="date"],
+input[type="time"],
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1px solid rgba(98, 87, 80, 0.12);
+    background: #ffffff;
+    box-shadow: none;
+    font-size: 1rem;
+    color: var(--text-dark);
+    transition: box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+select:focus,
+input:focus,
+textarea:focus {
+    outline: none;
+    border-color: rgba(169, 132, 103, 0.35);
+    box-shadow: 0 6px 18px rgba(169, 132, 103, 0.06);
+}
+
+.resAlign .submit {
+    width: auto;
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-size: 1rem;
+    box-shadow: 0 6px 18px rgba(55, 33, 21, 0.06);
+}
+
+/* Group inputs side-by-side on wider screens */
+@media (min-width: 860px) {
+    .resAlign .two-cols {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        align-items: start;
+    }
+}
+
+/* Make the disclosure text more readable */
+.container p,
+.container small {
+    color: #5b463d;
+    font-size: 0.95rem;
+}
+
+/* Revert disclosure agreement text to the site baseline (only for agreement blocks) */
+/* Target direct children of .container (the inline disclosure) and accordion content */
+.container>p,
+.container>small,
+.accordionContent small,
+.accordionContent p {
+    color: var(--text-dark);
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.checkoutAlign {
     align-self: center;
     max-width: 700px;
     text-align: left;
     padding: 5px;
 }
-form{
+
+form {
     align-items: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
-label{
+
+label {
     font-size: 16px;
     margin-bottom: 10px;
     font-weight: bold;
 }
-input, select, textarea{
+
+input,
+select,
+textarea {
     padding: 5px;
     margin-bottom: 15px;
     border: 1px solid #ddd;
     border-radius: 4px;
-    box-shadow: 1px 1px 6px 1px  hsl(23, 7%, 23%);
+    box-shadow: 1px 1px 6px 1px hsl(23, 7%, 23%);
     background-color: #ffffff;
 }
-.submit{
+
+.submit {
     font-size: large;
     width: 25%;
     padding: 10px;
@@ -209,44 +458,61 @@ input, select, textarea{
     border: 3px solid #625750;
     cursor: pointer;
 }
+
 .submit:hover {
     background-color: #625750;
     border: 3px solid #78ada5;
     color: #58ada5;
 }
-#resTypeID{
+
+#resTypeID {
     box-sizing: border-box;
     font-size: 14px;
     background-color: #ffffff;
     height: 32px;
     width: 330px;
     border-radius: 8px;
-    box-shadow: 1px 1px 6px 1px  hsl(23, 7%, 23%);
+    box-shadow: 1px 1px 6px 1px hsl(23, 7%, 23%);
 }
-#fName, #lName, #email, #eMail, #phone, #drinkType, #message, #name{
+
+#fName,
+#lName,
+#email,
+#eMail,
+#phone,
+#drinkType,
+#message,
+#name {
     font-size: 14px;
     background-color: #ffffff;
     height: 30px;
     width: 320px;
     border-radius: 8px;
-    box-shadow: 1px 1px 6px 1px  hsl(23, 7%, 23%);
+    box-shadow: 1px 1px 6px 1px hsl(23, 7%, 23%);
 }
-#resDate, #resStartTime, #resEndTime {
+
+#resDate,
+#resStartTime,
+#resEndTime {
     font-size: 14px;
     background-color: #ffffff;
     height: 30px;
     width: 180px;
     border-radius: 8px;
-    box-shadow: 1px 1px 6px 1px  hsl(23, 7%, 23%);
+    box-shadow: 1px 1px 6px 1px hsl(23, 7%, 23%);
 }
-#cNum, #cName{
+
+#cNum,
+#cName {
     font-size: 12px;
     background-color: #ffffff;
     height: 20px;
     width: 220px;
     border-radius: 8px;
 }
-#expDate, #sCode{
+
+#expDate,
+#sCode {
     display: flex;
     flex-direction: column;
     font-size: 10px;
@@ -255,7 +521,8 @@ input, select, textarea{
     width: 90px;
     border-radius: 8px;
 }
-.accordionHeader{
+
+.accordionHeader {
     background: hsl(23, 7%, 23%);
     box-shadow: 1px 1px 6px 1px #78ada5;
     color: white;
@@ -270,26 +537,64 @@ input, select, textarea{
     transition: 0.3s;
     border: 2px solid #78ada5;
 }
-.pay{
-    width: 90px;;
-}
-.active, .accordionHeader:hover {
-    background: #b0907b;
-}
+
+/* Accordion content should be hidden by default and transition when opened */
 .accordionContent {
-  padding: 0 18px;
-  background-color: white;
-  box-shadow: 1px 1px 6px 1px  hsl(23, 7%, 23%);
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.2s ease-out;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.25s ease-out;
+    width: 98%;
+    margin: 0 auto;
+    padding: 0 8px;
+    /* keep padding inside when opened */
+    background: transparent;
+}
+
+.accordionHeader.active+.accordionContent {
+    /* When JS toggles the .active class, JS sets maxHeight inline; this selector keeps styles consistent */
+}
+
+.pay {
+    width: 90px;
+
+    .calendar-header button#prev-month,
+    .calendar-header button#next-month {
+        background: var(--primary);
+        color: var(--text-light);
+        border: none;
+        padding: 4px 8px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-weight: 700;
+    }
+
+    .calendar-header h2#month-year {
+        margin: 0 6px;
+        font-size: 1.25rem;
+        color: var(--text-dark);
+    }
+
+    /* Slight hover for header buttons */
+    .calendar-header button#prev-month:hover,
+    .calendar-header button#next-month:hover {
+        background: var(--accent);
+        color: var(--text-light);
+    }
+
+    padding: 0 18px;
+    background-color: white;
+    box-shadow: 1px 1px 6px 1px hsl(23, 7%, 23%);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
 }
 
 /*Search, Edit, Cancel Pages*/
-.searchRes{
+.searchRes {
     display: grid;
     justify-content: center;
 }
+
 .search {
     width: 95px;
     background: hsl(23, 7%, 23%);
@@ -297,10 +602,12 @@ input, select, textarea{
     border-radius: 12px;
     padding: 12px;
 }
+
 .search:hover {
     width: 80px;
     background-color: #b0907b;
 }
+
 .edit {
     border-radius: 30px;
     padding: 4px;
@@ -309,21 +616,25 @@ input, select, textarea{
     color: white;
     border: 1px solid white;
 }
+
 .edit:hover {
     background-color: #be641a;
 }
-.editSuccess{
+
+.editSuccess {
     width: 100%;
     display: flex;
     justify-content: center;
 
 }
-.success{
+
+.success {
     align-self: center;
     max-width: 600px;
     text-align: left;
     padding: 10px;
 }
+
 .cancel {
     border-radius: 30px;
     padding: 4px;
@@ -332,27 +643,30 @@ input, select, textarea{
     color: white;
     border: 1px solid white;
 }
+
 .cancel:hover {
     background-color: #921c27;
 }
-h4{
+
+h4 {
     color: #921c27;
 }
 
-.confirm-align{
+.confirm-align {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
-.confirmation-container{
+
+.confirmation-container {
     align-self: center;
     max-width: 550px;
     text-align: left;
     background-color: white;
     padding: 50px;
     border-radius: 8px;
-    box-shadow: 3px 3px 10px 4px  #372115;
+    box-shadow: 3px 3px 10px 4px #372115;
 }
 
 /*MENU PAGE*/
@@ -360,6 +674,7 @@ h4{
 .menu-item span {
     font-weight: bold;
 }
+
 .menu-section {
     margin: 10px;
     padding: 10px;
@@ -367,20 +682,23 @@ h4{
     border-radius: 8px;
     background-color: #fff;
 }
+
 .menu-item {
     margin-bottom: 10px;
     padding-bottom: 8px;
     border-bottom: 1px dashed #625750;
-  }
-  
-  .menu-desc {
+}
+
+.menu-desc {
     margin: 4px 0 0 0;
     font-size: 0.85rem;
     color: #625750;
-  }
+}
+
 .menu-item span {
     font-weight: bold;
 }
+
 /*ABOUT US*/
 .aboutUs {
     width: 70%;
@@ -388,7 +706,8 @@ h4{
     align-items: center;
     justify-content: center;
     text-align: center;
-    margin: 0 auto; /* Center horizontally */
+    margin: 0 auto;
+    /* Center horizontally */
 }
 
 /* Contact Section */
@@ -398,20 +717,25 @@ h4{
     width: 80%;
     max-width: 600px;
 }
+
 .contact h2 {
     margin-bottom: 20px;
 }
+
 .contact form {
     display: flex;
     flex-direction: column;
     gap: 5px;
 }
+
 .contact label {
     font-size: 16px;
     margin-bottom: 10px;
     font-weight: bold;
 }
-.contact input, .contact textarea {
+
+.contact input,
+.contact textarea {
     padding: 5px;
     margin-bottom: 15px;
     border: 1px solid #ddd;
@@ -419,6 +743,7 @@ h4{
     font-size: 14px;
     background-color: #d9d3cb;
 }
+
 .contact button {
     font-size: 14px;
     padding: 10px;
@@ -428,106 +753,202 @@ h4{
     border: 1px solid #625750;
     cursor: pointer;
 }
+
 .contact button:hover {
-        background-color: #625750;
-        border: 2px solid #78ada5;
-}
-.businessHours {
-   max-width: 300px;
-   margin: 10px auto;
-   background-color: #f8f8f8;
-   border: 1px solid #ddd;
-   border-radius: 8px;
-   padding: 10px;
-   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-}
-.businessHours h2 {
-   text-align: center;
-   color: #333;
-   margin-bottom: 10px;
-   border-bottom: 2px solid #333;
-   padding-bottom: 10px;
-}
-.businessHours ul {
-   list-style: none;
-   padding: 0;
-   margin: 0;
-}
-.businessHours li {
-   display: flex;
-   justify-content: space-between;
-   padding: 4px 0;
-   border-bottom: 1px solid #eee;
-}
-.businessHours li:last-child {
-  border-bottom: none;
-}
-.businessHours .day {
-   font-weight: bold;
-   color: #555;
-}
-.businessHours .hours {
-   color: #777;
+    background-color: #625750;
+    border: 2px solid #78ada5;
 }
 
-.printBtn{
+.businessHours {
+    max-width: 300px;
+    margin: 10px auto;
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.businessHours h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #333;
+    padding-bottom: 10px;
+}
+
+.businessHours ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.businessHours li {
+    display: flex;
+    justify-content: space-between;
+    padding: 4px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.businessHours li:last-child {
+    border-bottom: none;
+}
+
+.businessHours .day {
+    font-weight: bold;
+    color: #555;
+}
+
+.businessHours .hours {
+    color: #777;
+}
+
+.printBtn {
     font-size: medium;
 }
 
 
-/* HOME PAGE - CALANDER */
+/* HOME PAGE - CALENDAR */
 .calendar-container {
-    width: 500px;
-    height: 580px;
-    padding: 0px;
-    background-color: #b7b19e;
+    max-width: 520px;
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(180deg, rgba(183, 177, 158, 0.06), rgba(183, 177, 158, 0.02));
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    gap: 12px;
     margin: 0 auto;
+    border-radius: 14px;
+    box-shadow: none;
+    backdrop-filter: blur(2px);
 }
-.calendar-header{
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    margin-bottom: 10px;
-    padding: 10px;
+
+.calendar-header {
+    position: relative;
+    width: 100%;
+    text-align: center;
+    /* center the month/year */
+    padding: 8px 6px;
 }
-#prev-month{
-    margin-left: 30px;
+
+.calendar-header h2#month-year {
+    display: inline-block;
+    margin: 0;
+    font-size: 1.25rem;
+    color: var(--text-dark);
+    line-height: 1;
 }
-#prev-month, #next-month{
-    font-size: medium;
-}
-button {
-    background-color: hsl(23, 7%, 23%);
-    align-items: center;
-    color: white;
-    border: 1px solid #CE9178;
+
+/* position prev/next at the left/right edges of the header so month-year stays centered */
+.calendar-header button#prev-month,
+.calendar-header button#next-month {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--primary);
+    color: var(--text-light);
     border: none;
-    padding: 10px;
+    padding: 6px 10px;
+    border-radius: 8px;
     cursor: pointer;
-    border-radius: 15px;
+    font-weight: 700;
 }
-button:hover {
-    background-color: #b0907b;
-    color: white;
+
+.calendar-header button#prev-month {
+    left: 8px;
 }
+
+.calendar-header button#next-month {
+    right: 8px;
+}
+
+.calendar-header button#prev-month:hover,
+.calendar-header button#next-month:hover {
+    background: var(--accent);
+    color: var(--text-light);
+}
+
+.calendar-card {
+    width: 100%;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(98, 87, 80, 0.06);
+}
+
 #calendar {
     width: 100%;
     border-collapse: collapse;
+    table-layout: fixed;
 }
-#calendar th,
-#calendar td {
-    padding: 6px;
-    border: 1px solid white;
+
+#calendar thead th {
+    background: var(--primary);
+    color: var(--text-light);
+    padding: 10px 12px;
+    font-weight: 700;
     text-align: center;
+    font-size: 0.95rem;
 }
-#calendar td {
+
+#calendar tbody td {
+    padding: 14px 8px;
+    text-align: center;
+    vertical-align: top;
+    background: #fff;
+    color: var(--text-dark);
+    border-bottom: 1px solid rgba(98, 87, 80, 0.04);
+    min-height: 72px;
+}
+
+#calendar tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Day cell states */
+#calendar tbody td:hover {
+    background: linear-gradient(180deg, rgba(169, 132, 103, 0.06), rgba(169, 132, 103, 0.03));
     cursor: pointer;
 }
-#calendar td:hover {
-    background-color: #B5CEA8;
+
+#calendar tbody td.today {
+    background: linear-gradient(180deg, var(--accent), rgba(169, 132, 103, 0.06));
+    color: var(--text-light);
+    font-weight: 700;
+}
+
+#calendar tbody td.has-event {
+    position: relative;
+}
+
+.event-dot {
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--primary);
+    box-shadow: 0 2px 6px rgba(98, 87, 80, 0.18);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .calendar-container {
+        padding: 8px;
+    }
+
+    #calendar thead th {
+        padding: 8px 6px;
+        font-size: 0.9rem;
+    }
+
+    #calendar tbody td {
+        padding: 10px 6px;
+        min-height: 60px;
+        font-size: 0.95rem;
+    }
 }
 
 /* Upcoming Events Section */
@@ -535,25 +956,47 @@ button:hover {
     margin-top: 3px;
     width: 100%;
 }
+
+/* Make the events list wider than the calendar on large screens and centered
+   by offsetting from the calendar container's center. It remains full-width
+   on smaller devices. */
 #events-list {
     list-style: none;
-    padding: 5px;
-    max-width: 500px;
+    padding: 12px 6px;
+    width: min(900px, 90vw);
+    box-sizing: border-box;
+    position: relative;
+    left: 80%;
+    transform: translateX(-50%);
+    max-width: none;
+    display: grid;
+    gap: 10px;
 }
+
+@media (max-width: 1024px) {
+    #events-list {
+        width: 100%;
+        left: 0;
+        transform: none;
+        padding: 6px 4px;
+    }
+}
+
 li {
     display: flex;
     justify-content: left;
     padding-top: 7px;
     padding-bottom: 6px;
-    white-space: nowrap; 
+    white-space: nowrap;
 }
 
-.aboutUs{
+.aboutUs {
     width: 100%;
     display: flex;
     justify-content: center;
 }
-.aboutAlign{
+
+.aboutAlign {
     align-self: center;
     max-width: 750px;
     text-align: left;
@@ -562,16 +1005,19 @@ li {
 
 
 @media print {
+
     /* Hide elements on the page */
     body * {
         visibility: hidden;
     }
+
     /* Make only the confirmation container visible */
-    .confirmation-container, 
+    .confirmation-container,
     .confirmation-container * {
         visibility: visible;
         box-shadow: 0px 0px 0px 0px;
     }
+
     /* Position the confirmation container at the top left of the printed page */
     .confirmation-container {
         position: absolute;
@@ -579,9 +1025,11 @@ li {
         left: 0;
     }
 }
+
 .addressContainer {
     line-height: 1.5;
 }
+
 .addressContainer strong {
     display: block;
     margin-bottom: 0.5em;
@@ -596,30 +1044,41 @@ li {
     gap: 20px;
     padding: 30px;
 }
+
 .footer .socialIcon {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    object-fit: cover; /* Ensure the images scale well */
-    transition: transform 0.3s ease; /* Smooth hover effect */
+    object-fit: cover;
+    /* Ensure the images scale well */
+    transition: transform 0.3s ease;
+    /* Smooth hover effect */
 }
+
 .footer .socialIcon:hover {
-    transform: scale(1.1); /* Slight zoom effect on hover */
+    transform: scale(1.1);
+    /* Slight zoom effect on hover */
 }
+
 #chatbotContainer {
     position: fixed;
-    bottom: 80px; /* Push above button */
+    bottom: 80px;
+    /* Push above button */
     right: 20px;
-    width: 420px; /* Adjusted width */
-    height: 570px; /* Adjusted height */
+    width: 420px;
+    /* Adjusted width */
+    height: 570px;
+    /* Adjusted height */
     z-index: 9999;
     background: white;
     border-radius: 10px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
     overflow: hidden;
-    display: none; /* Hidden by default */
+    display: none;
+    /* Hidden by default */
     flex-direction: column;
 }
+
 #chatbotHeader {
     background: #b0907b;
     color: white;
@@ -627,12 +1086,14 @@ li {
     text-align: center;
     cursor: pointer;
 }
+
 #chatbotiFrame {
     width: 100%;
     height: 100%;
     border: none;
     display: block;
 }
+
 #close-chatbot {
     position: absolute;
     right: 10px;
@@ -641,6 +1102,7 @@ li {
     font-size: 14px;
     color: white;
 }
+
 #chatbotButton {
     position: fixed;
     bottom: 20px;
@@ -655,7 +1117,8 @@ li {
     z-index: 10000;
     border: none;
 }
-#chatbotButton:hover{
+
+#chatbotButton:hover {
     background-color: #b0907b;
     box-shadow: 0px 2px 5px #625750;
 }
@@ -666,6 +1129,7 @@ li {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+
     /* Adjust content width */
     .content {
         width: 95%;
@@ -673,7 +1137,8 @@ li {
 
     /* Adjust button width */
     .btn {
-        width: 80%; /* Make buttons more narrow */
+        width: 80%;
+        /* Make buttons more narrow */
         margin-left: 0;
     }
 
@@ -684,12 +1149,16 @@ li {
     }
 
     /* Adjust text size for headings */
-    h2, h3 {
+    h2,
+    h3 {
         font-size: 18px;
     }
 
     /* Adjust form input fields to full width */
-    input, select, textarea, .submit {
+    input,
+    select,
+    textarea,
+    .submit {
         width: 100%;
     }
 
@@ -756,7 +1225,8 @@ li {
         font-size: medium;
     }
 
-    h2, h3 {
+    h2,
+    h3 {
         font-size: 1.5rem;
         flex-direction: column;
         text-align: center;
@@ -776,12 +1246,23 @@ li {
     form input,
     form select,
     form textarea,
-    #resDate, #resTime, #fName, #lName, #email, #eMail, #phone, #drinkType, #message, #name {
+    #resDate,
+    #resTime,
+    #fName,
+    #lName,
+    #email,
+    #eMail,
+    #phone,
+    #drinkType,
+    #message,
+    #name {
         width: 100%;
         font-size: 16px;
     }
 
-    .submit, .printBtn, button {
+    .submit,
+    .printBtn,
+    button {
         width: 100%;
         font-size: 16px;
     }
@@ -819,5 +1300,60 @@ li {
     #chatbotButton {
         padding: 8px 10px;
         font-size: 12px;
+    }
+}
+
+/* Consolidated responsive button rules - placed last to override earlier scattered rules */
+/* Tablet: slightly smaller padding, keep inline where possible */
+@media (max-width: 1024px) {
+
+    button,
+    .btn,
+    .submit {
+        padding: 10px 14px;
+        font-size: 0.96rem;
+    }
+
+    .btn {
+        min-width: 120px;
+    }
+}
+
+/* Mobile / small tablets: stack buttons and make them full-width for touch friendliness */
+@media (max-width: 768px) {
+
+    button,
+    .btn,
+    .submit {
+        width: 100% !important;
+        display: block;
+        margin: 8px 0;
+        box-sizing: border-box;
+    }
+
+    /* reset left margins used for desktop layout */
+    .btn {
+        margin-left: 0 !important;
+    }
+}
+
+/* Very small screens: slightly larger tappable area */
+@media (max-width: 480px) {
+
+    button,
+    .btn,
+    .submit {
+        padding: 12px !important;
+        font-size: 1rem !important;
+        border-radius: 10px;
+    }
+}
+
+/* Utility class: opt-out of full-width stacking when needed (use in HTML as `class="btn no-stack"`) */
+@media (max-width: 768px) {
+    .no-stack {
+        display: inline-block !important;
+        width: auto !important;
+        margin: 6px !important;
     }
 }
